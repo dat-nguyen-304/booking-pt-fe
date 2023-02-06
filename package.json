@@ -2,7 +2,7 @@
   "name": "zestadmin-react",
   "version": "1.1.0",
   "private": true,
-  "homepage": "https://jaybabani.com/zestreact/app",
+  "homepage": "https://booking-pt-tl.vercel.app/",
   "dependencies": {
     "ajv": "6.10.0",
     "axios": "^0.19.2",
@@ -18,7 +18,6 @@
     "jvectormap": "2.0.4",
     "moment": "^2.29.1",
     "moment-range": "^3.0.3",
-    "sass": "^1.49.9",
     "node-sass-chokidar": "1.3.4",
     "npm-run-all": "4.1.5",
     "perfect-scrollbar": "1.5.2",
@@ -49,6 +48,7 @@
     "react-tagsinput": "3.19.0",
     "react-time-picker": "3.5.1",
     "reactstrap": "8.9.0",
+    "sass": "^1.49.9",
     "typescript": "^3.7.5",
     "validator": "10.11.0"
   },
