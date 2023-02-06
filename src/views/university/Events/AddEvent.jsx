@@ -36,7 +36,7 @@ class AddEvent extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Add Event</h1>
+                            <h1 className="title">Add Schedule</h1>
                         </div>
                     </div>
 

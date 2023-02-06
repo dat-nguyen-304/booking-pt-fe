@@ -152,10 +152,10 @@ var dashRoutes = [
 
 
     { 
-        path: "#", name: "Events", icon: "event", type: "dropdown", parentid: "events",
+        path: "#", name: "Schedule", icon: "event", type: "dropdown", parentid: "events",
             child: [
-                { path: BASEDIR+"/university/events", name: "Events"},
-                { path: BASEDIR+"/university/addevent", name: "Add Event"},
+                { path: BASEDIR+"/university/events", name: "Schedules"},
+                { path: BASEDIR+"/university/addevent", name: "Add Schedules"},
             ]
     },
         { path: BASEDIR+"/university/events", component: UniversityEvents, type: "child"},
