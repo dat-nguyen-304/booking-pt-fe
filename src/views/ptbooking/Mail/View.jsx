@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 
 import {  } from 'components';
-import Mailmenu from 'views/university/Mail/Menu.jsx';
+import Mailmenu from 'views/ptbooking/Mail/Menu.jsx';
 var IMGDIR = process.env.REACT_APP_IMGDIR;
 
 class UniversityMailview extends React.Component{

@@ -6,7 +6,7 @@ import {
 import {  } from 'components';
 
 import BigCalendar from 'react-big-calendar'
-import events from 'views/university/Events/events.js'
+import events from 'views/ptbooking/Events/events.js'
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 

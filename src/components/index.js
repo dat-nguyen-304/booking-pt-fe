@@ -14,10 +14,10 @@ import Mailbox from './common/Mailbox/Mailbox';
 
 
 /*--------------- University Admin Components ------------------*/
-import Professorslist from './university/Professorslist/Professorslist';
-import Studentslist from './university/Studentslist/Studentslist';
-import UniStaffslist from './university/UniStaffslist/UniStaffslist';
-import Courseslist from './university/Courseslist/Courseslist';
+import Professorslist from './ptbooking/Professorslist/Professorslist';
+import Studentslist from './ptbooking/Studentslist/Studentslist';
+import UniStaffslist from './ptbooking/UniStaffslist/UniStaffslist';
+import Courseslist from './ptbooking/Courseslist/Courseslist';
 /*--------------- Unused Components ------------------*/
 //import PanelHeader from './general/PanelHeader/PanelHeader';
 //import Stats from './general/Stats/Stats';
