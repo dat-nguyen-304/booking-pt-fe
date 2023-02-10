@@ -22,7 +22,7 @@ class Courseslist extends React.Component{
                                                             <img className="img-fluid" src={this.props.courses[i].avatar} alt="" />
                                                         </div>
                                                         <div className="team-info col-8">
-                                                            <h3><NavLink to={BASEDIR+"/university/course-view"}>{ this.props.courses[i].name }</NavLink></h3>
+                                                            <h3><NavLink to={BASEDIR+"/ptbooking/course-view"}>{ this.props.courses[i].name }</NavLink></h3>
                                                             <span>{ this.props.courses[i].position }</span> / <span>{ this.props.courses[i].age } years old</span>
                                                             <ul className="social-icons list-inline list-unstyled">
                                                                 <li className="list-inline-item"><a href="#!"><i className="i-envelope icon-primary icon-xs"></i></a></li>
