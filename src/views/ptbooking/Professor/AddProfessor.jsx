@@ -34,7 +34,7 @@ class AddProfessor extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Add Professor</h1>
+                            <h1 className="title">Add Personal Trainer</h1>
                         </div>
                     </div>
 

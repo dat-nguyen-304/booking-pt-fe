@@ -23,7 +23,7 @@ class ProfessorProfile extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Professor Profile</h1>
+                            <h1 className="title">PT Profile</h1>
                         </div>
                     </div>
 

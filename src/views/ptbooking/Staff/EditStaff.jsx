@@ -36,7 +36,7 @@ class EditStaff extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Edit Staff</h1>
+                            <h1 className="title">Edit Center</h1>
                         </div>
                     </div>
 

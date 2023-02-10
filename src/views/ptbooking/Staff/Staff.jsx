@@ -23,7 +23,7 @@ class Staff extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Staff</h1>
+                            <h1 className="title">Center</h1>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@ class Staff extends React.Component{
                     <div className="col-xl-12">
                         <section className="box ">
                             <header className="panel_header">
-                                <h2 className="title float-left">All Staffs</h2>
+                                <h2 className="title float-left">All Centers</h2>
                             </header>
                             <div className="content-body">    
 

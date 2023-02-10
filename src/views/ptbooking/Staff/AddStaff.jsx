@@ -34,7 +34,7 @@ class AddStaff extends React.Component{
 
                     <div className="page-title">
                         <div className="float-left">
-                            <h1 className="title">Add Staff</h1>
+                            <h1 className="title">Add Center</h1>
                         </div>
                     </div>
 
@@ -60,20 +60,12 @@ class AddStaff extends React.Component{
                                                         <input type="text" className="form-control" id="inputname4" placeholder="" />
                                                     </div>
                                                     <div className="form-group col-md-12">
-                                                        <label>Date of Birth</label>
+                                                        <label>Etablished</label>
                                                         <div className="controls">
                                                             <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
                                                         </div>
                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleSelect">Gender</Label>
-                                                      <Input type="select" name="select" id="exampleSelect">
-                                                        <option>Select</option>
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                      </Input>
-                                                    </div>
-
+{/* 
                                                     <div className="form-group col-md-12">
                                                       <Label htmlFor="exampleSelect3">Department</Label>
                                                       <Input type="select" name="select" id="exampleSelect3">
@@ -86,7 +78,7 @@ class AddStaff extends React.Component{
                                                             <option value="Mechanical Engg.">Mechanical Engg.</option>
                                                             <option value="BBA">BBA</option>
                                                       </Input>
-                                                    </div>
+                                                    </div> */}
 
                                                     <div className="form-group col-md-12">
                                                         <label htmlFor="inputname4121">Position</label>
@@ -95,18 +87,17 @@ class AddStaff extends React.Component{
 
 
                                                     <div className="form-group col-md-12">
-                                                       <Label htmlFor="field-11">Phone (+49 99 999 99)</Label>
-                                                       <InputMask id="field-11" className="form-control" mask="+4\9 99 999 99" maskChar="_" />
+                                                       <Label htmlFor="field-11">Phone (+84 99 999 99)</Label>
+                                                       <InputMask id="field-11" className="form-control" mask="+84 99 9999 999" maskChar="_" />
                                                     </div>
 
+
                                                     <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleText">Brief</Label>
-                                                      <Input type="textarea" name="text" id="exampleText" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleFile">Profile Image</Label>
+                                                      <Label htmlFor="exampleFile">Center Image</Label>
                                                       <Input type="file" name="file" id="exampleFile" />
                                                     </div>
+
+
                                                     <div className="form-group col-md-12">
                                                         <label htmlFor="input4">Website</label>
                                                         <input type="text" className="form-control" id="input4" placeholder="" />
@@ -148,7 +139,7 @@ class AddStaff extends React.Component{
                             </section></div>
 
 
-                        <div className="col-12">
+                        {/* <div className="col-12">
                             <section className="box ">
                                 <header className="panel_header">
                                     <h2 className="title float-left">Account Info</h2>
@@ -179,7 +170,7 @@ class AddStaff extends React.Component{
                                     </div>
 
                                 </div>
-                            </section></div>
+                            </section></div> */}
 
 
 

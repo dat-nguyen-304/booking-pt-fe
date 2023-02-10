@@ -51,21 +51,6 @@ var dashRoutes = [
 
     //{ path: "#", name: "Main", type: "navgroup"},
     { path: BASEDIR+"/ptbooking/dashboard", name: "Dashboard", icon: "speedometer", badge: "", component: University },
-
-    { 
-        path: "#", name: "Personal trainer", icon: "user", type: "dropdown", parentid: "professors",
-            child: [
-                { path: BASEDIR+"/ptbooking/professors", name: "Personal trainer"},
-                { path: BASEDIR+"/ptbooking/add-professor", name: "Add Personal trainer"},
-                { path: BASEDIR+"/ptbooking/edit-professor", name: "Edit Personal trainer"},
-                { path: BASEDIR+"/ptbooking/professor-profile", name: "Personal trainer Profile"},
-            ]
-    },
-        { path: BASEDIR+"/ptbooking/professors", component: Professor, type: "child"},
-        { path: BASEDIR+"/ptbooking/add-professor", component: AddProfessor, type: "child"},
-        { path: BASEDIR+"/ptbooking/edit-professor", component: EditProfessor, type: "child"},
-        { path: BASEDIR+"/ptbooking/professor-profile", component: ProfessorProfile, type: "child"},
-
     { 
         path: "#", name: "Trainees", icon: "people", type: "dropdown", parentid: "students",
             child: [
@@ -79,6 +64,19 @@ var dashRoutes = [
         { path: BASEDIR+"/ptbooking/add-student", component: AddStudent, type: "child"},
         { path: BASEDIR+"/ptbooking/edit-student", component: EditStudent, type: "child"},
         { path: BASEDIR+"/ptbooking/student-profile", component: StudentProfile, type: "child"},
+    { 
+        path: "#", name: "Personal trainer", icon: "user", type: "dropdown", parentid: "professors",
+            child: [
+                { path: BASEDIR+"/ptbooking/professors", name: "Personal trainer"},
+                { path: BASEDIR+"/ptbooking/add-professor", name: "Add Personal trainer"},
+                { path: BASEDIR+"/ptbooking/edit-professor", name: "Edit Personal trainer"},
+                { path: BASEDIR+"/ptbooking/professor-profile", name: "Personal trainer Profile"},
+            ]
+    },
+        { path: BASEDIR+"/ptbooking/professors", component: Professor, type: "child"},
+        { path: BASEDIR+"/ptbooking/add-professor", component: AddProfessor, type: "child"},
+        { path: BASEDIR+"/ptbooking/edit-professor", component: EditProfessor, type: "child"},
+        { path: BASEDIR+"/ptbooking/professor-profile", component: ProfessorProfile, type: "child"},
 
     { 
         path: "#", name: "Centers", icon: "user-female", type: "dropdown", parentid: "staffs",
