@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 
 import {  } from 'components';
-import Mailmenu from 'views/ptbooking/Mail/Menu.jsx';
+import Mailmenu from 'views/admin/Mail/Menu.jsx';
 
 class UniversityMailcompose extends React.Component{
     render(){

@@ -94,7 +94,9 @@ class AddStaff extends React.Component{
 
                                                     <div className="form-group col-md-12">
                                                       <Label htmlFor="exampleFile">Center Image</Label>
-                                                      <Input type="file" name="file" id="exampleFile" />
+                                                      <Input type="text" name="imageLink" id="exampleFile" />
+                                                      <img src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt1ce35ff19afc982a/60ef294574f163428d4aaf5a/752d38621b7815f91630c31c14716f04edbee7c5.jpg?auto=webp&fit=crop&format=jpg&height=800&quality=60&width=1200" alt="" />
+                                                      {/* <p>{imageLink}</p> */}
                                                     </div>
 
 
@@ -129,7 +131,7 @@ class AddStaff extends React.Component{
                                                         <input type="text" className="form-control" id="inputZip"/>
                                                     </div>
                                                 </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
+                                                <button type="submit" className="btn btn-primary">Submit</button>
                                             </form>
 
                                         </div>

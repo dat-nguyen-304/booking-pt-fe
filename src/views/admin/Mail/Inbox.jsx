@@ -9,7 +9,7 @@ import {
 
 import { mailbox } from 'variables/university/mailbox.jsx';
 
-import Mailmenu from 'views/ptbooking/Mail/Menu.jsx';
+import Mailmenu from 'views/admin/Mail/Menu.jsx';
 
 class UniversityMailinbox extends React.Component{
     render(){
