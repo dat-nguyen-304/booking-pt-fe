@@ -22,7 +22,7 @@ ReactDOM.render(
         <Switch>
             {
                 indexRoutes.map((prop,key) => {
-                    //console.log(prop.path + prop.key);
+                    console.log(prop.path + prop.key);
                     return ( 
                         <Route
                             path={prop.path}

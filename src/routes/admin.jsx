@@ -1,4 +1,4 @@
-import University from 'views/admin/Dashboard/University.jsx';
+import Admin from 'views/admin/Dashboard/University.jsx';
 
 
 
@@ -50,7 +50,7 @@ var BASEDIR = process.env.REACT_APP_BASEDIR;
 var dashRoutes = [ 
 
     //{ path: "#", name: "Main", type: "navgroup"},
-    { path: BASEDIR+"/", name: "Dashboard", icon: "speedometer", badge: "", component: University },
+    { path: BASEDIR+"/dashboard", name: "Dashboard", icon: "speedometer", badge: "", component: Admin },
     { 
         path: "#", name: "Trainees", icon: "people", type: "dropdown", parentid: "students",
             child: [
@@ -159,7 +159,7 @@ var dashRoutes = [
         { path: BASEDIR+"/admin/events", component: UniversityEvents, type: "child"},
         { path: BASEDIR+"/admin/addevent", component: AddEvent, type: "child"},
 
-        { path: BASEDIR+"/admin/dashboard", component: University, type: "child"},
+        { path: BASEDIR+"/admin/dashboard", component: Admin, type: "child"},
 
     //{ redirect: true, path: BASEDIR+"/", pathTo: "/dashboard", name: "Dashboard" }
 

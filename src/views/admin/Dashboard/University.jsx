@@ -4,9 +4,6 @@ import {
     Row, Col,Table,
 } from 'reactstrap';
 
-import {
-    
-} from 'components';
 
 import { Line, Bar, Scatter, HorizontalBar } from 'react-chartjs-2';
 

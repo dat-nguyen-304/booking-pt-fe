@@ -38,7 +38,7 @@ class StudentProfile extends React.Component{
                                     <div className="col-12">
                                     <div className="row uprofile">
                                         <div className="uprofile-image col-xl-2 col-lg-3 col-md-3 col-sm-4 col-12">
-                                            <img alt="" src={IMGDIR+"/images/university/students/student-13.jpg"} className="img-fluid" />
+                                            <img alt="" src={IMGDIR+"/images/admin/students/student-13.jpg"} className="img-fluid" />
                                         </div>
                                         <div className="uprofile-name col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                                             <h3 className="uprofile-owner">

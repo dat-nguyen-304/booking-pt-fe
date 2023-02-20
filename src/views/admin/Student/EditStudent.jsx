@@ -106,7 +106,7 @@ class EditStudent extends React.Component{
                                                     </div>
                                                     <div className="form-group col-md-12">
                                                       <Label htmlFor="exampleFile">Profile Image</Label>
-                                                      <div className="profileimg-input"><img alt="" src={IMGDIR+"/images/university/students/student-1.jpg"} className="img-fluid" style={{"width": "120px"}}/></div>
+                                                      <div className="profileimg-input"><img alt="" src={IMGDIR+"/images/admin/students/student-1.jpg"} className="img-fluid" style={{"width": "120px"}}/></div>
                                                       <Input type="file" name="file" id="exampleFile" />
                                                     </div>
                                                     <div className="form-group col-md-12">

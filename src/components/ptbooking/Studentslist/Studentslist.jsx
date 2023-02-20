@@ -22,6 +22,7 @@ class Studentslist extends React.Component{
                                                     </div>
                                                     <div className="team-info">
                                                         <h3><NavLink to={BASEDIR+"/ptbooking/student-profile"}>{ this.props.students[i].name }</NavLink></h3>
+                                            
                                                         <span>{ this.props.students[i].position }</span> / <span>{ this.props.students[i].age } years old</span>
                                                         <ul className="social-icons list-inline list-unstyled">
                                                                 <li className="list-inline-item"><a href="#!"><i className="i-envelope icon-primary icon-xs"></i></a></li>

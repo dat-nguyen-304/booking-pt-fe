@@ -63,8 +63,8 @@ class UniversityLayout extends React.Component{
 
                 
 
-                <Header {...this.props} navtype={navWidth} admintype={'university'}/>
-                <Sidebar {...this.props} routes={dashboardRoutes} admintype={'university'}/>
+                <Header {...this.props} navtype={navWidth} admintype={'admin'}/>
+                <Sidebar {...this.props} routes={dashboardRoutes} admintype={'admin'}/>
                 <div className="main-panel" ref="mainPanel">
 
                                 

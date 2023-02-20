@@ -62,9 +62,15 @@ class Sidebar extends React.Component {
       : "";
   }
   componentDidMount() {
-    if (this.props.admintype === "university") {
+    if (this.props.admintype === "admin") {
       this.setState({
         profileposition: "Administration",
+        profilename: "Henry Gibson",
+        profileimg: IMGDIR + "/images/profile/profile-university.jpg",
+      });
+    }if (this.props.admintype === "pt") {
+      this.setState({
+        profileposition: "Personal Trainer",
         profilename: "Henry Gibson",
         profileimg: IMGDIR + "/images/profile/profile-university.jpg",
       });

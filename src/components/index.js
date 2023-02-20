@@ -22,7 +22,10 @@ import Courseslist from './ptbooking/Courseslist/Courseslist';
 //import PanelHeader from './general/PanelHeader/PanelHeader';
 //import Stats from './general/Stats/Stats';
 //import Tasks from './general/Tasks/Tasks';
-
+import Pt from './pt/Professorslist/Professorslist'
+import St from './pt/Studentslist/Studentslist';
+import Uni from './pt/UniStaffslist/UniStaffslist';
+import Cour from './pt/Courseslist/Courseslist';
 export {
     // Footer
     Footer,
@@ -51,9 +54,15 @@ export {
     Chatgroups,
     Mailbox,
     StyleSettings,
-
+    //admin
     Professorslist,
     Studentslist,
     UniStaffslist,
     Courseslist,
+
+    //pt
+    Pt,
+    St,
+    Uni,
+    Cour,
 };
