@@ -9,7 +9,7 @@ import {
     Messages, Notifications
 } from 'components';
 
-import dashboardRoutes from 'routes/university.jsx';
+import dashboardRoutes from 'routes/admin.jsx';
 
 import { messages } from 'variables/topbar.jsx';
 import { notifications } from 'variables/topbar.jsx';

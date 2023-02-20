@@ -12,7 +12,7 @@ import {
   dashboardShippedProductsChart,
     dashboardAllProductsChart,
     dashboard24HoursPerformanceChart,
-} from 'variables/university/charts.jsx';
+} from 'variables/admin/charts.jsx';
 
 class UniversityReportsUniversity extends React.Component{
 

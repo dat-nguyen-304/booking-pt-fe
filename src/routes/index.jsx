@@ -1,5 +1,5 @@
 
-import UniversityLayout from 'layouts/University.jsx';
+import UniversityLayout from 'layouts/admin.jsx';
 import BlankPage from 'layouts/BlankPage.jsx';
 import LoginPage from 'layouts/LoginPage.jsx';
 

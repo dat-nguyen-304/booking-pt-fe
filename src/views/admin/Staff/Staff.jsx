@@ -8,7 +8,7 @@ import {
     UniStaffslist
 } from 'components';
 
-import { staffs } from 'variables/university/staffs.jsx';
+import { staffs } from 'variables/admin/staffs.jsx';
 
 class Staff extends React.Component{
    

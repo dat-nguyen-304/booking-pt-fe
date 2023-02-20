@@ -8,8 +8,8 @@ import {
 
 import { Header, Footer, Sidebar, ChatSidebar, Stylebar } from 'components'
 
-import dashboardRoutes from 'routes/university.jsx';
-import { topbarStyle, menuStyle, menuType, topbarType, navWidth, chatWidth, chatType } from 'variables/settings/university.jsx';
+import dashboardRoutes from 'routes/admin.jsx';
+import { topbarStyle, menuStyle, menuType, topbarType, navWidth, chatWidth, chatType } from 'variables/settings/admin.jsx';
 
 //var ps;
 

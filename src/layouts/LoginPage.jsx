@@ -9,7 +9,7 @@ import {
 
 //import { Header, Footer, Sidebar, ChatSidebar } from 'components'
 
-import dashboardRoutes from 'routes/university.jsx';
+import dashboardRoutes from 'routes/admin.jsx';
 
 var ps;
 

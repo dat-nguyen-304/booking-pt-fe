@@ -27,7 +27,7 @@ import {
     playlistCharts8, 
     playlistCharts9, 
     playlistCharts10, 
-} from 'variables/university/dashboard-charts.jsx';
+} from 'variables/admin/dashboard-charts.jsx';
 var IMGDIR = process.env.REACT_APP_IMGDIR;
 
 class University extends React.Component{

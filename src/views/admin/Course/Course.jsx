@@ -8,7 +8,7 @@ import {
     Courseslist
 } from 'components';
 
-import { courses } from 'variables/university/courses.jsx';
+import { courses } from 'variables/admin/courses.jsx';
 
 class Course extends React.Component{
    

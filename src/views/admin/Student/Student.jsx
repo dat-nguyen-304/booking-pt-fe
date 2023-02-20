@@ -8,7 +8,7 @@ import {
     Studentslist
 } from 'components';
 
-import { students } from 'variables/university/students.jsx';
+import { students } from 'variables/admin/students.jsx';
 
 class Student extends React.Component{
    

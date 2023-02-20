@@ -8,7 +8,7 @@ import {
     Professorslist
 } from 'components';
 
-import { professors } from 'variables/university/professors.jsx';
+import { professors } from 'variables/admin/professors.jsx';
 
 class Professor extends React.Component{
    
