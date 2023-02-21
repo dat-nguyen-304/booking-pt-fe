@@ -13,7 +13,6 @@ import dashboardRoutes from 'routes/admin.jsx';
 
 import { messages } from 'variables/topbar.jsx';
 import { notifications } from 'variables/topbar.jsx';
-
 var IMGDIR = process.env.REACT_APP_IMGDIR;
 class Header extends React.Component{
     constructor(props) {
@@ -154,9 +153,14 @@ class Header extends React.Component{
             this.refs.sidebarToggle.classList.remove('toggled');
         }
         window.addEventListener("resize", this.updateColor.bind(this));
-            if(this.props.admintype === 'university'){
+            if(this.props.admintype === 'admin'){
                 this.setState({     
                     profilename: 'Henry Gibson',
+                    profileimg: IMGDIR+'/images/profile/profile-university.jpg'    
+                });  
+            } else if(this.props.admintype === 'pt') {
+                this.setState({     
+                    profilename: 'pt',
                     profileimg: IMGDIR+'/images/profile/profile-university.jpg'    
                 });  
             } 
@@ -228,7 +232,7 @@ class Header extends React.Component{
                                     <DropdownItem tag="a"><i className="i-wrench" href="#!"></i> Settings</DropdownItem>
                                     <DropdownItem tag="a"><i className="i-user" href="#!"></i> Profile</DropdownItem>
                                     <DropdownItem tag="a"><i className="i-info" href="#!"></i> Help</DropdownItem>
-                                    <DropdownItem tag="a" className="" href=""><i className="i-lock"></i> Logout</DropdownItem>
+                                    <DropdownItem tag="a" className=""><i className="i-lock"></i>Logout</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                             <NavItem>

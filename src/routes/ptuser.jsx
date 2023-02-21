@@ -38,7 +38,7 @@ var BASEDIR = process.env.REACT_APP_BASEDIR;
 var dashRoutes = [ 
    
     // { path: "#", name: "Main", type: "navgroup"},
-    { path: BASEDIR+"/pt/Scheduled", name: "Scheduled", icon: "event", badge: "", component: UniversityEvents },
+    { path: BASEDIR+"/pt/scheduled", name: "Scheduled", icon: "event", badge: "", component: UniversityEvents },
     // { 
     //     path: "#", name: "Scheduled", icon: "event", type: "dropdown", parentid: "events",
     //         child: [

@@ -7,15 +7,15 @@ import AddProfessor from 'views/admin/Professor/AddProfessor.jsx';
 import EditProfessor from 'views/admin/Professor/EditProfessor.jsx';
 import ProfessorProfile from 'views/admin/Professor/ProfessorProfile.jsx';
 
-import Student from 'views/admin/Student/Student.jsx';
-import AddStudent from 'views/admin/Student/AddStudent.jsx';
-import EditStudent from 'views/admin/Student/EditStudent.jsx';
-import StudentProfile from 'views/admin/Student/StudentProfile.jsx';
+import Trainee from 'views/admin/Trainee/Trainee.jsx';
+import AddTrainee from 'views/admin/Trainee/AddTrainee.jsx';
+import EditTrainee from 'views/admin/Trainee/EditTrainee.jsx';
+import TraineeProfile from 'views/admin/Trainee/TraineeProfile.jsx';
 
-import Staff from 'views/admin/Staff/Staff.jsx';
-import AddStaff from 'views/admin/Staff/AddStaff.jsx';
-import EditStaff from 'views/admin/Staff/EditStaff.jsx';
-import StaffProfile from 'views/admin/Staff/StaffProfile.jsx';
+import Center from 'views/admin/Center/Center.jsx';
+import AddCenter from 'views/admin/Center/AddCenter.jsx';
+import EditCenter from 'views/admin/Center/EditCenter.jsx';
+import CenterProfile from 'views/admin/Center/CenterProfile.jsx';
 
 // import UniversityCentres from 'views/admin/Centres/UniversityCentres.jsx';
 
@@ -50,47 +50,47 @@ var BASEDIR = process.env.REACT_APP_BASEDIR;
 var dashRoutes = [ 
 
     //{ path: "#", name: "Main", type: "navgroup"},
-    { path: BASEDIR+"/dashboard", name: "Dashboard", icon: "speedometer", badge: "", component: Admin },
+    { path: BASEDIR+"/admin/dashboard", name: "Dashboard", icon: "speedometer", badge: "", component: Admin },
     { 
-        path: "#", name: "Trainees", icon: "people", type: "dropdown", parentid: "students",
+        path: "#", name: "Trainees", icon: "people", type: "dropdown", parentid: "trainees",
             child: [
-                { path: BASEDIR+"/admin/students", name: "Trainees"},
-                { path: BASEDIR+"/admin/add-student", name: "Add Trainees"},
-                { path: BASEDIR+"/admin/edit-student", name: "Edit Trainees"},
-                { path: BASEDIR+"/admin/student-profile", name: "Student Trainees"},
+                { path: BASEDIR+"/admin/trainees", name: "Trainees"},
+                { path: BASEDIR+"/admin/add-trainee", name: "Add Trainees"},
+                { path: BASEDIR+"/admin/edit-trainee", name: "Edit Trainees"},
+                { path: BASEDIR+"/admin/trainee-profile", name: "Trainee Trainees"},
             ]
     },
-        { path: BASEDIR+"/admin/students", component: Student, type: "child"},
-        { path: BASEDIR+"/admin/add-student", component: AddStudent, type: "child"},
-        { path: BASEDIR+"/admin/edit-student", component: EditStudent, type: "child"},
-        { path: BASEDIR+"/admin/student-profile", component: StudentProfile, type: "child"},
+        { path: BASEDIR+"/admin/trainees", component: Trainee, type: "child"},
+        { path: BASEDIR+"/admin/add-trainee", component: AddTrainee, type: "child"},
+        { path: BASEDIR+"/admin/edit-trainee", component: EditTrainee, type: "child"},
+        { path: BASEDIR+"/admin/trainee-profile", component: TraineeProfile, type: "child"},
     { 
         path: "#", name: "Personal trainer", icon: "user", type: "dropdown", parentid: "professors",
             child: [
-                { path: BASEDIR+"/admin/professors", name: "Personal trainer"},
+                { path: BASEDIR+"/admin/pts", name: "Personal trainer"},
                 { path: BASEDIR+"/admin/add-professor", name: "Add Personal trainer"},
                 { path: BASEDIR+"/admin/edit-professor", name: "Edit Personal trainer"},
                 { path: BASEDIR+"/admin/professor-profile", name: "Personal trainer Profile"},
             ]
     },
-        { path: BASEDIR+"/admin/professors", component: Professor, type: "child"},
-        { path: BASEDIR+"/admin/add-professor", component: AddProfessor, type: "child"},
-        { path: BASEDIR+"/admin/edit-professor", component: EditProfessor, type: "child"},
-        { path: BASEDIR+"/admin/professor-profile", component: ProfessorProfile, type: "child"},
+        { path: BASEDIR+"/admin/pts", component: Professor, type: "child"},
+        { path: BASEDIR+"/admin/add-pt", component: AddProfessor, type: "child"},
+        { path: BASEDIR+"/admin/edit-pt", component: EditProfessor, type: "child"},
+        { path: BASEDIR+"/admin/pt-profile", component: ProfessorProfile, type: "child"},
 
     { 
-        path: "#", name: "Centers", icon: "user-female", type: "dropdown", parentid: "staffs",
+        path: "#", name: "Centers", icon: "user-female", type: "dropdown", parentid: "centers",
             child: [
-                { path: BASEDIR+"/admin/staffs", name: "Centers"},
-                { path: BASEDIR+"/admin/add-staff", name: "Add Centers"},
-                { path: BASEDIR+"/admin/edit-staff", name: "Edit Centers"},
-                { path: BASEDIR+"/admin/staff-profile", name: "Centers Profile"},
+                { path: BASEDIR+"/admin/centers", name: "Centers"},
+                { path: BASEDIR+"/admin/add-center", name: "Add Centers"},
+                { path: BASEDIR+"/admin/edit-center", name: "Edit Centers"},
+                { path: BASEDIR+"/admin/center-profile", name: "Centers Profile"},
             ]
     },
-        { path: BASEDIR+"/admin/staffs", component: Staff, type: "child"},
-        { path: BASEDIR+"/admin/add-staff", component: AddStaff, type: "child"},
-        { path: BASEDIR+"/admin/edit-staff", component: EditStaff, type: "child"},
-        { path: BASEDIR+"/admin/staff-profile", component: StaffProfile, type: "child"},
+        { path: BASEDIR+"/admin/centers", component: Center, type: "child"},
+        { path: BASEDIR+"/admin/add-center", component: AddCenter, type: "child"},
+        { path: BASEDIR+"/admin/edit-center", component: EditCenter, type: "child"},
+        { path: BASEDIR+"/admin/center-profile", component: CenterProfile, type: "child"},
 
 
   { 
