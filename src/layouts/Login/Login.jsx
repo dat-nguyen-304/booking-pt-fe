@@ -12,6 +12,8 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdb-react-ui-kit";
+
+
 function Login() {
   const [token, setToken] = useState("");
   const [redirect, setRedirect] = useState(null);
@@ -29,6 +31,7 @@ function Login() {
         );
         const accessToken = res.data.tokens.accessToken;
         localStorage.setItem("accessToken", accessToken);
+        navigate1();
       } catch (error) {
         console.log("error: ", error);
       }
@@ -37,8 +40,7 @@ function Login() {
     const navigate1 = () => {
         const accessToken = localStorage.getItem("accessToken");
         const decode = jwt.decode(accessToken);
-        const role = decode.role;
-        console.log(role)
+        const role = decode && decode.role;
         if (role === "admin") {
           setRedirect("/admin/dashboard");
         } else if (role === "user") {
@@ -50,7 +52,7 @@ function Login() {
 
     if (token) {
     callAPI();
-    navigate1();
+    
     }
   }, [token]);
     

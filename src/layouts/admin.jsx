@@ -25,7 +25,7 @@ class UniversityLayout extends React.Component{
         this.menuSettings = this.menuSettings.bind(this);
         this.topbarSettings = this.topbarSettings.bind(this);
     }
-
+    
     menuSettings(val1,val2) {
         this.setState({
           menuColor: val1,

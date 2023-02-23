@@ -68,9 +68,9 @@ var dashRoutes = [
         path: "#", name: "Personal trainer", icon: "user", type: "dropdown", parentid: "professors",
             child: [
                 { path: BASEDIR+"/admin/pts", name: "Personal trainer"},
-                { path: BASEDIR+"/admin/add-professor", name: "Add Personal trainer"},
-                { path: BASEDIR+"/admin/edit-professor", name: "Edit Personal trainer"},
-                { path: BASEDIR+"/admin/professor-profile", name: "Personal trainer Profile"},
+                { path: BASEDIR+"/admin/add-pt", name: "Add Personal trainer"},
+                { path: BASEDIR+"/admin/edit-pt", name: "Edit Personal trainer"},
+                { path: BASEDIR+"/admin/pt-profile", name: "Personal trainer Profile"},
             ]
     },
         { path: BASEDIR+"/admin/pts", component: Professor, type: "child"},
