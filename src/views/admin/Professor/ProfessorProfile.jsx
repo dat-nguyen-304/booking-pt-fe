@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-
     Row, Col,
 } from 'reactstrap';
 
@@ -38,14 +37,14 @@ class ProfessorProfile extends React.Component{
                                     <div className="col-12">
                                     <div className="row uprofile">
                                         <div className="uprofile-image col-xl-2 col-lg-3 col-md-3 col-sm-4 col-12">
-                                            <img alt="" src={IMGDIR+"/images/university/professors/professor-1.jpg"} className="img-fluid" />
+                                            <img alt="" src={IMGDIR+"/images/admin/professors/professor-1.jpg"} className="img-fluid" />
                                         </div>
                                         <div className="uprofile-name col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                                             <h3 className="uprofile-owner">
                                                 <a href="#!">Prof. Stephnie Clarke</a>
                                             </h3>
-                                            <button className="btn btn-primary btn-sm profile-btn">Send message</button>
-                                            <button className="btn btn-primary btn-sm profile-btn">Add as friend</button>
+                                            <button className="btn btn-primary btn-sm profile-btn">Edit Profile</button>
+                                            {/* <button className="btn btn-primary btn-sm profile-btn">Add as friend</button> */}
                                             <div className="clearfix"></div>
                                             <p className="uprofile-title">Sr. Professor</p>
                                             <div className="clearfix"></div>

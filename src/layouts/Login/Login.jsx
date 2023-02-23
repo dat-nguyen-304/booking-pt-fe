@@ -13,10 +13,10 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 
-
 function Login() {
   const [token, setToken] = useState("");
   const [redirect, setRedirect] = useState(null);
+
   useEffect(() => {
     async function callAPI() {
       try {
@@ -38,29 +38,39 @@ function Login() {
     }
 
     const navigate1 = () => {
-        const accessToken = localStorage.getItem("accessToken");
-        const decode = jwt.decode(accessToken);
-        const role = decode && decode.role;
-        if (role === "admin") {
-          setRedirect("/admin/dashboard");
-        } else if (role === "user") {
-          setRedirect("/pt/scheduled");
-        } else {
-          setRedirect("/");
-        }
-      };
+      const accessToken = localStorage.getItem("accessToken");
+      const decode = jwt.decode(accessToken);
+      const role = decode && decode.role;
+      if (role === "admin") {
+        setRedirect("/admin/dashboard");
+      } else if (role === "user") {
+        setRedirect("/pt/scheduled");
+      } else {
+        setRedirect("/");
+      }
+    };
 
     if (token) {
-    callAPI();
-    
+      callAPI();
+    } else {
+      const isLoggin = localStorage.getItem("accessToken");
+      if (isLoggin) {
+        const role = jwt.decode(isLoggin).role;
+        if (role === "admin") {
+          setRedirect("/admin/dashboard");
+        } else if (role === "pt") {
+          setRedirect("/pt/scheduled");
+        }
+      }
     }
   }, [token]);
-    
+
   const signInWithGoogle = () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((userCred) => {
       console.log("userCred.user.accessToken: ", userCred.user.accessToken);
+      console.log(window.localStorage.pathname);
       setToken(userCred.user.accessToken);
     });
   };

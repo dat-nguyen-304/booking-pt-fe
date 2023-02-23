@@ -8,7 +8,7 @@ import {
 import {
     Messages, Notifications
 } from 'components';
-
+import { logout } from '../../../variables/Firebase';
 import dashboardRoutes from 'routes/admin.jsx';
 
 import { messages } from 'variables/topbar.jsx';
@@ -232,7 +232,7 @@ class Header extends React.Component{
                                     <DropdownItem tag="a"><i className="i-wrench" href="#!"></i> Settings</DropdownItem>
                                     <DropdownItem tag="a"><i className="i-user" href="#!"></i> Profile</DropdownItem>
                                     <DropdownItem tag="a"><i className="i-info" href="#!"></i> Help</DropdownItem>
-                                    <DropdownItem tag="a" className=""><i className="i-lock"></i>Logout</DropdownItem>
+                                    <DropdownItem tag="a" className="" onClick={logout}><i className="i-lock"></i>Logout</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                             <NavItem>

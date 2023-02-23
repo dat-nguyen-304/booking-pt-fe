@@ -13,19 +13,11 @@ import indexRoutes from "routes/index.jsx";
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  // <div>
-  // <Router history={hist} basename={process.env.REACT_APP_BASEDIR}>
-  //     <Switch>
-  //         <Route path="/login" exact component={Login}/>
-  //         <Route path="/admin" exact component={Admin}/>
-  //         <Route path="/admin/dashboard" exact component={Dashboard}/>
-  //     </Switch>
-  // </Router></div>
 
   <Router history={hist} basename={process.env.REACT_APP_BASEDIR}>
     <Switch>
       {indexRoutes.map((prop, key) => {
-        if (prop.path === "/login") {
+        if (prop.path === "/login" || prop.path === "/") {
           return (
             <Route path={prop.path} key={key} component={prop.component} />
           );

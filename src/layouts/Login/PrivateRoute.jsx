@@ -14,6 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
     return <Redirect to={{ pathname: "/login", state: { from: rest.location } }} />;
   }
+  
   // Kiểm tra xem vai trò của người dùng có được phép truy cập trang hay không
   else if (!route || (route.allowedRoles && route.allowedRoles.includes(currentUserRole))) {
     return (

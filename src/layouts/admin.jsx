@@ -12,7 +12,6 @@ import dashboardRoutes from 'routes/admin.jsx';
 import { topbarStyle, menuStyle, menuType, topbarType, navWidth, chatWidth, chatType } from 'variables/settings/admin.jsx';
 
 //var ps;
-
 class UniversityLayout extends React.Component{
     constructor(props) {
         super(props);
@@ -57,6 +56,7 @@ class UniversityLayout extends React.Component{
         document.scrollingElement.scrollTop = 0;
       }
     }
+
     render(){
         return (
             <div className="wrapper" ref="themeWrapper" data-menu={this.state.menuColor} data-topbar={this.state.topbarColor} data-menutype={this.state.menuType} data-topbartype={this.state.topbarType}>
