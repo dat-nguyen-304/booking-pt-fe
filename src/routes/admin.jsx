@@ -2,10 +2,10 @@ import Admin from 'views/admin/Dashboard/University.jsx';
 
 
 
-import Professor from 'views/admin/Professor/Professor.jsx';
-import AddProfessor from 'views/admin/Professor/AddProfessor.jsx';
-import EditProfessor from 'views/admin/Professor/EditProfessor.jsx';
-import ProfessorProfile from 'views/admin/Professor/ProfessorProfile.jsx';
+import Pt from 'views/admin/Professor/Professor.jsx';
+import AddPt from 'views/admin/Professor/AddProfessor.jsx';
+import EditPt from 'views/admin/Professor/EditProfessor.jsx';
+import PtProfile from 'views/admin/Professor/ProfessorProfile.jsx';
 
 import Trainee from 'views/admin/Trainee/Trainee.jsx';
 import AddTrainee from 'views/admin/Trainee/AddTrainee.jsx';
@@ -73,10 +73,10 @@ var dashRoutes = [
                 { path: BASEDIR+"/admin/pt-profile", name: "Personal trainer Profile"},
             ]
     },
-        { path: BASEDIR+"/admin/pts", component: Professor, type: "child"},
-        { path: BASEDIR+"/admin/add-pt", component: AddProfessor, type: "child"},
-        { path: BASEDIR+"/admin/edit-pt", component: EditProfessor, type: "child"},
-        { path: BASEDIR+"/admin/pt-profile", component: ProfessorProfile, type: "child"},
+        { path: BASEDIR+"/admin/pts", component: Pt, type: "child"},
+        { path: BASEDIR+"/admin/add-pt", component: AddPt, type: "child"},
+        { path: BASEDIR+"/admin/edit-pt", component: EditPt, type: "child"},
+        { path: BASEDIR+"/admin/pt-profile", component: PtProfile, type: "child"},
 
     { 
         path: "#", name: "Centers", icon: "user-female", type: "dropdown", parentid: "centers",

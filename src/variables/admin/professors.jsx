@@ -1,5 +1,5 @@
 // ##############################
-// // // professors
+// // // pt
 // #############################
 var IMGDIR = process.env.REACT_APP_IMGDIR;
 

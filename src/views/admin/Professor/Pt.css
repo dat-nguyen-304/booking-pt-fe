@@ -1,0 +1,7 @@
+.hide {
+  display: none;
+}
+
+.panel-header-clicked .h2 {
+  color: red;
+}
