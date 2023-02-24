@@ -11,7 +11,6 @@ import PrivateRoute from "./layouts/Login/PrivateRoute.jsx";
 import indexRoutes from "routes/index.jsx";
 
 const hist = createBrowserHistory();
-
 ReactDOM.render(
 
   <Router history={hist} basename={process.env.REACT_APP_BASEDIR}>

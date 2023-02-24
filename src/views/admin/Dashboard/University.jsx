@@ -429,7 +429,8 @@ class University extends React.Component {
                 </div>
               </div>
 
-              <div className="col-lg-12 col-xl-12 col-md-12 col-12">
+               {/* table  */}
+              <div className="col-lg-12 col-xl-12 col-md-12 col-12"> 
                 <section className="box ">
                   <header className="panel_header">
                     <h2 className="title float-left">Users</h2>

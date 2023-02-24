@@ -43,7 +43,7 @@ function Login() {
       const role = decode && decode.role;
       if (role === "admin") {
         setRedirect("/admin/dashboard");
-      } else if (role === "user") {
+      } else if (role === "pt") {
         setRedirect("/pt/scheduled");
       } else {
         setRedirect("/");
@@ -70,7 +70,6 @@ function Login() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((userCred) => {
       console.log("userCred.user.accessToken: ", userCred.user.accessToken);
-      console.log(window.localStorage.pathname);
       setToken(userCred.user.accessToken);
     });
   };

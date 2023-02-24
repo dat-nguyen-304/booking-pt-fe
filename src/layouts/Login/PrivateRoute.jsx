@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
       <Redirect
         to={{
-          pathname: currentUserRole === 'admin' ? '/admin/dashboard' : '/pt/',
+          pathname: currentUserRole === 'admin' ? '/admin/dashboard' : '/pt/scheduled',
           state: { from: rest.location },
         }}
       />
