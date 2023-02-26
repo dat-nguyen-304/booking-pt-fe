@@ -21,7 +21,7 @@ class Studentslist extends React.Component{
                                                         <img className="img-fluid" src={this.props.students[i].avatar} alt="" />
                                                     </div>
                                                     <div className="team-info">
-                                                        <h3><NavLink to={BASEDIR+"/admin/edit-trainee"}>{ this.props.students[i].name }</NavLink></h3>
+                                                        <h3><NavLink to={BASEDIR+"/admin/trainee-profile"}>{ this.props.students[i].name }</NavLink></h3>
                                             
                                                         <span>{ this.props.students[i].position }</span> / <span>{ this.props.students[i].age } years old</span>
                                                         <ul className="social-icons list-inline list-unstyled">

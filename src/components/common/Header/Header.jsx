@@ -292,7 +292,7 @@ class Header extends React.Component {
                   <DropdownItem tag="a">
                     <i className="i-info" href="#!"></i> Help
                   </DropdownItem>
-                  <DropdownItem tag="a" className="" onClick={logout}>
+                  <DropdownItem tag="a" className="" onClick={logout} style={{cursor:"pointer"}}>
                     <i className="i-lock"></i>Logout
                   </DropdownItem>
                 </DropdownMenu>

@@ -212,8 +212,10 @@ function ProfessorProfile() {
               <thead>
                 <tr>
                   <th>Trainees</th>
+                  <th>Email</th>
                   <th>Course</th>
-                  <th>Feed Back</th>
+                  <th>Feed Back</th>  
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -226,8 +228,10 @@ function ProfessorProfile() {
                     />
                     Duy
                   </td>
+                  <td>duy2223@gmail.com</td>
                   <td>Muay Thai</td>
                   <td>Thầy dạy kỹ, chăm sóc học viên</td>
+                  <td>14/02/2022</td>
                 </tr>
                 <tr>
                 <td className="user-inline-img">
@@ -238,8 +242,10 @@ function ProfessorProfile() {
                     />
                     Duy
                   </td>
+                  <td>duy2223@gmail.com</td>
                   <td>Muay Thai</td>
                   <td>Thầy dạy kỹ, chăm sóc học viên</td>
+                  <td>14/02/2022</td>
                 </tr>
                 <tr>
                 <td className="user-inline-img">
@@ -250,8 +256,10 @@ function ProfessorProfile() {
                     />
                     Duy
                   </td>
+                  <td>duy2223@gmail.com</td>
                   <td>Muay Thai</td>
                   <td>Thầy dạy kỹ, chăm sóc học viên</td>
+                  <td>14/02/2022</td>
                 </tr>
               </tbody>
             </ToggleableTable>

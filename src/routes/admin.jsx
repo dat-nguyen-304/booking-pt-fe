@@ -55,26 +55,26 @@ var dashRoutes = [
         path: "#", name: "Trainees", icon: "people", type: "dropdown", parentid: "trainees",
             child: [
                 { path: BASEDIR+"/admin/trainees", name: "Trainees"},
-                { path: BASEDIR+"/admin/add-trainee", name: "Add Trainees"},
-                { path: BASEDIR+"/admin/edit-trainee", name: "Edit Trainees"},
-                { path: BASEDIR+"/admin/trainee-profile", name: "Trainee Trainees"},
+                // { path: BASEDIR+"/admin/add-trainee", name: "Add Trainee"},
+                { path: BASEDIR+"/admin/edit-trainee", name: "Edit Trainee"},
+                { path: BASEDIR+"/admin/trainee-profile", name: "Trainee Profile"},
             ]
     },
         { path: BASEDIR+"/admin/trainees", component: Trainee, type: "child"},
-        { path: BASEDIR+"/admin/add-trainee", component: AddTrainee, type: "child"},
+        // { path: BASEDIR+"/admin/add-trainee", component: AddTrainee, type: "child"},
         { path: BASEDIR+"/admin/edit-trainee", component: EditTrainee, type: "child"},
         { path: BASEDIR+"/admin/trainee-profile", component: TraineeProfile, type: "child"},
     { 
         path: "#", name: "Personal trainer", icon: "user", type: "dropdown", parentid: "professors",
             child: [
                 { path: BASEDIR+"/admin/pts", name: "Personal trainer"},
-                { path: BASEDIR+"/admin/add-pt", name: "Add Personal trainer"},
+                // { path: BASEDIR+"/admin/add-pt", name: "Add Personal trainer"},
                 { path: BASEDIR+"/admin/edit-pt", name: "Edit Personal trainer"},
                 { path: BASEDIR+"/admin/pt-profile", name: "Personal trainer Profile"},
             ]
     },
         { path: BASEDIR+"/admin/pts", component: Pt, type: "child"},
-        { path: BASEDIR+"/admin/add-pt", component: AddPt, type: "child"},
+        // { path: BASEDIR+"/admin/add-pt", component: AddPt, type: "child"},
         { path: BASEDIR+"/admin/edit-pt", component: EditPt, type: "child"},
         { path: BASEDIR+"/admin/pt-profile", component: PtProfile, type: "child"},
 
