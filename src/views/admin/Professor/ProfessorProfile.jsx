@@ -109,6 +109,7 @@ function ProfessorProfile() {
                   <td>11/04/2024</td>
                 </tr>
               </tbody>
+              <h4>Total: 3</h4>
             </ToggleableTable>
 
             <ToggleableTable title="2. Trainees">

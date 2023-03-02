@@ -12,7 +12,6 @@ import indexRoutes from "routes/index.jsx";
 
 const hist = createBrowserHistory();
 ReactDOM.render(
-
   <Router history={hist} basename={process.env.REACT_APP_BASEDIR}>
     <Switch>
       {indexRoutes.map((prop, key) => {
@@ -28,6 +27,7 @@ ReactDOM.render(
             component={prop.component}
             allowedRoles={['admin', 'pt']}
           />
+      
         );
       })}
     </Switch>

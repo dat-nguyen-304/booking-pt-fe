@@ -83,7 +83,7 @@ class Sidebar extends React.Component {
       });
     }
 
-    //console.log(this.props.location.pathname);
+    // console.log(this.props.location.pathname);
   }
   componentWillUnmount() {
     if (navigator.platform.indexOf("Win") > -1) {

@@ -13,11 +13,11 @@ import Messages from './common/Messages/Messages';
 import Mailbox from './common/Mailbox/Mailbox';
 
 
-/*--------------- University Admin Components ------------------*/
-import Professorslist from './ptbooking/Professorslist/Professorslist';
-import Studentslist from './ptbooking/Studentslist/Studentslist';
-import UniStaffslist from './ptbooking/UniStaffslist/UniStaffslist';
-import Courseslist from './ptbooking/Courseslist/Courseslist';
+/*---------------  Admin Components ------------------*/
+import Professorslist from './admin/Professorslist/Professorslist';
+import Studentslist from './admin/Studentslist/Studentslist';
+import Center from './admin/UniStaffslist/Center';
+import Courseslist from './admin/Courseslist/Courseslist';
 /*--------------- Unused Components ------------------*/
 //import PanelHeader from './general/PanelHeader/PanelHeader';
 //import Stats from './general/Stats/Stats';
@@ -57,7 +57,7 @@ export {
     //admin
     Professorslist,
     Studentslist,
-    UniStaffslist,
+    Center,
     Courseslist,
 
     //pt

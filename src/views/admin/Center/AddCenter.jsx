@@ -1,233 +1,111 @@
-import React from 'react';
-import {
-    Row, Col, Label, Input,
-} from 'reactstrap';
+import React, { useState } from "react";
+import { Row, Col, Label, Input } from "reactstrap";
+import axios from "axios";
+function AddCenter() {
+  const [centerName, setCenterName] = useState("");
+  const [address, setAddress] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append("profileImage", selectedFile);
+    data.append("address", address);
+    data.append("centerName", centerName);
+    console.log(data);
+    console.log(selectedFile);
+    axios
+      .post("http://localhost:5000/api/centers", data, {
+        // headers: {
+        //     "Content-Type": "multipart/form-data",
+        // },
+      })
+      .then((res) => {
+        console.log(res.statusText);
+        console.log(res.data);
+        alert("Success");
+      })
+      .catch((err) => {
+        alert("fail");
+        console.log(err);
+      });
+  };
 
-import InputMask from 'react-input-mask';
-
-import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-
-class AddStaff extends React.Component{
-    constructor (props) {
-    super(props)
-    this.state = {
-      startDate: moment()
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-  }
-
-    render(){
-
-        return (
-            <div>
-                <div className="content">
-                    <Row>
-                        <Col xs={12} md={12}>
-
-                    <div className="page-title">
-                        <div className="float-left">
-                            <h1 className="title">Add Center</h1>
-                        </div>
-                    </div>
-
-
-                            
-
-
-                    <div className="row margin-0">
-                        <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Basic Info</h2>
-                                    
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputname4">Name</label>
-                                                        <input type="text" className="form-control" id="inputname4" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label>Etablished</label>
-                                                        <div className="controls">
-                                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
-                                                        </div>
-                                                   </div>
-{/* 
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleSelect3">Department</Label>
-                                                      <Input type="select" name="select" id="exampleSelect3">
-                                                        <option>Select</option>
-                                                            <option value="Computer Engineering">Computer Engineering</option>
-                                                            <option value="Architecture">Architecture</option>
-                                                            <option value="MBA">MBA</option>
-                                                            <option value="Automobile Engg.">Automobile Engg.</option>
-                                                            <option value="Civil Engg.">Civil Engg.</option>
-                                                            <option value="Mechanical Engg.">Mechanical Engg.</option>
-                                                            <option value="BBA">BBA</option>
-                                                      </Input>
-                                                    </div> */}
-
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputname4121">Position</label>
-                                                        <input type="text" className="form-control" id="inputname4121" placeholder=""/>
-                                                    </div>
-
-
-                                                    <div className="form-group col-md-12">
-                                                       <Label htmlFor="field-11">Phone (+84 99 999 99)</Label>
-                                                       <InputMask id="field-11" className="form-control" mask="+84 99 9999 999" maskChar="_" />
-                                                    </div>
-
-
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleFile">Center Image</Label>
-                                                      <Input type="file" name="imageLink" id="exampleFile" />
-                                                      
-                                                    </div>
-
-
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input4">Website</label>
-                                                        <input type="text" className="form-control" id="input4" placeholder="" />
-                                                    </div>
-
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="inputAddress">Address</label>
-                                                    <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="inputAddress2">Address 2</label>
-                                                    <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
-                                                </div>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-6">
-                                                        <label htmlFor="inputCity">City</label>
-                                                        <input type="text" className="form-control" id="inputCity"/>
-                                                    </div>
-                                                    <div className="form-group col-md-4">
-                                                        <label htmlFor="inputState">State</label>
-                                                        <select id="inputState" className="form-control">
-                                                            <option>Select</option>
-                                                            <option>...</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="form-group col-md-2">
-                                                        <label htmlFor="inputZip">Zip</label>
-                                                        <input type="text" className="form-control" id="inputZip"/>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Submit</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div>
-
-
-                        {/* <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Account Info</h2>
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputEmail4">Email</label>
-                                                        <input type="email" className="form-control" id="inputEmail4" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputPassword4">Password</label>
-                                                        <input type="password" className="form-control" id="inputPassword4" placeholder=""/>
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputPassword41">Confirm Password</label>
-                                                        <input type="password" className="form-control" id="inputPassword41" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div> */}
-
-
-
-
-
-                        <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Social Media Info</h2>
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input24">Facebook URL</label>
-                                                        <input type="text" className="form-control" id="input24" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input241">Twitter URL</label>
-                                                        <input type="text" className="form-control" id="input241" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input242">Linkedin URL</label>
-                                                        <input type="text" className="form-control" id="input242" placeholder="" />
-                                                    </div>
-                                                    
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div>
-
-
-                    </div>
-
-
-
-
-
-
-                                
-                        </Col>
-
-                    </Row>
-                </div>
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+  };
+  return (
+    <div>
+      <div className="content">
+        <Row>
+          <Col xs={12} md={12}>
+            <div className="page-title">
+              <div className="float-left">
+                <h1 className="title">Add Center</h1>
+              </div>
             </div>
-        );
-    }
+
+            <div className="row margin-0">
+              <div className="col-12">
+                <section className="box ">
+                  <header className="panel_header">
+                    <h2 className="title float-left">Basic Info</h2>
+                  </header>
+                  <div className="content-body">
+                    <div className="row">
+                      <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
+                        <form onSubmit={handleSubmit}>
+                          <div className="form-row">
+                            <div className="form-group col-md-12">
+                              <label htmlFor="inputname4">Name</label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="inputname4"
+                                placeholder=""
+                                value={centerName}
+                                onChange={(e) => setCenterName(e.target.value)}
+                              />
+                            </div>
+
+                            <div className="form-group col-md-12">
+                              <Label htmlFor="exampleFile">Center Image</Label>
+                              <Input
+                                type="file"
+                                name="imageLink"
+                                id="exampleFile"
+                                onChange={handleFileSelect}
+                              />
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="inputAddress">Address</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="inputAddress"
+                              placeholder="1234 Main St"
+                              value={address}
+                              onChange={(e) => setAddress(e.target.value)}
+                            />
+                          </div>
+
+                          <button type="submit" className="btn btn-primary">
+                            Submit
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+
+    </div>
+  );
 }
 
-export default AddStaff;
+export default AddCenter;

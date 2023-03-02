@@ -21,7 +21,7 @@ class Professorslist extends React.Component{
                                                         <img className="img-fluid" src={this.props.professors[i].avatar} alt="" />
                                                     </div>
                                                     <div className="team-info">
-                                                        <h3><NavLink to={BASEDIR+"/university/professor-profile"}>{ this.props.professors[i].name }</NavLink></h3>
+                                                        <h3><NavLink to={BASEDIR+"/pt/professor-profile"}>{ this.props.professors[i].name }</NavLink></h3>
                                                         <span>{ this.props.professors[i].position }</span>
                                                         <ul className="social-icons list-inline list-unstyled">
                                                             <li className="list-inline-item"><a href={ this.props.professors[i].facebook }><i className="i-social-facebook icon-primary icon-xs"></i></a></li>
