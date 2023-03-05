@@ -13,7 +13,7 @@ import AddCourse from 'views/pt/Course/AddCourse.jsx';
 import EditCourse from 'views/pt/Course/EditCourse.jsx';
 import CourseView from 'views/pt/Course/CourseView.jsx';
 
-import Library from 'views/pt/Library/Library.jsx';
+import Session from 'views/pt/Library/Library.jsx';
 import AddLibrary from 'views/pt/Library/AddLibrary.jsx';
 import EditLibrary from 'views/pt/Library/EditLibrary.jsx';
 
@@ -93,15 +93,15 @@ var dashRoutes = [
 
 
     { 
-        path: "#", name: "Library", icon: "notebook", type: "dropdown", parentid: "library",
+        path: "#", name: "Upload Image", icon: "notebook", type: "dropdown", parentid: "library",
             child: [
-                { path: BASEDIR+"/pt/library", name: "Library Assets"},
-                { path: BASEDIR+"/pt/add-library", name: "Add Library"},
+                { path: BASEDIR+"/pt/viewSession", name: "View Session"},
+                { path: BASEDIR+"/pt/upload-image", name: "Upload Image"},
                 { path: BASEDIR+"/pt/edit-library", name: "Edit Library"},
             ]
     },
-        { path: BASEDIR+"/pt/library", component: Library, type: "child"},
-        { path: BASEDIR+"/pt/add-library", component: AddLibrary, type: "child"},
+        { path: BASEDIR+"/pt/viewSession", component: Session, type: "child"},
+        { path: BASEDIR+"/pt/upload-image", component: AddLibrary, type: "child"},
         { path: BASEDIR+"/pt/edit-library", component: EditLibrary, type: "child"},
 
 

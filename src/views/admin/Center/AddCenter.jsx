@@ -14,7 +14,7 @@ function AddCenter() {
     console.log(data);
     console.log(selectedFile);
     axios
-      .post("http://localhost:5000/api/centers", data, {
+      .post("https://gachateambe.herokuapp.com/api/centers", data, {
         // headers: {
         //     "Content-Type": "multipart/form-data",
         // },

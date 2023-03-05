@@ -2,7 +2,7 @@
 // // // centers
 // #############################
 import axios from "axios";
-const API_URL = "http://localhost:5000/api/centers";
+const API_URL = "https://gachateambe.herokuapp.com/api/centers";
 const loadCenters = async () => {
   try {
     const response = await axios.get(API_URL);
@@ -15,6 +15,7 @@ const loadCenters = async () => {
       img: center.imgLink,
       status: center.activate,
     }));
+    console.log(centers);
     return centers;
   } catch (error) {
     console.error(error);

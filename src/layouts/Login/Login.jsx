@@ -17,7 +17,7 @@ function Login() {
     async function callAPI() {
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/auth/login",
+          "https://gachateambe.herokuapp.com/api/auth/login",
           null,
           {
             headers: {
@@ -41,7 +41,10 @@ function Login() {
         setRedirect("/admin/dashboard");
       } else if (role === "pt") {
         setRedirect("/pt/scheduled");
-      } else {
+      } else if (role === "user") {
+        setRedirect("/user");
+      } 
+      else {
         setRedirect("/");
       }
     };
@@ -56,6 +59,8 @@ function Login() {
           setRedirect("/admin/dashboard");
         } else if (role === "pt") {
           setRedirect("/pt/scheduled");
+        } else if (role === "user") {
+          setRedirect("/user");
         }
       }
     }
