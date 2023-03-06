@@ -4,42 +4,42 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
-var BASEDIR = process.env.REACT_APP_BASEDIR;
 
-class Professorslist extends React.Component {
+
+class Ptlist extends React.Component {
   render() {
-    var professorsList = [];
-    for (var i = 0; i < this.props.professors.length; i++) {
-      professorsList.push(
+    var ptList = [];
+    for (var i = 0; i < this.props.pt.length; i++) {
+      ptList.push(
         <div className="col-md-6 col-lg-4" key={i}>
           <div className="team-member ">
             <div className="team-img">
               <img
                 className="img-fluid"
-                src={this.props.professors[i].avatar}
+                src={this.props.pt[i].img}
                 alt=""
               />
             </div>
             <div className="team-info">
               <h3>
-                <NavLink to={BASEDIR + "/admin/pt-profile"}>
-                  {this.props.professors[i].name}
+                <NavLink to={`/admin/pt-profile/${this.props.pt[i].id}`}>
+                  {this.props.pt[i].name}
                 </NavLink>
               </h3>
-              <span>{this.props.professors[i].position}</span>
+              <span>{this.props.pt[i].description}</span>
 
-              <p>{this.props.professors[i].msg}</p>
+              <p>{this.props.pt[i].center}</p>
             </div>
           </div>
         </div>
       );
     }
-    return <div className="row">{professorsList}</div>;
+    return <div className="row">{ptList}</div>;
   }
 }
 
-Professorslist.propTypes = {
-  professors: PropTypes.arrayOf(PropTypes.object),
+Ptlist.propTypes = {
+  pt: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default Professorslist;
+export default Ptlist;

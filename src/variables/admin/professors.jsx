@@ -1,18 +1,69 @@
 // ##############################
 // // // pt
 // #############################
-var IMGDIR = process.env.REACT_APP_IMGDIR;
+import axios from "axios";
+const API_URL = "https://gachateambe.herokuapp.com/api/PTs";
 
-const professors = [
-    {avatar: IMGDIR+"/images/admin/professors/professor-8.jpg", name: "Alan Smith", position: "Admin", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'After a slow start, blogging rapidly gained in popularity, blog usage spread.'},
-    {avatar: IMGDIR+"/images/admin/professors/professor-6.jpg", name: "Blake Ross", position: "Author", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'Posts were made to appear in reverse chronological order by manually updating text based HTML.'},
-    {avatar: IMGDIR+"/images/admin/professors/professor-1.jpg", name: "Carl Vasar", position: "Admin", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'The evolution of electronic and software tools to facilitate the production and maintenance'},
-    {avatar: IMGDIR+"/images/admin/professors/professor-4.jpg", name: "Eric Short", position: "Editor", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'Blogs can be hosted by dedicated blog hosting services, on regular web hosting services.'},
-    {avatar: IMGDIR+"/images/admin/professors/professor-2.jpg", name: "Dan Vance", position: "Editor", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'Early blogs were simply manually updated components of common Websites.'},
-    {avatar: IMGDIR+"/images/admin/professors/professor-7.jpg", name: "John Terry", position: "Subscriber", facebook: "#!", twitter: "#!", linkedin: "#!", msg: 'Web site was produced and updated manually before any blogging programs were available. '},
+const loadPTs = async () => {
+    try {
+        const response = await axios.get(API_URL);
+        const PTData = response.data;
+        const PTs = PTData.PTs.map((pt) => {
+          return {
+            id: pt.PTId,
+            name: pt.fullName,
+            description: pt.description,
+            rating: pt.rating,
+            img: pt.imgLink,
+            center: pt.center.centerName,
+          };
+        });
+        return PTs;
+      } catch (error) {
+        console.error(error);
+      }
+  };
+  const getPtById  = async (ptID) => {
+    try {
+      const response = await axios.get(API_URL + '/' + ptID);
+      const pt = response.data.PT;
+      const center = response.data.PT.center;
+      const PtInfo = {
+        id : pt.PTId,
+        fullName: pt.fullName,
+        rating : pt.rating,
+        description : pt.description,
+        img : pt.imgLink,
+        centerName : center.centerName,
+        centerAddress : center.address,
+    }
+      
+      console.log(PtInfo);
+      return PtInfo;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-]; 
-
+  const updatePt = async (ptID, ptData) => {
+    try {
+      const response = await axios.patch(
+        `${API_URL}/${ptID}`,
+        ptData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
 export {
-    professors, 
+    loadPTs, getPtById, updatePt
 };

@@ -15,7 +15,7 @@ const MainHeader = () => {
 						adipisicing sunt adipisicing incididunt veniam fugiat labore eiusmod
 						nisi quis ad nulla exercitation.
 					</p>
-					<Link to="/plans" className="btn lg">
+					<Link to="/user/plans" className={style.btn }>
 						Get Started
 					</Link>
 				</div>

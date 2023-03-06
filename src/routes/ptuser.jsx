@@ -13,9 +13,9 @@ import AddCourse from 'views/pt/Course/AddCourse.jsx';
 import EditCourse from 'views/pt/Course/EditCourse.jsx';
 import CourseView from 'views/pt/Course/CourseView.jsx';
 
-import Session from 'views/pt/Library/Library.jsx';
-import AddLibrary from 'views/pt/Library/AddLibrary.jsx';
-import EditLibrary from 'views/pt/Library/EditLibrary.jsx';
+import Session from 'views/pt/Upload/Slot.jsx';
+import UploadImg from 'views/pt/Upload/UploadImg.jsx';
+import EditLibrary from 'views/pt/Upload/EditLibrary.jsx';
 
 
 import Department from 'views/pt/Department/Department.jsx';
@@ -62,6 +62,18 @@ var dashRoutes = [
         { path: BASEDIR+"/pt/edit-student", component: EditStudent, type: "child"},
         { path: BASEDIR+"/pt/student-profile", component: StudentProfile, type: "child"},
 
+        { 
+            path: "#", name: "Upload Image", icon: "notebook", type: "dropdown", parentid: "library",
+                child: [
+                    { path: BASEDIR+"/pt/viewSession", name: "View Session"},
+                    // { path: BASEDIR+"/pt/upload-image/:id", name: "Upload Image"},
+                    { path: BASEDIR+"/pt/edit-library", name: "Edit Library"},
+                ]
+        },
+            { path: BASEDIR+"/pt/viewSession", component: Session, type: "child"},
+            { path: BASEDIR+"/pt/upload-image/:id", component: UploadImg, type: "child"},
+            { path: BASEDIR+"/pt/edit-library", component: EditLibrary, type: "child"},
+            
       { 
         path: "#", name: "Reports", icon: "chart", type: "dropdown", parentid: "reports",
         child: [
@@ -92,17 +104,7 @@ var dashRoutes = [
         { path: BASEDIR+"/pt/course-view", component: CourseView, type: "child"},
 
 
-    { 
-        path: "#", name: "Upload Image", icon: "notebook", type: "dropdown", parentid: "library",
-            child: [
-                { path: BASEDIR+"/pt/viewSession", name: "View Session"},
-                { path: BASEDIR+"/pt/upload-image", name: "Upload Image"},
-                { path: BASEDIR+"/pt/edit-library", name: "Edit Library"},
-            ]
-    },
-        { path: BASEDIR+"/pt/viewSession", component: Session, type: "child"},
-        { path: BASEDIR+"/pt/upload-image", component: AddLibrary, type: "child"},
-        { path: BASEDIR+"/pt/edit-library", component: EditLibrary, type: "child"},
+    
 
 
     { 

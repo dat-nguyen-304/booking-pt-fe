@@ -24,14 +24,35 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       />
     );
   } else {
-    return (
-      <Redirect
-        to={{
-          pathname: currentUserRole === 'admin' ? '/admin/dashboard' : '/pt/scheduled',
-          state: { from: rest.location },
-        }}
-      />
-    );
+    if (currentUserRole === 'admin') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/admin/dashboard',
+            state: { from: rest.location },
+          }}
+        />
+      );
+    } else if (currentUserRole === 'pt') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/pt/scheduled',
+            state: { from: rest.location },
+          }}
+        />
+      );
+    } else {
+      return (
+        <Redirect
+          to={{
+            pathname: '/user/home',
+            state: { from: rest.location },
+          }}
+        />
+      );
+    }
+    
   }
 };
 

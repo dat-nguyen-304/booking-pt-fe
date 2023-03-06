@@ -75,14 +75,14 @@ var dashRoutes = [
     child: [
       { path: "/admin/pts", name: "Personal trainer" },
       // { path: "/admin/add-pt", name: "Add Personal trainer"},
-      { path: "/admin/edit-pt", name: "Edit Personal trainer" },
-      { path: "/admin/pt-profile", name: "Personal trainer Profile" },
+      { path: "/admin/edit-pt/:id", name: "Edit Personal trainer" },
+      { path: "/admin/pt-profile/:id", name: "Personal trainer Profile" },
     ],
   },
   { path: "/admin/pts", component: Pt, type: "child" },
   // { path: "/admin/add-pt", component: AddPt, type: "child"},
-  { path: "/admin/edit-pt", component: EditPt, type: "child" },
-  { path: "/admin/pt-profile", component: PtProfile, type: "child" },
+  { path: "/admin/edit-pt/:id", component: EditPt, type: "child" },
+  { path: "/admin/pt-profile/:id", component: PtProfile, type: "child" },
 
   {
     path: "#",

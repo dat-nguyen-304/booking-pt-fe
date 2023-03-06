@@ -1,30 +1,22 @@
 import React from "react";
 import Card from "../../views/pages/UI/Card";
+import styles from "../../layouts/index.module.css";
 
-const Trainer = ({ image, name, job, socials }) => {
-	return (
-		<Card className="trainer">
-			<div className="trainer__img">
-				<img src={image} alt={name} />
-			</div>
-			<h3>{name}</h3>
-			<p>{job}</p>
-			<div className="trainer__socials">
-				{socials.map(({ icon, link }, index) => {
-					return (
-						<a
-							href={link}
-							key={index}
-							target="_blank"
-							rel="noreferrer noopener"
-						>
-							{icon}
-						</a>
-					);
-				})}
-			</div>
-		</Card>
-	);
+const Trainer = ({ id, image, name, center, rating, description }) => {
+  return (
+    <Card className="trainer">
+      <div className="trainer__img">
+        <img src={image} alt={name} />
+      </div>
+      <h3 className={styles.h3_3}>{name}</h3>
+      <p>Work: {center}</p>
+      <p>Rate: {rating}</p>
+      <p>Description: {description}</p>
+      <button className={styles.btn} onClick={console.log(id)}>
+        Book Pt
+      </button>
+    </Card>
+  );
 };
 
 export default Trainer;

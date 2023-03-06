@@ -42,7 +42,7 @@ function Login() {
       } else if (role === "pt") {
         setRedirect("/pt/scheduled");
       } else if (role === "user") {
-        setRedirect("/user");
+        setRedirect("/user/home");
       } 
       else {
         setRedirect("/");
@@ -60,7 +60,7 @@ function Login() {
         } else if (role === "pt") {
           setRedirect("/pt/scheduled");
         } else if (role === "user") {
-          setRedirect("/user");
+          setRedirect("/user/home");
         }
       }
     }

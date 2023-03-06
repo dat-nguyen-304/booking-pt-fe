@@ -49,18 +49,23 @@
     color: var(--color-gray-100);
   }
 
-  h1 {
-    font-size: 3rem;
+  .h1__1 {
+    color: #ffb116;
+    font-size: 2rem;
   }
 
   .h2_2 {
     font-size: 2rem ;
   }
-
-  a {
+  .h3__3 {
+    font-size: 1.5rem;
+  }
+  .li__1 a{
     color: var(--color-gray-100);
   }
-
+  .link__1 {
+    color: var(--color-gray-100);
+  }
   .img_1{
     display: block;
     object-fit: cover;

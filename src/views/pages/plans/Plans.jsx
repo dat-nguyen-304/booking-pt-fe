@@ -1,37 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./plans.css";
-import { plans } from "../../../components/user/data";
+import {  getPackage } from "../../../components/user/data";
 import Header from "../../../components/user/Header";
 import HeaderImage from "../../../components/user/images/header_bg_4.jpg";
 import Card from "../UI/Card";
+import styles from "../../../layouts/index.module.css";
 const Plans = () => {
+  const [packData, setPackData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPackage();
+      setPackData(data);
+    };
+    getData();
+  }, []);
+
   return (
     <>
       <Header title="Membership Plans" image={HeaderImage}>
-        Et eu reprehenderit esse minim.Et eu reprehenderit esse minim. Et eu
-        reprehenderit esse minim.
+        Transform your fitness journey with our diverse range of training
+        programs, tailored to your individual needs and goals. Whether you're
+        looking to build strength, improve endurance, or enhance your overall
+        wellness, our expert trainers are here to guide and motivate you every
+        step of the way.
       </Header>
       <section className="plans">
-        <div className= "container plans__container">
-          {plans.map(({ id, name, desc, price, features }) => {
-            return (
-              <Card key={id} className="plan">
-                <h3>{name}</h3>
-                <small>{desc}</small>
-                <h1>{`$ ${price}`}</h1>
-                <h2>/mo</h2>
-                <h4>Features</h4>
-                {features.map(({ feature, available, index }) => {
-                  return (
-                    <p key={index} className={available ? "" : "disabled"}>
-                      {feature}
-                    </p>
-                  );
-                })}
-                <button className="btn lg">Choose Plan</button>
-              </Card>
-            );
-          })}
+        <div className="container plans__container">
+          {packData.map(
+            ({
+              id,
+              name,
+              price,
+              durationByMonth,
+              object,
+              ptStatus,
+            }) => {
+              return (
+                <Card key={id} className="plan">
+                  <h3 className={styles.h1__1}>{name}</h3>
+                  <h3 className={styles.h3__3}>Suitable: {object}</h3>
+                  <h4 className={styles.h4_4}>
+                    {`$ ${price}`}/{durationByMonth} month
+                  </h4>
+                  <p>{ptStatus}</p>
+                  <button className={styles.btn}>Choose Plan</button>
+                </Card>
+              );
+            }
+          )}
         </div>
       </section>
     </>

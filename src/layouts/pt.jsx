@@ -78,7 +78,15 @@ class UniversityLayout extends React.Component {
           <Switch>
             {dashboardRoutes.map((prop, key) => {
               //console.log(this.props.location.pathname);
-              if (this.props.location.pathname === prop.path) {
+              if (prop.path.includes("/:id")) {
+                return (
+                  <Route
+                    path={prop.path}
+                    component={prop.component}
+                    key={key}
+                  />
+                );
+              } else if (this.props.location.pathname === prop.path) {
                 return (
                   <Route
                     path={prop.path}

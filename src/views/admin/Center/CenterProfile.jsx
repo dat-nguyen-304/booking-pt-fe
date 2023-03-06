@@ -51,6 +51,7 @@ class CenterDetail extends React.Component  {
                           <h3 className="uprofile-owner">
                             <a href="#!">{this.state.center.centerName}</a>
                           </h3>
+                          <button className="btn btn-danger btn-sm profile-btn">Delete</button>
                           <button
                             className="btn btn-primary btn-sm profile-btn"
                             onClick={() => {
@@ -59,6 +60,7 @@ class CenterDetail extends React.Component  {
                           >
                             Edit Center
                           </button>
+                         
                           <div className="clearfix"></div>
                           <p>
                            {this.state.center.address}

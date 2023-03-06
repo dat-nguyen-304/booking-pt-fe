@@ -7,17 +7,19 @@ function AddCenter() {
   const [selectedFile, setSelectedFile] = useState(null);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(centerName);
+    console.log(address);
     const data = new FormData();
-    data.append("profileImage", selectedFile);
-    data.append("address", address);
     data.append("centerName", centerName);
+    data.append("address", address);
+    data.append("centerImg", selectedFile);
     console.log(data);
     console.log(selectedFile);
     axios
       .post("https://gachateambe.herokuapp.com/api/centers", data, {
-        // headers: {
-        //     "Content-Type": "multipart/form-data",
-        // },
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
       })
       .then((res) => {
         console.log(res.statusText);

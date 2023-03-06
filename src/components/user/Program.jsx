@@ -1,35 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaCrown } from "react-icons/fa";
 import SectionHead from "./SectionHead";
-import { programs } from "../../components/user/data";
+import {getAllCenter } from "../../components/user/data";
 import Card from "../../views/pages/UI/Card";
-import { Link } from "react-router-dom";
-import { AiFillCaretRight } from "react-icons/ai";
 import style from "../../layouts/index.module.css";
-
+import "./program.css";
 const Program = () => {
-	return (
-		<section className="programs">
-			<div className="container programs container">
-				<SectionHead icon={<FaCrown />} title="Programs" />
+  const [centerData, setCenterData] = useState([]);
+ 
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getAllCenter();
+      setCenterData(data);
+    };
+    getData();
+  }, []);
 
-				<div className="program__wrapper">
-					{programs.map(({ id, icon, title, info, path }) => {
-						return (
-							<Card className="programs__program" key={id}>
-								<span>{icon}</span>
-								<h4 className={style.h4_4}>{title}</h4>
-								<small>{info}</small>
-								<Link to={path} className="btn sm">
-									Learn More <AiFillCaretRight />
-								</Link>
-							</Card>
-						);
-					})}
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className="programs">
+      <div className="container programs container">
+        <SectionHead icon={<FaCrown />} title="Centers" />
+
+        <div className="program__wrapper">
+          {centerData.map(({ id, name, address, img }) => {
+            return (
+              <Card className="center" key={id}>
+                <div className="center__img">
+                  <img src={img} alt={name} />
+                </div>
+                <h3 className={style.h3_3}>{name}</h3>
+                <p>{address}</p>
+                <button className={style.btn} onClick={console.log(id)}>
+                  View Center
+                </button>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Program;
