@@ -15,7 +15,7 @@ const loadCenters = async () => {
       img: center.imgLink,
       status: center.activate,
     }));
-    console.log(centers);
+
     return centers;
   } catch (error) {
     console.error(error);

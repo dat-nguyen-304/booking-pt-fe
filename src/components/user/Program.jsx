@@ -30,7 +30,7 @@ const Program = () => {
                 </div>
                 <h3 className={style.h3_3}>{name}</h3>
                 <p>{address}</p>
-                <button className={style.btn} onClick={console.log(id)}>
+                <button className={style.btn}>
                   View Center
                 </button>
               </Card>

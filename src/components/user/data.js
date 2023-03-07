@@ -46,7 +46,6 @@ export const getPackage = async () => {
 export const getAllCenter = async () => {
     try {
         const center = await loadCenters();
-        console.log(center);
         return center;
       } catch (error) {
         console.error(error);
