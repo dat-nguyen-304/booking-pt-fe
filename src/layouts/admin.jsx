@@ -3,7 +3,7 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch } from "react-router-dom";
 
-import { Header, Footer, Sidebar, ChatSidebar, Stylebar } from "components";
+import { Header, Sidebar, ChatSidebar, Stylebar } from "components";
 
 import dashboardRoutes from "routes/admin.jsx";
 import {
@@ -98,7 +98,6 @@ class UniversityLayout extends React.Component {
               return "";
             })}
           </Switch>
-          <Footer fluid />
         </div>
         <ChatSidebar
           {...this.props}

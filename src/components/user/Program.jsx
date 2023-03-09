@@ -9,11 +9,17 @@ const Program = () => {
   const [centerData, setCenterData] = useState([]);
  
   useEffect(() => {
+    let isMounted = true;
     const getData = async () => {
       const data = await getAllCenter();
-      setCenterData(data);
+      if (isMounted) {
+        setCenterData(data);
+      }
     };
     getData();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

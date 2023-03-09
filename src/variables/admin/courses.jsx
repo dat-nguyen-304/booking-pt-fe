@@ -25,7 +25,8 @@ const getAllPackage = async () => {
         created: pack.createdAt,
         category: pack.category ,
         status: pack.activate,
-        ptStatus: ptStatus // thêm thuộc tính mới
+        ptStatus: ptStatus, // thêm thuộc tính mới
+        imgLink : "https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.15752-9/332773078_2141261912889325_4648798698662692148_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=oSPfdFG0cccAX_9nDPG&_nc_ht=scontent.fsgn5-3.fna&oh=03_AdQas4dGsNoikQrXg-vJcCTTy8UyjaoCQb0DYhtGPM8j7Q&oe=643179D3"
       };
     });
     console.log(packages);
@@ -35,17 +36,42 @@ const getAllPackage = async () => {
   }
 };
 
-const courses = [
-    {avatar: "/images/admin/courses/course-1.jpg", name: "Web Development", position: "IT Dept", length: "1 week", msg: "Their endowment by a prince or monarch and their role in training government officials"},
-    {avatar: "/images/admin/courses/course-2.jpg", name: "Photography", position: "Art", length: "2 weeks", msg: "The first documentary evidence of this comes from early in the life of the admin "},
-    {avatar: "/images/admin/courses/course-4.jpg", name: "Designing", position: "Architect", length: "3 weeks", msg: "An important idea in the definition of a admin is the notion of academic freedom."},
-    {avatar: "/images/admin/courses/course-5.jpg", name: "Basics of Coding", position: "Computer Engg", length: "2 weeks", msg: "Some scholars, including Makdisi, have argued that early medieval universities were influenced"},
-    {avatar: "/images/admin/courses/course-8.jpg", name: "Latest Tech", position: "General", length: "4 weeks", msg: "The admin is generally regarded as a formal institution that has its origin"},
-    {avatar: "/images/admin/courses/course-9.jpg", name: "Hosting Management", position: "IT", length: "1 month", msg: "The earliest universities were developed under the governance to great philosophers"},
-    {avatar: "/images/admin/courses/course-12.jpg", name: "File Management", position: "Computer Engg", length: "3 weeks", msg: "The propagation of universities was not necessarily a steady progression in history"},
-    {avatar: "/images/admin/courses/course-13.jpg", name: "Project Lifecycle", position: "Management", length: "15 days", msg: "Universities were also reluctant to give up older curricula, and the continued reliance"},
-]; 
+const getPayment = async () => {
+  try {
+    const response = await axios.get("https://gachateambe.herokuapp.com/api/payments");
+    const payments = response.data.payments;
+    return payments;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const getPackageById = async (id) => {
+  try {
+    const response = await axios.get(`https://gachateambe.herokuapp.com/api/packages/${id}`);
+    const packages = response.data.package;
+    return packages
+  }catch (error) {
+    console.error(error);
+  }
+}
+
+const getPackage = async (id) => {
+  try {
+    const response = await axios.get(`https://gachateambe.herokuapp.com/api/trainee-packages?packageId=${id}`);
+    const total = response.data.totalItems;
+    const traineePackages = response.data.traineePackages;
+    const packages = {
+      total,
+      traineePackages
+    }
+    console.log(packages);
+    return packages
+  }catch (error) {
+    console.error(error);
+  }
+}
 
 export {
-    courses, getAllPackage
+   getAllPackage, getPayment, getPackageById, getPackage
 };

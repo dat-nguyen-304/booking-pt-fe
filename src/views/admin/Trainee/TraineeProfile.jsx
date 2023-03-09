@@ -1,11 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import "./Trainee.css";
 import {} from "components";
 import ToggleTableTn from "./toggleTableTn.jsx";
-var IMGDIR = process.env.REACT_APP_IMGDIR;
-
+import moment from 'moment';
+import {
+  getTraineeByID,
+  getPackagePurchased,
+} from "../../../variables/admin/students";
 function StudentProfile() {
+  const [pt, setPt] = useState([]);
+  const [total, setTotal] = useState("");
+  const [array, setArray] = useState([]);
+  useEffect(() => {
+    const path = window.location.pathname;
+    const traineeId = path.split("/").pop();
+    const getPt = async () => {
+      const ptId = await getTraineeByID(traineeId);
+      setPt(ptId);
+      const packages = await getPackagePurchased(traineeId);
+      setTotal(packages.total);
+      setArray(packages.totalItems);
+    };
+    getPt();
+  }, []);
+  function getStatusColor(status) {
+    if (status) {
+      return "badge-info";
+    } else {
+      return "badge-danger";
+    }
+    
+  }
+
+  function getTextColor(status) {
+    if (status) {
+      return "On-going";
+    } else {
+      return "End";
+    }
+    
+  }
+ 
   return (
     <div>
       <div className="content">
@@ -23,37 +59,18 @@ function StudentProfile() {
                   <div className="col-12">
                     <div className="row uprofile">
                       <div className="uprofile-image col-xl-2 col-lg-3 col-md-3 col-sm-4 col-12">
-                        <img
-                          alt=""
-                          src={IMGDIR + "/images/admin/students/student-13.jpg"}
-                          className="img-fluid"
-                        />
+                        <img alt="" src={""} className="img-fluid" />
                       </div>
                       <div className="uprofile-name col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
-                        <h3 className="uprofile-owner">
-                          <a href="#!">Jane Douglas</a>
-                        </h3>
+                        <h3 className="uprofile-owner">{pt.fullName}</h3>
                         <button className="btn btn-primary btn-sm profile-btn">
-                          Send message
-                        </button>
-                        <button className="btn btn-primary btn-sm profile-btn">
-                          Add as friend
+                          Edit Profile
                         </button>
                         <div className="clearfix"></div>
-                        <p className="uprofile-title">Course purchased: 3</p>
-                        <div className="clearfix"></div>
-                        <p>Date create account: 14/02/2022</p>
-                        <p className="uprofile-list">
-                          <span>
-                            <i className="i-home"></i> Hồ Chí Minh City
-                          </span>
-                          <span>
-                            <i className="i-user"></i>Gacha56236@gmail.com
-                          </span>
-                          <span>
-                            <i className="i-briefcase"></i> Gacha Tân Bình
-                          </span>
+                        <p className="uprofile-title">
+                          Course purchased: {total}
                         </p>
+                        <div className="clearfix"></div>
                       </div>
                     </div>
                   </div>
@@ -68,40 +85,28 @@ function StudentProfile() {
                   <th>Slots</th>
                   <th>Date Started</th>
                   <th>Date End</th>
-                  <th>Feed back</th>
+                  <th>Center</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="">Muay Thái</td>
-                  <td>
-                    <span className="badge badge-info">On-Going</span>
-                  </td>
-                  <td>1, 2, 3</td>
-                  <td>11/02/2023</td>
-                  <td>11/04/2024</td>
-                  <td>Not yet</td>
-                </tr>
-                <tr>
-                  <td className="">Vovinam</td>
-                  <td>
-                    <span className="badge badge-primary">Upcoming</span>
-                  </td>
-                  <td>1, 2, 3</td>
-                  <td>11/04/2023</td>
-                  <td>11/04/2024</td>
-                  <td>Upcoming</td>
-                </tr>
-                <tr>
-                  <td className="">Karate</td>
-                  <td>
-                    <span className="badge badge-danger">End</span>
-                  </td>
-                  <td>1, 2, 3</td>
-                  <td>11/04/2023</td>
-                  <td>11/04/2024</td>
-                  <td>Good</td>
-                </tr>
+                {array.map((packages, index) => (
+                  <tr key={index}>
+                    <td>{packages.package.packageName}</td>
+                    <td>
+                      <span
+                        className={`badge ${getStatusColor(
+                          packages.package.activate
+                        )}`}
+                      >
+                        { getTextColor(packages.package.activate)}
+                      </span>
+                    </td>
+                    <td>{packages.slot.slotName}</td>
+                    <td>{moment(packages.startDate).format('DD/MM/YYYY')}</td>
+                    <td>{moment(packages.endDate).format('DD/MM/YYYY')}</td>
+                    <td>{packages.center.centerName}</td>
+                  </tr>
+                ))}
               </tbody>
             </ToggleTableTn>
 
@@ -119,7 +124,7 @@ function StudentProfile() {
                 <tr>
                   <td className="user-inline-img">
                     <img
-                      src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                      src={"/images/profile/avatar-4.jpg"}
                       alt="user avatar"
                       className="avatar-image img-inline"
                     />
@@ -133,7 +138,7 @@ function StudentProfile() {
                 <tr>
                   <td className="user-inline-img">
                     <img
-                      src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                      src={"/images/profile/avatar-4.jpg"}
                       alt="user avatar"
                       className="avatar-image img-inline"
                     />
@@ -147,7 +152,7 @@ function StudentProfile() {
                 <tr>
                   <td className="user-inline-img">
                     <img
-                      src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                      src={"/images/profile/avatar-4.jpg"}
                       alt="user avatar"
                       className="avatar-image img-inline"
                     />

@@ -5,9 +5,11 @@ import Header from "../../../components/user/Header";
 import HeaderImage from "../../../components/user/images/header_bg_4.jpg";
 import Card from "../UI/Card";
 import styles from "../../../layouts/index.module.css";
+import { Redirect } from "react-router-dom";
 const Plans = () => {
   const [packData, setPackData] = useState([]);
-
+  const [redirect, setRedirect] = useState(false);
+  const [selectedPackageId, setSelectedPackageId] = useState(null);
   useEffect(() => {
     const getData = async () => {
       const data = await getPackage();
@@ -15,9 +17,13 @@ const Plans = () => {
     };
     getData();
   }, []);
-
+  const handleOnClick = (id) => {
+    setSelectedPackageId(id);
+    setRedirect(true);
+  }
   return (
     <>
+     {redirect && <Redirect to={`/user/booking/${selectedPackageId}`} />}
       <Header title="Membership Plans" image={HeaderImage}>
         Transform your fitness journey with our diverse range of training
         programs, tailored to your individual needs and goals. Whether you're
@@ -44,7 +50,7 @@ const Plans = () => {
                     {`$ ${price}`}/{durationByMonth} month
                   </h4>
                   <p>{ptStatus}</p>
-                  <button className={styles.btn}>Choose Plan</button>
+                  <button className={styles.btn} onClick={() => handleOnClick(id)} >Choose Plan</button>
                 </Card>
               );
             }

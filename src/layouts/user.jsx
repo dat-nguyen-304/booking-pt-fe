@@ -7,6 +7,7 @@ import Contact from "../views/pages/contact/Contact";
 import Gallery from "../views/pages/gallery/Gallery";
 import Plans from "../views/pages/plans/Plans";
 import Trainers from "../views/pages/trainers/Trainers";
+import Booking from "../views/pages/booking/booking";
 import Footer from "../components/user/Footer";
 import style from"./index.module.css";
 function User() {
@@ -27,6 +28,7 @@ function User() {
         <Route path="/user/gallery" component={Gallery} />
         <Route path="/user/plans" component={Plans} />
         <Route path="/user/trainers" component={Trainers} />
+        <Route path="/user/booking/:id" component={Booking} />
       </Switch>
       <Footer />
     </div>

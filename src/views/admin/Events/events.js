@@ -3,8 +3,8 @@ export default [
     id: 0,
     title: 'All Day Event very long title',
     allDay: true,
-    start: new Date(2018, 3, 0),
-    end: new Date(2018, 3, 1),
+    start: new Date(2022, 2, 15),
+    end: new Date(2022, 3, 1),
   },
   {
     id: 1,
@@ -94,6 +94,7 @@ export default [
   {
     id: 14,
     title: 'Today',
+    pt: "Trần Quang Anh",
     start: new Date(new Date().setHours(new Date().getHours() - 3)),
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
   },

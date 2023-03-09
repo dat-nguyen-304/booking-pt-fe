@@ -4,7 +4,6 @@ import {} from "components";
 import { withRouter } from "react-router-dom";
 import {getCenterById} from "../../../variables/admin/centers"
 import ToggleCenter from "./ToggleCenter";
-var IMGDIR = process.env.REACT_APP_IMGDIR;
 
 class CenterDetail extends React.Component  {
   constructor(props) {
@@ -93,7 +92,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />
@@ -111,7 +110,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />
@@ -129,7 +128,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />
@@ -159,7 +158,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />
@@ -177,7 +176,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />
@@ -195,7 +194,7 @@ class CenterDetail extends React.Component  {
                   <tr>
                     <td className="user-inline-img">
                       <img
-                        src={IMGDIR + "/images/profile/avatar-4.jpg"}
+                        src={ "/images/profile/avatar-4.jpg"}
                         alt="user avatar"
                         className="avatar-image img-inline"
                       />

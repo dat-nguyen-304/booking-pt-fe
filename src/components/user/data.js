@@ -29,6 +29,10 @@ export const links = [
     {
         name: "My Profile",
         path: '/user/profile'
+    },
+    {
+        name: "My Schedule",
+        path: '/user/Schedule'
     }
 ]
 
@@ -170,7 +174,6 @@ export const testimonials = [
 export const getTrainers = async () => {
     try {
       const centerData = await loadPTs();
-      console.log(centerData);
       const trainers = centerData.map((trainer) => ({
         id: trainer.id,
         image: trainer.img,
@@ -179,7 +182,6 @@ export const getTrainers = async () => {
         rating: trainer.rating ? trainer.rating : "Not yet",
         description: trainer.description,
       }));
-      console.log(trainers);
       return trainers;
     } catch (error) {
       console.error(error);
