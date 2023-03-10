@@ -5,32 +5,27 @@ const AddCourse = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const courseName = event.target.elements.inputname4.value;
+    const packageName = event.target.elements.inputname4.value;
     const durationByDay = event.target.elements.day.value;
     const durationByMonth = event.target.elements.month.value;
     const category = event.target.elements.category.value;
-    const suitableFor = event.target.elements.inputname4121.value;
+    const object = event.target.elements.inputname4121.value;
     const price = event.target.elements.price.value;
     const data = {
-      courseName,
+      packageName,
       price,
       durationByDay,
       durationByMonth,
       category,
-      suitableFor,
+      object,
     };
     console.log(data);
-    const token = localStorage.getItem("accessToken");
     axios
       .post("https://gachateambe.herokuapp.com/api/packages", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Access-Control-Allow-Origin': 'http://localhost:3000'
-        },
       })
       .then((response) => {
         console.log(response);
-        alert("Success");
+        window.location.href = "/admin/courses";
       })
       .catch((error) => {
         console.log(error);
