@@ -85,10 +85,10 @@ const Booking = () => {
     axios
       .post(
         "https://gachateambe.herokuapp.com/api/trainee-packages",
-        JSON.stringify(data),
+        data,
         {
           headers: {
-            "Content-Type": "application/json",
+            'Authorization': `Bearer ${accessToken}`,
           },
         }
       )
@@ -97,9 +97,10 @@ const Booking = () => {
         console.log(res.data);
         alert("Success");
       })
-      .catch((err) => {
+      .catch((err, res) => {
         alert("fail");
         console.log(err);
+        console.log(res);
       });
   }
 
@@ -124,7 +125,6 @@ const Booking = () => {
     const today = new Date().toISOString().substr(0, 10);
     if (selectedDate >= today) {
       setStartDate(selectedDate);
-      console.log(startDate);
     } else {
       alert("Start date cannot be before today!");
     }
@@ -151,7 +151,7 @@ const Booking = () => {
       <section>
         <Form className="container" onSubmit={handleSubmit}>
           <Row>
-            <Col md={6}>
+            <Col md={12}>
               <FormGroup>
                 <Label htmlFor="center">Center:</Label>
                 <Input
@@ -254,6 +254,7 @@ const Booking = () => {
           </Button>
         </Form>
       </section>
+
     </>
   );
 };

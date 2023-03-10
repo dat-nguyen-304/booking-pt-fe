@@ -5,6 +5,7 @@ function AddCenter() {
   const [centerName, setCenterName] = useState("");
   const [address, setAddress] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const accessToken = localStorage.getItem("accessToken");
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(centerName);
@@ -18,7 +19,8 @@ function AddCenter() {
     axios
       .post("https://gachateambe.herokuapp.com/api/centers", data, {
         headers: {
-            "Content-Type": "multipart/form-data",
+          'Authorization': `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
@@ -105,7 +107,6 @@ function AddCenter() {
           </Col>
         </Row>
       </div>
-
     </div>
   );
 }

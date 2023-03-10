@@ -22,7 +22,7 @@ const AddCourse = () => {
     axios
       .post("https://gachateambe.herokuapp.com/api/packages", data, {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
