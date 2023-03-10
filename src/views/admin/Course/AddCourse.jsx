@@ -25,6 +25,7 @@ const AddCourse = () => {
       .post("https://gachateambe.herokuapp.com/api/packages", data, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Access-Control-Allow-Origin': 'http://localhost:3000'
         },
       })
       .then((response) => {
@@ -73,7 +74,7 @@ const AddCourse = () => {
                               <input
                                 type="number"
                                 className="form-control"
-                                id="Price"
+                                id="price"
                                 placeholder=""
                                 required
                               />
