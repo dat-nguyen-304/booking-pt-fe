@@ -71,7 +71,7 @@ const Booking = () => {
     const mainSlotId = selectedSlot;
     //paymentId
     const paymentId = selectedPay;
-    const date = new Date(startDate).getTime();
+    const date = new Date(startDate).getTime()/1000;
     console.log(date);
     const data = {
       traineeId: traineeId,

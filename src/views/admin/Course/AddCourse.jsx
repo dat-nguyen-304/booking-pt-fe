@@ -10,14 +10,16 @@ const AddCourse = () => {
     const durationByMonth = event.target.elements.month.value;
     const category = event.target.elements.category.value;
     const suitableFor = event.target.elements.inputname4121.value;
-
+    const price = event.target.elements.price.value;
     const data = {
       courseName,
+      price,
       durationByDay,
       durationByMonth,
       category,
       suitableFor,
     };
+    console.log(data);
     const token = localStorage.getItem("accessToken");
     axios
       .post("https://gachateambe.herokuapp.com/api/packages", data, {
@@ -62,6 +64,16 @@ const AddCourse = () => {
                                 type="text"
                                 className="form-control"
                                 id="inputname4"
+                                placeholder=""
+                                required
+                              />
+                            </div>
+                            <div className="form-group col-md-12">
+                              <label htmlFor="price">Price</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="Price"
                                 placeholder=""
                                 required
                               />
