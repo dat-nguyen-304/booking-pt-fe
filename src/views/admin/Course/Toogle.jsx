@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table } from 'reactstrap';
 
-function ToggleCenter(props) {
+function ToggleCourse(props) {
   const [tableVisible, setTableVisible] = useState(false);
   const [headerColor, setHeaderColor] = useState("#676767");
   function toggleTable() {
@@ -31,4 +31,4 @@ function ToggleCenter(props) {
   );
 }
 
-export default ToggleCenter;
+export default ToggleCourse;

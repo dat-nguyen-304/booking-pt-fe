@@ -4,12 +4,12 @@ import {} from "components";
 import { withRouter } from "react-router-dom";
 import {getCenterById} from "../../../variables/admin/centers"
 import ToggleCenter from "./ToggleCenter";
-
 class CenterDetail extends React.Component  {
   constructor(props) {
     super(props);
     this.state = {
       center: [],
+
     };
   }
 
@@ -22,7 +22,6 @@ class CenterDetail extends React.Component  {
     });
   }
   render() {
-    console.log(this.state.center);
     return (
       <div>
         <div className="content">
@@ -48,9 +47,8 @@ class CenterDetail extends React.Component  {
                         </div>
                         <div className="uprofile-name col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                           <h3 className="uprofile-owner">
-                            <a href="#!">{this.state.center.centerName}</a>
+                            {this.state.center.centerName}
                           </h3>
-                          <button className="btn btn-danger btn-sm profile-btn">Delete</button>
                           <button
                             className="btn btn-primary btn-sm profile-btn"
                             onClick={() => {
@@ -64,15 +62,6 @@ class CenterDetail extends React.Component  {
                           <p>
                            {this.state.center.address}
                           </p>
-                          {/* <p className="uprofile-list">
-                            <span>
-                              <i className="i-envelope"></i>{" "}
-                              GachaTanBinh@gmail.com
-                            </span>
-                            <span>
-                              <i className="i-phone"></i> 00011110999999
-                            </span>
-                          </p> */}
                         </div>
                       </div>
                     </div>

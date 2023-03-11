@@ -21,6 +21,7 @@ const loadCenters = async () => {
     console.error(error);
   }
 };
+
 const getCenterById  = async (centerId) => {
   try {
     const response = await axios.get(API_URL + '/' + centerId);
@@ -30,13 +31,6 @@ const getCenterById  = async (centerId) => {
     console.error(error);
   }
 }
-const deleteCenter = async(centerId) => {
-  axios.delete(API_URL + '/' + centerId)
-  .then((response) => {
-    console.log(response.data); // xử lý dữ liệu trả về
-  })
-  .catch((error) => {
-    console.log(error); // xử lý lỗi
-  });
-}
-export { loadCenters, getCenterById, deleteCenter };
+
+
+export { loadCenters, getCenterById };

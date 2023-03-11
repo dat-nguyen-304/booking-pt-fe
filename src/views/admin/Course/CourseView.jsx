@@ -90,46 +90,48 @@ class CourseProfile extends React.Component {
                   </div>
                 </section>
               </div>
-              <div>
-                <ReactPaginate
-                  previousLabel={"Previous"}
-                  nextLabel={"Next"}
-                  breakLabel={"..."}
-                  pageCount={Math.ceil(packages.length / perPage)}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={5}
-                  onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
-                  subContainerClassName={"pages pagination"}
-                  activeClassName={"active"}
-                />
-              </div>
 
               <ToggleCourse title="1. Static">
-                <thead>
-                  <tr>
-                    <th>Traniee Name</th>
-                    <th>Pt Name</th>
-                    <th>Center</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Buy Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentPackages.map((packages, index) => (
-                    <tr key={index}>
-                      <td>{packages.trainee.fullName}</td>
-                      <td>{packages.PT.fullName}</td>
-                      <td>{packages.center.centerName}</td>
-                      <td>{moment(packages.startDate).format("DD/MM/YYYY")}</td>
-                      <td>{moment(packages.endDate).format("DD/MM/YYYY")}</td>
-                      <td>
-                        {moment(packages.registerDate).format("DD/MM/YYYY")}
-                      </td>
+                  <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    breakLabel={"..."}
+                    pageCount={Math.ceil(packages.length / perPage)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}
+                  />
+                  <table>
+                  <thead>
+                    <tr>
+                      <th>Traniee Name</th>
+                      <th>Pt Name</th>
+                      <th>Center</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Buy Date</th>
                     </tr>
-                  ))}
-                </tbody>
+                  </thead>
+                  <tbody>
+                    {currentPackages.map((packages, index) => (
+                      <tr key={index}>
+                        <td>{packages.trainee.fullName}</td>
+                        <td>{packages.mainPT.fullName}</td>
+                        <td>{packages.mainCenter.centerName}</td>
+                        <td>
+                          {moment(packages.startDate).format("DD/MM/YYYY")}
+                        </td>
+                        <td>{moment(packages.endDate).format("DD/MM/YYYY")}</td>
+                        <td>
+                          {moment(packages.registerDate).format("DD/MM/YYYY")}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  </table>
               </ToggleCourse>
             </Col>
           </Row>

@@ -21,6 +21,7 @@ function StudentProfile() {
       const packages = await getPackagePurchased(traineeId);
       setTotal(packages.total);
       setArray(packages.totalItems);
+
     };
     getPt();
   }, []);
@@ -41,7 +42,7 @@ function StudentProfile() {
     }
     
   }
- 
+  console.log(array);
   return (
     <div>
       <div className="content">
@@ -77,6 +78,7 @@ function StudentProfile() {
                 </div>
               </section>
             </div>
+            
             <ToggleTableTn title="1. Packages purchased">
               <thead>
                 <tr>
@@ -85,6 +87,7 @@ function StudentProfile() {
                   <th>Slots</th>
                   <th>Date Started</th>
                   <th>Date End</th>
+                  <th>Remaining</th>
                   <th>Center</th>
                 </tr>
               </thead>
@@ -101,10 +104,11 @@ function StudentProfile() {
                         { getTextColor(packages.package.activate)}
                       </span>
                     </td>
-                    <td>{packages.slot.slotName}</td>
+                    <td>{packages.mainSlot.slotName}</td>
                     <td>{moment(packages.startDate).format('DD/MM/YYYY')}</td>
                     <td>{moment(packages.endDate).format('DD/MM/YYYY')}</td>
-                    <td>{packages.center.centerName}</td>
+                    <td>{packages.remainDay} day</td>
+                    <td>{packages.mainCenter.centerName}</td>
                   </tr>
                 ))}
               </tbody>

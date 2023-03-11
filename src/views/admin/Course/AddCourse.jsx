@@ -9,7 +9,7 @@ const AddCourse = () => {
     const durationByDay = event.target.elements.day.value;
     const durationByMonth = event.target.elements.month.value;
     const category = event.target.elements.category.value;
-    const object = event.target.elements.inputname4121.value;
+    const object = event.target.elements.object.value;
     const price = event.target.elements.price.value;
     const data = {
       packageName,
@@ -116,16 +116,27 @@ const AddCourse = () => {
                             </div>
 
                             <div className="form-group col-md-12">
-                              <label htmlFor="inputname4121">
+                              <Label htmlFor="object">
                                 Suitable for:
-                              </label>
-                              <input
+                              </Label>
+                              <Input
                                 type="text"
                                 className="form-control"
-                                id="inputname4121"
+                                id="object"
                                 placeholder=""
                                 required
-                              />
+                              >
+                                 <option>Select</option>
+                                <option value="newbie">
+                                  For newbie
+                                </option>
+                                <option value="intermediate">
+                                  For intermediate
+                                </option>
+                                <option value="professional">
+                                  for professional
+                                </option>
+                                </Input>
                             </div>
                           </div>
                           <button type="submit" className="btn btn-primary">

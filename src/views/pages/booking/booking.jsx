@@ -7,6 +7,8 @@ import HeaderImage from "../../../components/user/images/header_bg_4.jpg";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+// import {Popup} from 'reactjs-popup';
+
 const Booking = () => {
   const [centers, setCenters] = useState([]);
   const [selectedCenter, setSelectedCenter] = useState("");
@@ -95,12 +97,10 @@ const Booking = () => {
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        alert("Success");
+        window.location.href='/user/Schedule';
       })
-      .catch((err, res) => {
-        alert("fail");
+      .catch((err) => {
         console.log(err);
-        console.log(res);
       });
   }
 

@@ -74,9 +74,11 @@ function Login() {
       setToken(userCred.user.accessToken);
     });
   };
+
   if (redirect) {
     return <Redirect to={redirect} />;
   }
+  
   return (
     <Container fluid>
       <Row>

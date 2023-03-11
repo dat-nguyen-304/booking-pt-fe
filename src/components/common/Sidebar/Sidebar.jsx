@@ -12,7 +12,7 @@ import logofull from "assets/img/logo-full.png";
 import logomini from "assets/img/logo-mini.png";
 import logofulldark from "assets/img/logo-full-dark.png";
 import logominidark from "assets/img/logo-mini-dark.png";
-
+import jwt from "jsonwebtoken";
 var ps;
 var currentmenu = "notset";
 
@@ -62,10 +62,12 @@ class Sidebar extends React.Component {
       : "";
   }
   componentDidMount() {
+    const accessToken = localStorage.getItem('accessToken');
+    const nameUser = jwt.decode(accessToken).email;
     if (this.props.admintype === "admin") {
       this.setState({
         profileposition: "Administration",
-        profilename: "Henry Gibson",
+        profilename: nameUser,
         profileimg: IMGDIR + "/images/profile/profile-university.jpg",
       });
     }if (this.props.admintype === "pt") {
