@@ -1,0 +1,65 @@
+/* .rbc-events-container .rbc-event {
+  height: 8% !important; 
+}
+
+.rbc-day-slot .rbc-event{
+  text-align: center;
+  display: block;
+
+} */
+
+ body .rbc-event {
+  padding: 0%;
+
+} 
+
+.event-with-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-title {
+  margin-bottom: 5px;
+  color: black;
+  font-weight: 900;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.event-time {
+  font-size: 12px;
+  color: black;
+  font-weight: 500;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.rbc-date-cell > a, .rbc-date-cell > a:active, .rbc-date-cell > a:visited {
+  color: inherit;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.rbc-event {
+  background-color: rgb(218, 218, 80) !important;
+} 
+body .rbc-calendar .rbc-toolbar .rbc-toolbar-label {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 30px;
+  color: black;
+}
+body .rbc-calendar .rbc-toolbar .rbc-btn-group button {
+  cursor: pointer;
+  border-radius: 0px;
+  -o-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border: 0px solid transparent;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  text-shadow: none;
+  font-size: 15px;
+  line-height: 1.618;
+}

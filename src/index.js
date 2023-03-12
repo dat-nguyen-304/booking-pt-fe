@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import "./variables/Firebase.js";
-import "bootstrap/dist/css/bootstrap.css";
-/*import 'font-awesome/css/font-awesome.min.css';*/
+// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'font-awesome/css/font-awesome.min.css';
 import "assets/scss/zest-admin.css";
 import "assets/fonts/simple-line-icons.css";
 import PrivateRoute from "./layouts/Login/PrivateRoute.jsx";

@@ -93,9 +93,14 @@ export default [
   },
   {
     id: 14,
-    title: 'Today',
-    pt: "Trần Quang Anh",
+    title: 'Lích học hôm nay',
     start: new Date(new Date().setHours(new Date().getHours() - 3)),
     end: new Date(new Date().setHours(new Date().getHours() + 3)),
+  },
+  {
+    id: 15,
+    title: "Lịch học với Pt",
+    start: new Date(new Date().setHours(9, 15, 0)), // Thời gian bắt đầu: 9:30
+    end: new Date(new Date().setHours(10, 45, 0)), // Thời gian kết thúc: 10:00
   },
 ]

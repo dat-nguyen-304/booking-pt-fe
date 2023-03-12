@@ -8,7 +8,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import styles from "../../layouts/index.module.css";
 const Footer = () => {
   return (
-    <footer>
+    <footer className={styles.footer_1}>
       <div className="container footer__container">
         <article>
           <Link to="/" className="logo">

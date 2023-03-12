@@ -7,8 +7,8 @@ import HeaderImage from "../../../components/user/images/header_bg_4.jpg";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
-// import {Popup} from 'reactjs-popup';
-
+import style from "../../../layouts/index.module.css";
+import { Modal, Button as Btn } from "react-bootstrap";
 const Booking = () => {
   const [centers, setCenters] = useState([]);
   const [selectedCenter, setSelectedCenter] = useState("");
@@ -20,6 +20,7 @@ const Booking = () => {
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [loadingCenters, setLoadingCenters] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   // useEffect hook to load centers on component mount
   //id course
 
@@ -73,7 +74,7 @@ const Booking = () => {
     const mainSlotId = selectedSlot;
     //paymentId
     const paymentId = selectedPay;
-    const date = new Date(startDate).getTime()/1000;
+    const date = new Date(startDate).getTime() / 1000;
     console.log(date);
     const data = {
       traineeId: traineeId,
@@ -85,24 +86,21 @@ const Booking = () => {
     };
     console.log(data);
     axios
-      .post(
-        "https://gachateambe.herokuapp.com/api/trainee-packages",
-        data,
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .post("https://gachateambe.herokuapp.com/api/trainee-packages", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        window.location.href='/user/Schedule';
+        setShowModal(true);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+  //model
 
   // Handler function for center selection
   function handleCenterChange(event) {
@@ -249,12 +247,30 @@ const Booking = () => {
             </Col>
           </Row>
 
-          <Button type="submit" className="btn btn-success">
+          <Button type="submit" className={style.btn}>
             Register now
           </Button>
         </Form>
       </section>
-
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Register success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className={style.p_1}>You have successfully registered, thank you for purchasing the training package</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Btn className={style.btn} variant="secondary" onClick={() => (window.location.href = "/user/home")}>
+            Home
+          </Btn>
+          <Btn
+           className={style.btn}
+            onClick={() => (window.location.href = "/user/Schedule")}
+          >
+            View Schedule
+          </Btn>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

@@ -59,12 +59,24 @@
   }
   .h3__3 {
     font-size: 1.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .tittle_1 {
+    background-color: rgb(202, 217, 217);
+  }
+  .p_1 {
+    font-size: medium;
+    font-weight: bold;
+    
   }
   .li__1 a{
     color: var(--color-gray-100);
+    font-weight: 700;
+    text-decoration: none;
   }
   .link__1 {
     color: var(--color-gray-100);
+    
   }
   .img_1{
     display: block;
@@ -82,6 +94,12 @@
     transition: var(--transition);
 }
 
+.btn__1 {
+    width: fit-content;
+    margin: 0 auto;
+    background-color:rgb(227, 92, 92) !important;
+    border-radius: 1.5rem;
+}
 .btn:hover {
     background: var(--color-secondary);
     color: var(--color-gray-600);
@@ -101,7 +119,9 @@
 .btn.sm:hover {
     background: var(--color-gray-100);
 }
-
+.footer_1 {
+    background-color: hsl(134deg 2% 6%);
+}
 /******************** SECTION REUSABLE STYLES ********************/
 section {
     margin-top: 10rem;

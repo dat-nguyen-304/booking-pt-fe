@@ -26,7 +26,7 @@ function AddCenter() {
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        alert("Success");
+        window.location.href= "/admin/centers";
       })
       .catch((err) => {
         alert("fail");
