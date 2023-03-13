@@ -6,7 +6,7 @@ import { Row, Col } from "reactstrap";
 import axios from "axios";
 const apiUrl = "https://gachateambe.herokuapp.com/api/accounts";
 const token = localStorage.getItem("accessToken");
-console.log(token);
+
 const header = [
   { title: "ID", prop: "id", sortable: true, filterable: true },
   { title: "Email", prop: "email", sortable: true, filterable: true },

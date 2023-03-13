@@ -1,7 +1,7 @@
 .nav_1{
     height: 5rem;
     width: 100vw; /*100% of the window/browser*/
-    background: hsl(134deg 2% 6%);
+    background: var(--color-primary); /* hsl(134deg 2% 6%)*/
     display: grid; 
     place-items: center;
     position: fixed; /*commnt this to see hiden layers*/
@@ -51,7 +51,8 @@
     display: block;
     width: 1.2rem;
     height: 1.2rem;
-    background-color: hsl(134deg 2% 6%);
+    background-color: var(--color-primary) ;
+    /* background-color: hsl(134deg 2% 6%); */
     position: absolute;
     left: calc(50% - 0.6rem);
     transform: rotate(45deg);

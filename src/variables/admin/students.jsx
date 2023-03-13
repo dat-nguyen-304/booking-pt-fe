@@ -13,7 +13,6 @@ const getAllTrainee = async() => {
             id: train.traineeId,
             fullName: train.fullName,
             currentPackageId : train.currentPackageId || "0",
-            imgLink: train.imgLink || "https://png.pngtree.com/png-vector/20190623/ourlarge/pngtree-accountavataruser--flat-color-icon--vector-icon-banner-templ-png-image_1491720.jpg"
           }));
         return trainee;
       } catch (error) {

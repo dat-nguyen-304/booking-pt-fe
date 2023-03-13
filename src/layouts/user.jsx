@@ -3,7 +3,7 @@ import Navbar from "../components/user/Navbar";
 import React, { useEffect } from "react";
 import Home from "../views/pages/home/Home";
 import About from "../views/pages/about/About";
-import Contact from "../views/pages/contact/Contact";
+import Profile from "../views/pages/contact/Contact";
 import Gallery from "../views/pages/gallery/Gallery";
 import Plans from "../views/pages/plans/Plans";
 import Trainers from "../views/pages/trainers/Trainers";
@@ -25,7 +25,7 @@ function User() {
       <Switch>
         <Route path="/user/home" component={Home} />
         <Route path="/user/about" component={About} />
-        <Route path="/user/profile" component={Contact} />
+        <Route path="/user/profile" component={Profile} />
         <Route path="/user/gallery" component={Gallery} />
         <Route path="/user/plans" component={Plans} />
         <Route path="/user/trainers" component={Trainers} />

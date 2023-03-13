@@ -12,9 +12,6 @@ const Trainer = ({ id, image, name, center, rating, description }) => {
       <p>Work: {center}</p>
       <p>Rate: {rating}</p>
       <p>Description: {description}</p>
-      <button className={styles.btn} onClick={console.log(id)}>
-        Book Pt
-      </button>
     </Card>
   );
 };

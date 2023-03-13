@@ -21,8 +21,12 @@ class Schedule extends React.Component {
     super(props);
     this.state = {
       schedule: [],
+      showCompleted: false,
     };
   }
+  handleShowCompleted = () => {
+    this.setState({ showCompleted: !this.state.showCompleted });
+  };
   async componentDidMount() {
     const accessToken = localStorage.getItem("accessToken");
     const userId = jwt.decode(accessToken).accountId;
@@ -37,6 +41,8 @@ class Schedule extends React.Component {
   };
 
   toggleModal = (event) => {
+    const eventDate = moment(event.start, "YYYY-MM-DD");
+    const isCompleted = eventDate.isBefore(moment().startOf("day"));
     const modalContent = (
       <div>
         <p className={styles.p_1}>PT: {event.title}</p>
@@ -46,7 +52,14 @@ class Schedule extends React.Component {
     );
     const modelFooter = (
       <div>
-        <Button className={styles.btn__1}>Change Schedule</Button>
+        {isCompleted ? (
+        <Button className={styles.btn__1}>
+          <a style={{textDecoration:"none"}} href="/user/gallery">View Photos</a></Button>
+      ) : (
+        <Button className={styles.btn__1}>
+           Change Schedule
+          </Button>
+      )}
       </div>
     );
     this.setState({
@@ -57,19 +70,24 @@ class Schedule extends React.Component {
   };
 
   render() {
-    const events = this.state.schedule.map((schedule) => ({
-      id: schedule.sessionsId,
-      title: schedule.pt,
-      start: moment1.tz(schedule.date, "Asia/Ho_Chi_Minh").toDate(),
-      end: moment1
-        .tz(schedule.date, "Asia/Ho_Chi_Minh")
-        .add({ hours: 1, minutes: 30 })
-        .toDate(),
-      //Các thuộc tính khác của event tùy ý bạn định dạng
-      center: schedule.center,
-      slot: schedule.slotName
-    }));
-    console.log(events);
+    const filteredEvents = this.state.schedule.filter((schedule) => {
+      const eventDate = moment(schedule.date, "YYYY-MM-DD");
+      const isCompleted = eventDate.isBefore(moment().startOf("day"));
+      return this.state.showCompleted ? isCompleted : !isCompleted;
+    });
+    const events = filteredEvents.map((schedule) => {
+      return {
+        id: schedule.sessionsId,
+        title: schedule.pt,
+        start: moment1.tz(schedule.date, "Asia/Ho_Chi_Minh").toDate(),
+        end: moment1
+          .tz(schedule.date, "Asia/Ho_Chi_Minh")
+          .add({ hours: 1, minutes: 30 })
+          .toDate(),
+        center: schedule.center,
+        slot: schedule.slotName,
+      };
+    });
     return (
       <div className="content">
         <Row>
@@ -85,7 +103,14 @@ class Schedule extends React.Component {
                 <header className="panel_header">
                   <h2 className="title float-left">Schedule</h2>
                 </header>
+               
                 <div className="content-body">
+                <Button
+                  className={styles.btn}
+                  onClick={this.handleShowCompleted}
+                >
+                  {this.state.showCompleted ? "Not Started" : "Started"}
+                </Button>
                   <div className="row">
                     <div className="col-lg-12">
                       <div style={{ height: 500, width: 100 + "%" }}>
@@ -108,11 +133,11 @@ class Schedule extends React.Component {
                                   <div>
                                     {moment(props.event.start)
                                       .tz(moment.tz.guess())
-                                      .format("h:mm A")}{" "}
+                                      .format("HH:mm")}{" "}
                                     -{" "}
                                     {moment(props.event.end)
                                       .tz(moment.tz.guess())
-                                      .format("h:mm A")}
+                                      .format("HH:mm")}
                                   </div>
                                 </div>
                               </div>
@@ -129,7 +154,9 @@ class Schedule extends React.Component {
           </Col>
         </Row>
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader className={styles.tittle_1} toggle={this.toggleModal}><h3 className={styles.h3__3}>Schedule Details</h3></ModalHeader>
+          <ModalHeader className={styles.tittle_1} toggle={this.toggleModal}>
+            Schedule Detail
+          </ModalHeader>
           <ModalBody>{this.state.modalContent}</ModalBody>
           <ModalFooter>{this.state.modelFooter}</ModalFooter>
         </Modal>

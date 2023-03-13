@@ -12,9 +12,12 @@ const getPackageById = async (id, token) => {
     );
     const schedules = response.data.sessions;
     const timeTable = schedules.map((timeTable)=> {
+      const date = timeTable.date.slice(0, 10)
+      const timeStart = timeTable.slot.slotTime.slice(0, 5);
+      const newTime = date + 'T' + timeStart + ':00.000';
       return {
         sessionsId: timeTable.sessionId,
-        date: timeTable.date.slice(0,-1),
+        date: newTime,
         pt: timeTable.PT.fullName,
         center: timeTable.center.centerName,
         slot: timeTable.slot.slotId,

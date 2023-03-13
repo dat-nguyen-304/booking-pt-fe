@@ -12,13 +12,6 @@ class Studentslist extends React.Component {
       studentsList.push(
         <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={i}>
           <div className="team-member">
-            <div className="team-img">
-              <img
-                className="img-fluid"
-                src={this.props.students[i].imgLink}
-                alt=""
-              />
-            </div>
             <div className="team-info">
               <h3>
                 <NavLink to={ `/admin/trainee-profile/${this.props.students[i].id}`}>

@@ -4,6 +4,7 @@ import React from 'react';
 import { loadPTs } from '../../variables/admin/professors';
 import { getAllPackage } from '../../variables/admin/courses';
 import { loadCenters } from '../../variables/admin/centers';
+import axios from 'axios';
 
 export const links = [
     {
@@ -183,6 +184,20 @@ export const getTrainers = async () => {
         description: trainer.description,
       }));
       return trainers;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  export const checkTrainers = async (id) => {
+    try {
+      const respone = await axios.get(`https://gachateambe.herokuapp.com/api/trainee-packages?traineeId=${id}`);
+      const data = respone.data.traineePackages;
+      const trainee = data.map((trainer) => ({
+        packCurrent: trainer.trainee.currentTraineePackageId
+      }));
+      return trainee;
     } catch (error) {
       console.error(error);
       return [];
