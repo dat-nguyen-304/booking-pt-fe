@@ -10,7 +10,6 @@ import {
 } from "../../../variables/admin/students";
 function StudentProfile() {
   const [pt, setPt] = useState([]);
-  const [total, setTotal] = useState("");
   const [array, setArray] = useState([]);
   useEffect(() => {
     const path = window.location.pathname;
@@ -19,7 +18,6 @@ function StudentProfile() {
       const ptId = await getTraineeByID(traineeId);
       setPt(ptId);
       const packages = await getPackagePurchased(traineeId);
-      setTotal(packages.total);
       setArray(packages.totalItems);
 
     };
@@ -50,23 +48,17 @@ function StudentProfile() {
           <Col xs={12} md={12}>
             <div className="page-title">
               <div className="float-left">
-                <h1 className="title">Trainee Profile</h1>
+                <h1 className="title">{pt.fullName}</h1>
               </div>
             </div>
 
-            <div className="col-xl-12">
+            {/* <div className="col-xl-12">
               <section className="box profile-page">
                 <div className="content-body">
                   <div className="col-12">
                     <div className="row uprofile">
-                      <div className="uprofile-image col-xl-2 col-lg-3 col-md-3 col-sm-4 col-12">
-                        <img alt="" src={""} className="img-fluid" />
-                      </div>
-                      <div className="uprofile-name col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
+                      <div className="uprofile-name col-xl-10 col-lg-12 col-md-12 col-sm-8 col-12">
                         <h3 className="uprofile-owner">{pt.fullName}</h3>
-                        <button className="btn btn-primary btn-sm profile-btn">
-                          Edit Profile
-                        </button>
                         <div className="clearfix"></div>
                         <p className="uprofile-title">
                           Course purchased: {total}
@@ -77,14 +69,14 @@ function StudentProfile() {
                   </div>
                 </div>
               </section>
-            </div>
+            </div> */}
             
             <ToggleTableTn title="1. Packages purchased">
               <thead>
                 <tr>
                   <th>Course Name</th>
                   <th>Status</th>
-                  <th>Slots</th>
+                  <th>PT</th>
                   <th>Date Started</th>
                   <th>Date End</th>
                   <th>Remaining</th>
@@ -94,7 +86,7 @@ function StudentProfile() {
               <tbody>
                 {array.map((packages, index) => (
                   <tr key={index}>
-                    <td>{packages.package.packageName}</td>
+                    <td>{packages.package.packageName} - {packages.mainSlot.slotName} </td>
                     <td>
                       <span
                         className={`badge ${getStatusColor(
@@ -104,7 +96,7 @@ function StudentProfile() {
                         { getTextColor(packages.package.activate)}
                       </span>
                     </td>
-                    <td>{packages.mainSlot.slotName}</td>
+                    <td>{packages.mainPT.fullName}</td>
                     <td>{moment(packages.startDate).format('DD/MM/YYYY')}</td>
                     <td>{moment(packages.endDate).format('DD/MM/YYYY')}</td>
                     <td>{packages.remainDay} day</td>

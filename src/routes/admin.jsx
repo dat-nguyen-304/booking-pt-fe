@@ -7,7 +7,7 @@ import PtProfile from "views/admin/Professor/ProfessorProfile.jsx";
 
 import Trainee from "views/admin/Trainee/Trainee.jsx";
 // import AddTrainee from 'views/admin/Trainee/AddTrainee.jsx';
-import EditTrainee from "views/admin/Trainee/EditTrainee.jsx";
+// import EditTrainee from "views/admin/Trainee/EditTrainee.jsx";
 import TraineeProfile from "views/admin/Trainee/TraineeProfile.jsx";
 
 import Center from "views/admin/Center/Center.jsx";
@@ -51,32 +51,34 @@ var dashRoutes = [
     component: Admin,
   },
   {
-    path: "#",
+    path: "/admin/trainees",
     name: "Trainees",
     icon: "people",
-    type: "dropdown",
+    // type: "dropdown",
     parentid: "trainees",
+    component: Trainee,
     child: [
       { path: "/admin/trainees", name: "Trainees" },
       // { path: "/admin/add-trainee", name: "Add Trainee"},
-      { path: "/admin/edit-trainee", name: "Edit Trainee" },
+      // { path: "/admin/edit-trainee", name: "Edit Trainee" },
       { path: "/admin/trainee-profile/:id", name: "Trainee Profile" },
     ],
   },
   { path: "/admin/trainees", component: Trainee, type: "child" },
   // { path: "/admin/add-trainee", component: AddTrainee, type: "child"},
-  { path: "/admin/edit-trainee", component: EditTrainee, type: "child" },
+  // { path: "/admin/edit-trainee", component: EditTrainee, type: "child" },
   { path: "/admin/trainee-profile/:id", component: TraineeProfile, type: "child" },
   {
-    path: "#",
+    path: "/admin/pts",
     name: "Personal trainer",
     icon: "user",
-    type: "dropdown",
+    // type: "dropdown",
     parentid: "professors",
+    component: Pt,
     child: [
       { path: "/admin/pts", name: "Personal trainer" },
       // { path: "/admin/add-pt", name: "Add Personal trainer"},
-      { path: "/admin/edit-pt/:id", name: "Edit Personal trainer" },
+      // { path: "/admin/edit-pt/:id", name: "Edit Personal trainer" },
       { path: "/admin/pt-profile/:id", name: "Personal trainer Profile" },
     ],
   },

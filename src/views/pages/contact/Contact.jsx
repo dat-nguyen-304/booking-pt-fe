@@ -39,7 +39,7 @@ const UserProfile = () => {
             <p>{user.phone}</p>
           </div>
 
-          <div class="user-profile__courses">
+          <div className="user-profile__courses">
             <h3>Purchased Course:</h3>
             <table>
               <thead>

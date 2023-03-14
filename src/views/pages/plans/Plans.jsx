@@ -16,7 +16,8 @@ const Plans = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
   const decode = jwt.decode(accessToken).accountId;
-
+  const refreshToken = localStorage.getItem('refreshToken');
+  console.log(refreshToken);
   useEffect(() => {
     const getData = async () => {
       const data = await getPackage();

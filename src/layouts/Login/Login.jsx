@@ -26,7 +26,9 @@ function Login() {
           }
         );
         const accessToken = res.data.tokens.accessToken;
+        const refreshToken = res.data.tokens.refreshToken;
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
         navigate1();
       } catch (error) {
         console.log("error: ", error);

@@ -195,8 +195,13 @@ export const getTrainers = async () => {
       const respone = await axios.get(`https://gachateambe.herokuapp.com/api/trainee-packages?traineeId=${id}`);
       const data = respone.data.traineePackages;
       const trainee = data.map((trainer) => ({
-        packCurrent: trainer.trainee.currentTraineePackageId
+        packCurrent: trainer.trainee.currentTraineePackageId,
+        startDate: trainer.startDate,
+        endDate: trainer.endDate,
+        remainDay: trainer.remainDay,
+        slot: trainer.mainSlot.slotTime
       }));
+      console.log(trainee);
       return trainee;
     } catch (error) {
       console.error(error);
