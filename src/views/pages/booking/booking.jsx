@@ -117,6 +117,12 @@ const Booking = () => {
     setSelectedSlot("");
   }
 
+  // Handler function for slot selection
+  function handleSlotChange(event) {
+    const selectedSlot = event.target.value;
+    setSelectedSlot(selectedSlot);
+  }
+  
   // Handler function for start date selection
   function handleDateChange(event) {
     const selectedDate = event.target.value;
@@ -128,11 +134,7 @@ const Booking = () => {
     }
   }
 
-  // Handler function for slot selection
-  function handleSlotChange(event) {
-    const selectedSlot = event.target.value;
-    setSelectedSlot(selectedSlot);
-  }
+  
   function handlePaymentChange(event) {
     const selectedPay = event.target.value;
     setSelectedPay(selectedPay);

@@ -87,7 +87,6 @@ const loadSlotByPT = async (ptID) => {
       `https://gachateambe.herokuapp.com/api/PTs/${ptID}`
     );
     const SlotData = response.data.PT.remainSlots;
-    console.log(SlotData);
     return SlotData;
   } catch (error) {
     console.error(error);

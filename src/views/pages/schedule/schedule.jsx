@@ -1,102 +1,20 @@
 import React, { useState, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap";
+import { Row, Col, Modal, ModalHeader, Button } from "reactstrap";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./customCalendar.css";
 import { getPackageById } from "./events.js";
-import { getAllCenter } from "../../../components/user/data";
-import { loadPtByID, loadSlotByPT } from "../../../variables/admin/professors";
 import styles from "../../../layouts/index.module.css";
 import moment1 from "moment-timezone";
 import jwt from "jsonwebtoken";
-
+import ModalContent from "./modal";
 function Schedule() {
   const [schedule, setSchedule] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const [modalFooter, setModalFooter] = useState(null);
-  // change schedule
-  const [centers, setCenters] = useState([]);
-  const [selectedCenter, setSelectedCenter] = useState();
-  const [loadingCenters, setLoadingCenters] = useState(false);
-  const [pts, setPTS] = useState([]);
-  const [selectedPT, setSelectedPT] = useState("");
-  const [slots, setSlots] = useState([]);
-  const [selectedSlot, setSelectedSlot] = useState("");
-  const handleShowCompleted = () => {
-    setShowCompleted(!showCompleted);
-  };
-  // Handle function for center selection
-  function handleCenterChange(event) {
-    const selectedCenter = event.target.value;
-    console.log(selectedCenter);
-    setSelectedCenter(selectedCenter);
-    setSelectedPT("");
-    setSelectedSlot("");
-  }
-
-  // Handle function for PT selection
-  function handlePTChange(event) {
-    const selectedPT = event.target.value;
-    setSelectedPT(selectedPT);
-    setSelectedSlot("");
-  }
-  // Handle function for slot selection
-  function handleSlotChange(event) {
-    const selectedSlot = event.target.value;
-    setSelectedSlot(selectedSlot);
-  }
-
-  //get Center
-  useEffect(() => {
-    const getCenter = async () => {
-      setLoadingCenters(true);
-      const center = await getAllCenter();
-      setCenters(center);
-    };
-    if (!loadingCenters) {
-      getCenter();
-    }
-  }, [loadingCenters]);
-
-  //load PTS for selected center
-  useEffect(() => {
-    if (selectedCenter) {
-      const getPts = async () => {
-        const pts = await loadPtByID(selectedCenter);
-        console.log(pts);
-        setPTS(pts);
-      };
-      getPts();
-    }
-  }, [selectedCenter]);
-
-
-  //useEffect hook to load Slot for each PT
-  useEffect(() => {
-    if (selectedPT) {
-      const getSlotByPtID = async () => {
-        const slots = await loadSlotByPT(selectedPT);
-        setSlots(slots);
-      };
-      getSlotByPtID();
-    }
-  }, [selectedPT]);
-
+  // load lịch học
   useEffect(() => {
     async function loadSchedule() {
       const accessToken = localStorage.getItem("accessToken");
@@ -107,65 +25,22 @@ function Schedule() {
     loadSchedule();
   }, []);
 
+  const handleShowCompleted = () => {
+    setShowCompleted(!showCompleted);
+  };
+
   const toggleModal = (event) => {
     const eventDate = moment(event.start, "YYYY-MM-DD HH:mm");
     const isCompleted = eventDate.isSameOrBefore(moment());
+    const today = moment();
+    const isToday = eventDate.isSame(today, "day");
+    console.log(isCompleted);
     const modalContent = (
       <div>
-        <Form>
-          <Row>
-            <Col md={12}>
-              <FormGroup>
-                <Label className={styles.p_1} htmlFor="center">
-                  Center:
-                </Label>
-                <Input
-                  type="select"
-                  id="center"
-                  value={selectedCenter}
-                  onChange={handleCenterChange}
-                  defaultValue={setSelectedCenter(event.id)}
-                 
-                >
-                  {centers.map((center) => (
-                    <option
-                      key={center.id}
-                      value={center.id}
-                    >
-                      {center.name}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={12}>
-            <FormGroup>
-                <Label className={styles.p_1} htmlFor="pt">PT:</Label>
-                <Input
-                  type="select"
-                  id="pt"
-                  value={selectedPT}
-                  onChange={handlePTChange}
-                >
-                  {pts.map((pt) => (
-                    <option key={pt.id} value={pt.id}>
-                      {pt.name}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    );
-    const modelFooter = (
-      <div>
         {isCompleted ? (
-          <Button className={styles.btn__1}>
+          <div>
+            <p>View your photos each slot</p>
+            <Button className={styles.btn__1}>
             <a
               className={styles.a_1}
               style={{ textDecoration: "none" }}
@@ -174,14 +49,21 @@ function Schedule() {
               View Photos
             </a>
           </Button>
+          </div>
         ) : (
-          <Button className={styles.btn__1}>Change Schedule</Button>
+          <ModalContent
+            center={event.centerId}
+            pt={event.PtID}
+            slot={event.slotID}
+            sessionID={event.id}
+            isToday={isToday}
+            slotTime={event.slot}
+          />
         )}
       </div>
     );
     setIsModalOpen(!isModalOpen);
     setModalContent(modalContent);
-    setModalFooter(modelFooter);
   };
 
   const filteredEvents = schedule.filter((schedule) => {
@@ -202,12 +84,19 @@ function Schedule() {
         .toDate(),
       centerId: schedule.centerId,
       center: schedule.center,
+      slotID: schedule.slot,
       slot: schedule.slotName,
     };
   });
-  
+
   return (
     <div className="content">
+      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+        <ModalHeader className={styles.tittle_1} toggle={toggleModal}>
+          Your Schedule 
+        </ModalHeader>
+        {modalContent}
+      </Modal>
       <Row>
         <Col xs={12} md={12}>
           <div className="page-title">
@@ -268,13 +157,6 @@ function Schedule() {
           </div>
         </Col>
       </Row>
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
-        <ModalHeader className={styles.tittle_1} toggle={toggleModal}>
-          Schedule Detail
-        </ModalHeader>
-        <ModalBody>{modalContent}</ModalBody>
-        <ModalFooter>{modalFooter}</ModalFooter>
-      </Modal>
     </div>
   );
 }

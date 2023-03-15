@@ -4,19 +4,14 @@
 -------------------------------*/
 
 .btn {
-    border-radius: 0px;
-    -o-border-radius: 0px;
-    -ms-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-    border: 0px solid transparent;
-    font-family: $menu-family;
-    font-weight: 300;
-    text-shadow: none;
-    text-transform:capitalize;
-    line-height: 1.618;
-    font-size: 15px;
-    margin-right: 15px;
+    color: var(--color-gray-100);
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.9rem 2rem;
+    background: var(--color-primary);
+    border-radius: 1.5rem;
+    transition: var(--transition);
+    text-decoration: none !important;
 }
 
 .btn.btn-round {

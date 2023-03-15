@@ -1,75 +1,171 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import {
-   Row, Col
-} from 'reactstrap';
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
+import BigCalendar from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "../../../views/pages/schedule/customCalendar.css";
+import { getPackageById } from "../../../views/pages/schedule/events";
+import styles from "../../../layouts/index.module.css";
+import moment1 from "moment-timezone";
+import jwt from "jsonwebtoken";
 
-import {  } from 'components';
+function Schedule() {
+  const [schedule, setSchedule] = useState([]);
+  const [showCompleted, setShowCompleted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [modalFooter, setModalFooter] = useState(null);
+  // load lịch học
+  useEffect(() => {
+    async function loadSchedule() {
+      const accessToken = localStorage.getItem("accessToken");
+      const userId = jwt.decode(accessToken).accountId;
+      const loadedSchedule = await getPackageById(userId, accessToken);
+      setSchedule(loadedSchedule);
+    }
+    loadSchedule();
+  }, []);
 
-import BigCalendar from 'react-big-calendar'
-import events from 'views/pt/Events/events.js'
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+  const handleShowCompleted = () => {
+    setShowCompleted(!showCompleted);
+  };
+  
+  const toggleModal = (event) => {
 
-moment.locale('en-GB');
-BigCalendar.momentLocalizer(moment);
+    const eventDate = moment(event.start, "YYYY-MM-DD HH:mm");
+    const isCompleted = eventDate.isSameOrBefore(moment());
 
-class UniversityEvents extends React.Component {
-  render() {
- 
-	const allViews = Object
-	  .keys(BigCalendar.Views)
-	  .map(k => BigCalendar.Views[k])
+    const modalContent = (
+      <div>
+      </div>
+    );
+    const modelFooter = (
+      <div>
+        {isCompleted ? (
+          <Button className={styles.btn__1}>
+            <a
+              className={styles.a_1}
+              style={{ textDecoration: "none" }}
+              href="/user/gallery"
+            >
+              View Photos
+            </a>
+          </Button>
+        ) : (
+          <Button className={styles.btn__1}>Change Schedule</Button>
+        )}
+      </div>
+    );
+    setIsModalOpen(!isModalOpen);
+    setModalContent(modalContent);
+    setModalFooter(modelFooter);
+  };
 
-  	//console.log({events});
-    return (
-            <div>
-                <div className="content">
-                    <Row>
-                        <Col xs={12} md={12}>
+  const filteredEvents = schedule.filter((schedule) => {
+    const eventDate = moment(schedule.date, "YYYY-MM-DD HH:mm");
+    const isCompleted = eventDate.isSameOrBefore(moment());
+    return showCompleted ? isCompleted : !isCompleted;
+  });
 
-                    <div className="page-title">
-                        <div className="float-left">
-                            <h1 className="title">Events</h1>
-                        </div>
-                    </div>
+  const events = filteredEvents.map((schedule) => {
 
+    return {
+      id: schedule.sessionsId,
+      title: schedule.pt,
+      PtID: schedule.ptID,
+      start: moment1.tz(schedule.date, "Asia/Ho_Chi_Minh").toDate(),
+      end: moment1
+        .tz(schedule.date, "Asia/Ho_Chi_Minh")
+        .add({ hours: 1, minutes: 30 })
+        .toDate(),
+      centerId: schedule.centerId,
+      center: schedule.center,
+      slot: schedule.slotName,
+      
+    };
+  });
 
-                    <div className="col-12">
-                        <section className="box ">
-                            <header className="panel_header">
-                                <h2 className="title float-left">Schedule</h2>
-                                
-                            </header>
-                            <div className="content-body">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                            
-
-									  <div style={{ height: 700, width: 100+'%' }}>
-									    <BigCalendar
-									      events={events}
-									      step={60}
-									      views={allViews}
-									      defaultDate={new Date(2018, 3, 1)}
-									    />
-									  </div>
-
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </section>
-                    </div>
-
-                        </Col>
-
-                    </Row>
-                </div>
+  return (
+    <div className="content">
+      <Row>
+        <Col xs={12} md={12}>
+          <div className="page-title">
+            <div className="float-left">
+              <h1 className="title">Schedule</h1>
             </div>
-    	);
-  }
+          </div>
+
+          <div className="col-12">
+            <section className="box ">
+              <header className="panel_header">
+                <h2 className="title float-left">Schedule</h2>
+              </header>
+
+              <div className="content-body">
+                <Button className={styles.btn} onClick={handleShowCompleted}>
+                  {showCompleted ? "Not Started" : "Started"}
+                </Button>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div style={{ height: 500, width: 100 + "%" }}>
+                      <BigCalendar
+                        events={events}
+                        step={60}
+                        defaultView={'week'}
+                        views={['week']}
+                        defaultDate={new Date()}
+                        eventPropGetter={(event) => ({
+                          className: "event-with-time",
+                          style: {
+                            backgroundColor: "#3174ad",
+                            color: "#fff",
+                          },
+                        })}
+                        components={{
+                          event: (props) => (
+                            <div>
+                              <div className="event-title">{props.title}</div>
+                              <div className="event-time">
+                                <div>
+                                  {moment(props.event.start)
+                                    .tz(moment.tz.guess())
+                                    .format("HH:mm")}{" "}
+                                  -{" "}
+                                  {moment(props.event.end)
+                                    .tz(moment.tz.guess())
+                                    .format("HH:mm")}
+                                </div>
+                              </div>
+                            </div>
+                          ),
+                        }}
+                        onSelectEvent={toggleModal}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </Col>
+      </Row>
+      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+        <ModalHeader className={styles.tittle_1} toggle={toggleModal}>
+          Schedule Detail
+        </ModalHeader>
+        <ModalBody>{modalContent}</ModalBody>
+        <ModalFooter>{modalFooter}</ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
-export default UniversityEvents;
+export default Schedule;

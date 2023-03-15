@@ -84,7 +84,7 @@ class Sessions extends React.Component {
         const slot = response.data;
         const slotData = slot.sessions.map((slot) => ({
           sessionId: slot.sessionId,
-          slot: slot.slotId,
+          slot: slot.slot.slotTime,
           date: moment(slot.date).format("DD-MM-YYYY"),
           notePt: slot.noteFromPT,
           noteTe: slot.noteFromTrainee ? slot.noteFromTrainee : "Nothing",
