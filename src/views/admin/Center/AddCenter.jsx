@@ -1,11 +1,25 @@
 import React, { useState } from "react";
-import { Row, Col, Label, Input } from "reactstrap";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
 import axios from "axios";
+import styles from "../../../layouts/index.module.css";
 function AddCenter() {
   const [centerName, setCenterName] = useState("");
   const [address, setAddress] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const accessToken = localStorage.getItem("accessToken");
+  const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(centerName);
@@ -26,7 +40,8 @@ function AddCenter() {
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        window.location.href= "/admin/centers";
+        setSuccessMessage("Update Personal Trainer successful");
+        setShowModal(true);
       })
       .catch((err) => {
         alert("fail");
@@ -107,6 +122,26 @@ function AddCenter() {
           </Col>
         </Row>
       </div>
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalHeader toggle={() => setShowModal(false)}>
+          Notification
+        </ModalHeader>
+        <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => (window.location.href = "/admin/centers")}
+          >
+            Back 
+          </Button>
+          <Button
+            color="danger"
+            onClick={() => setShowModal(false)}
+          >
+            Continue Add 
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }

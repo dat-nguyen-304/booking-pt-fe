@@ -14,9 +14,8 @@ import {
   InputGroupAddon,
   Input,
 } from "reactstrap";
-
+import jwt from "jsonwebtoken";
 import { Messages, Notifications } from "components";
-// import { logout } from '../../../variables/Firebase';
 import dashboardRoutes from "routes/admin.jsx";
 
 import { messages } from "variables/topbar.jsx";
@@ -160,9 +159,11 @@ class Header extends React.Component {
       this.refs.sidebarToggle.classList.remove("toggled");
     }
     window.addEventListener("resize", this.updateColor.bind(this));
+    const accessToken = localStorage.getItem('accessToken');
+    const nameUser = jwt.decode(accessToken).email.split("@")[0];
     if (this.props.admintype === "admin") {
       this.setState({
-        profilename: "Henry Gibson",
+        profilename: nameUser,
         profileimg: IMGDIR + "/images/profile/profile-university.jpg",
       });
     } else if (this.props.admintype === "pt") {

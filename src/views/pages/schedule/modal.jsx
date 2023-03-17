@@ -86,11 +86,10 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
   function handleSubmit(event) {
     event.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
-    console.log(selectedSlot);
     const data = {
       PTId: selectedPT,
       slotId: parseInt(selectedSlot),
-      noteFromStudent: noteFromStudent,
+      noteFromTrainee: noteFromStudent,
     };
     console.log(data);
     axios
@@ -206,7 +205,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
           <div>
             {isToday ? (
               <Button className={styles.btn__1} disabled>
-                Can't Change Schedule for Tomorrow
+                Can't Change Schedule Today
               </Button>
             ) : (
               <Button type="submit" className={styles.btn__1}>

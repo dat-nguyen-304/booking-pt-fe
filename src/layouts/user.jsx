@@ -26,7 +26,7 @@ function User() {
         <Route path="/user/home" component={Home} />
         <Route path="/user/about" component={About} />
         <Route path="/user/profile" component={Profile} />
-        <Route path="/user/gallery" component={Gallery} />
+        <Route path="/user/gallery/:id" component={Gallery} />
         <Route path="/user/plans" component={Plans} />
         <Route path="/user/trainers" component={Trainers} />
         <Route path="/user/booking/:id" component={Booking} />

@@ -73,7 +73,7 @@ const Plans = () => {
       <Modal isOpen={modalIsOpen}>
         <ModalHeader className={styles.tittle_1}>Already purchased a package</ModalHeader>
         <ModalBody>
-          Please go to your profile to view your purchased packages.
+          <p className={styles.p_1}>Please go to your profile to view your purchased packages.</p> 
         </ModalBody>
         <ModalFooter>
           <Button className={styles.btn__1} onClick={() => setModalIsOpen(false)}>

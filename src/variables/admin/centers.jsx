@@ -3,9 +3,14 @@
 // #############################
 import axios from "axios";
 const API_URL = "https://gachateambe.herokuapp.com/api/centers";
+const token = localStorage.getItem("accessToken");
 const loadCenters = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const centersData = response.data;
     const centers = centersData.centers.map((center) => ({
       id: center.centerId,
@@ -24,7 +29,11 @@ const loadCenters = async () => {
 
 const getCenterById  = async (centerId) => {
   try {
-    const response = await axios.get(API_URL + '/' + centerId);
+    const response = await axios.get(API_URL + '/' + centerId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const centerData = response.data.center;
     return centerData;
   } catch (error) {

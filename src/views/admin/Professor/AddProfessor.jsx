@@ -1,236 +1,219 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import {
-    Row, Col, Label, Input,
-} from 'reactstrap';
-
-import InputMask from 'react-input-mask';
-
-import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-
-class AddProfessor extends React.Component{
-    constructor (props) {
-    super(props)
-    this.state = {
-      startDate: moment()
+  Row,
+  Col,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
+import "react-datepicker/dist/react-datepicker.css"
+import { getAllCenter } from "../../../components/user/data";
+import axios from "axios";
+import styles from "../../../layouts/index.module.css";
+function AddProfessor() {
+  const accessToken = localStorage.getItem("accessToken");
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [centers, setCenters] = useState([]);
+  const [selectedCenter, setSelectedCenter] = useState("");
+  const [description, setDesscription] = useState("");
+  const [loadingCenters, setLoadingCenters] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  // get all center
+  useEffect(() => {
+    const getCenter = async () => {
+      setLoadingCenters(true);
+      const center = await getAllCenter();
+      setCenters(center);
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-  }
-
-    render(){
-
-        return (
-            <div>
-                <div className="content">
-                    <Row>
-                        <Col xs={12} md={12}>
-
-                    <div className="page-title">
-                        <div className="float-left">
-                            <h1 className="title">Add Personal Trainer</h1>
-                        </div>
-                    </div>
-
-
-                            
-
-
-                    <div className="row margin-0">
-                        <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Basic Info</h2>
-                                    
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputname4">Name</label>
-                                                        <input type="text" className="form-control" id="inputname4" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label>Date of Birth</label>
-                                                        <div className="controls">
-                                                            <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
-                                                        </div>
-                                                   </div>
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleSelect">Gender</Label>
-                                                      <Input type="select" name="select" id="exampleSelect">
-                                                        <option>Select</option>
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                      </Input>
-                                                    </div>
-
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleSelect3">Department</Label>
-                                                      <Input type="select" name="select" id="exampleSelect3">
-                                                        <option>Select</option>
-                                                            <option value="Computer Engineering">Computer Engineering</option>
-                                                            <option value="Architecture">Architecture</option>
-                                                            <option value="MBA">MBA</option>
-                                                            <option value="Automobile Engg.">Automobile Engg.</option>
-                                                            <option value="Civil Engg.">Civil Engg.</option>
-                                                            <option value="Mechanical Engg.">Mechanical Engg.</option>
-                                                            <option value="BBA">BBA</option>
-                                                      </Input>
-                                                    </div>
-
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputname4121">Position</label>
-                                                        <input type="text" className="form-control" id="inputname4121" placeholder="" />
-                                                    </div>
-
-                                                    <div className="form-group col-md-12">
-                                                       <Label htmlFor="field-11">Phone (+49 99 999 99)</Label>
-                                                       <InputMask id="field-11" className="form-control" mask="+4\9 99 999 99" maskChar="_" />
-                                                    </div>
-
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleText">Brief</Label>
-                                                      <Input type="textarea" name="text" id="exampleText" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                      <Label htmlFor="exampleFile">Profile Image</Label>
-                                                      <Input type="file" name="file" id="exampleFile" />
-                                                    </div>
-
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="inputAddress">Address</label>
-                                                    <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="inputAddress2">Address 2</label>
-                                                    <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
-                                                </div>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-6">
-                                                        <label htmlFor="inputCity">City</label>
-                                                        <input type="text" className="form-control" id="inputCity"/>
-                                                    </div>
-                                                    <div className="form-group col-md-4">
-                                                        <label htmlFor="inputState">State</label>
-                                                        <select id="inputState" className="form-control">
-                                                            <option>Select</option>
-                                                            <option>...</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="form-group col-md-2">
-                                                        <label htmlFor="inputZip">Zip</label>
-                                                        <input type="text" className="form-control" id="inputZip"/>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div>
-
-
-                        <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Account Info</h2>
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputEmail4">Email</label>
-                                                        <input type="email" className="form-control" id="inputEmail4" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputPassword4">Password</label>
-                                                        <input type="password" className="form-control" id="inputPassword4" placeholder=""/>
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="inputPassword41">Confirm Password</label>
-                                                        <input type="password" className="form-control" id="inputPassword41" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div>
-
-
-
-
-
-                        <div className="col-12">
-                            <section className="box ">
-                                <header className="panel_header">
-                                    <h2 className="title float-left">Social Media Info</h2>
-                                </header>
-                                <div className="content-body">
-                                    <div className="row">
-                                        <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
-
-                                            <form>
-                                                <div className="form-row">
-                                                    
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input24">Facebook URL</label>
-                                                        <input type="text" className="form-control" id="input24" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input241">Twitter URL</label>
-                                                        <input type="text" className="form-control" id="input241" placeholder="" />
-                                                    </div>
-                                                    <div className="form-group col-md-12">
-                                                        <label htmlFor="input242">Linkedin URL</label>
-                                                        <input type="text" className="form-control" id="input242" placeholder="" />
-                                                    </div>
-                                                    
-                                                </div>
-                                                <button type="submit" className="btn btn-primary">Save</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section></div>
-
-
-                    </div>
-
-
-
-
-
-
-                                
-                        </Col>
-
-                    </Row>
-                </div>
-            </div>
-        );
+    if (!loadingCenters) {
+      getCenter();
     }
+  }, [loadingCenters]);
+
+  const handleCenterChange = (event) => {
+    const selectedCenter = event.target.value;
+    setSelectedCenter(selectedCenter);
+  }
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const isValidEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append("email", email);
+    data.append("centerId", selectedCenter);
+    data.append("fullName", fullName)
+    data.append("imgLink ", selectedFile);
+    data.append("description", description)
+    console.log(data);
+    console.log(selectedFile);
+    axios
+      .post("https://gachateambe.herokuapp.com/api/PTs", data, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.statusText);
+        console.log(res.data);
+        setSuccessMessage("Add Personal Trainer Successfully")
+        setShowModal(true)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
+    <div>
+      <div className="content">
+        <Row>
+          <Col xs={12} md={12}>
+            <div className="page-title">
+              <div className="float-left">
+                <h1 className="title">Add Personal Trainer</h1>
+              </div>
+            </div>
+
+            <div className="row margin-0">
+              <div className="col-12">
+                <section className="box ">
+                  <header className="panel_header">
+                    <h2 className="title float-left">Personal Trainer Info</h2>
+                  </header>
+                  <div className="content-body">
+                    <div className="row">
+                      <div className="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8">
+                        <form method="post" onSubmit={handleSubmit}>
+                          <div className="form-row">
+                            <div className="form-group col-md-12">
+                              <Label htmlFor="email">Email</Label>
+                              <Input
+                                type="text"
+                                className="form-control"
+                                id="email"
+                                placeholder=""
+                                required
+                                onChange={(e) => {
+                                  const email = e.target.value;
+                                  if (isValidEmail(email)) {
+                                    setEmail(email);
+                                  } else {
+                                    alert("Invalid email")
+                                  }
+                                }}
+                              />
+                            </div>
+
+                            <div className="form-group col-md-12">
+                              <label htmlFor="fullName">Full Name</label>
+                              <Input
+                                type="text"
+                                className="form-control"
+                                id="fullName"
+                                placeholder=""
+                                required
+                                onChange={(e) => setFullName(e.target.value)}
+                              />
+                            </div>
+
+                            <div className="form-group col-md-12">
+                              <Label htmlFor="center">Center:</Label>
+                              <Input
+                                type="select"
+                                id="center"
+                                value={selectedCenter}
+                                onChange={handleCenterChange}
+                                required
+                              >
+                                <option value="">Select a center</option>
+                                {centers.map((center) => (
+                                  <option key={center.id} value={center.id}>
+                                    {center.name}
+                                  </option>
+                                ))}
+                              </Input>
+                            </div>
+
+                            <div className="form-group col-md-12">
+                              <Label htmlFor="ptImage">Image of PT</Label>
+                              <Input
+                                type="file"
+                                className="form-control"
+                                id="ptImage"
+                                placeholder=""
+                                onChange={handleFileSelect}
+                                required
+                              />
+                            </div>
+
+                            <div className="form-group col-md-12">
+                              <Label htmlFor="description">Description</Label>
+                              <Input
+                                type="text"
+                                className="form-control"
+                                id="description"
+                                placeholder=""
+                                onChange={(e) => setDesscription(e.target.value)}
+                              />
+                            </div>
+                          </div>
+                          <button
+                            className="btn btn-danger mr-2"
+                            onClick={() => {
+                              window.location.href = "/admin/pts";
+                            }}
+                          >
+                            Back
+                          </button>
+                          <button type="submit" className="btn btn-primary">
+                            Add PT
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalHeader toggle={() => setShowModal(false)}>
+          Notification
+        </ModalHeader>
+        <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => (window.location.href = "/admin/pts")}
+          >
+            Back
+          </Button>
+          <Button
+            color="danger"
+            onClick={() => setShowModal(false)}
+          >
+            Continue Add 
+          </Button>{" "}
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
 export default AddProfessor;

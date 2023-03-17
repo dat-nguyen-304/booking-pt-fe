@@ -4,9 +4,15 @@
 
 import axios from "axios";
 const API_URL = "https://gachateambe.herokuapp.com/api/packages";
+const token = localStorage.getItem("accessToken");
+
 const getAllPackage = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const packagesData = response.data;
     const packages = packagesData.packages.map((pack) => {
       let ptStatus = "";
@@ -39,7 +45,11 @@ const getAllPackage = async () => {
 const getPayment = async () => {
   try {
     const response = await axios.get(
-      "https://gachateambe.herokuapp.com/api/payments"
+      "https://gachateambe.herokuapp.com/api/payments",{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     const payments = response.data.payments;
     return payments;
@@ -50,7 +60,11 @@ const getPayment = async () => {
 const getAllTraineePack = async () => {
   try {
     const response = await axios.get(
-      `https://gachateambe.herokuapp.com/api/trainees`
+      `https://gachateambe.herokuapp.com/api/trainees`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     const packages = response.data.trainees;
     return packages;
@@ -61,7 +75,11 @@ const getAllTraineePack = async () => {
 const getPackageById = async (id) => {
   try {
     const response = await axios.get(
-      `https://gachateambe.herokuapp.com/api/packages/${id}`
+      `https://gachateambe.herokuapp.com/api/packages/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     const packages = response.data.package;
     return packages;
@@ -73,7 +91,11 @@ const getPackageById = async (id) => {
 const getPackage = async (id) => {
   try {
     const response = await axios.get(
-      `https://gachateambe.herokuapp.com/api/trainee-packages?packageId=${id}`
+      `https://gachateambe.herokuapp.com/api/trainee-packages?packageId=${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     const total = response.data.totalItems;
     const traineePackages = response.data.traineePackages;

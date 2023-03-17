@@ -34,11 +34,11 @@ const getPtById = async (ptID) => {
       rating: pt.rating,
       description: pt.description,
       img: pt.imgLink,
+      centerID: center.centerId,
       centerName: center.centerName,
       centerAddress: center.address,
     };
 
-    console.log(PtInfo);
     return PtInfo;
   } catch (error) {
     console.error(error);

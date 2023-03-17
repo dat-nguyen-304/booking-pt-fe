@@ -1,7 +1,7 @@
 import Admin from "views/admin/Dashboard/University.jsx";
 
 import Pt from "views/admin/Professor/Professor.jsx";
-// import AddPt from 'views/admin/Professor/AddProfessor.jsx';
+import AddPt from 'views/admin/Professor/AddProfessor.jsx';
 import EditPt from "views/admin/Professor/EditProfessor.jsx";
 import PtProfile from "views/admin/Professor/ProfessorProfile.jsx";
 
@@ -25,20 +25,8 @@ import ViewAll from "views/admin/Course/ViewAll.jsx";
 
 import Account from "views/admin/Library/Account.jsx";
 
-import Department from "views/admin/Department/Department.jsx";
-import AddDepartment from "views/admin/Department/AddDepartment.jsx";
-import EditDepartment from "views/admin/Department/EditDepartment.jsx";
 
-import UniversityEvents from "views/admin/Events/UniversityEvents.jsx";
-import AddEvent from "views/admin/Events/AddEvent.jsx";
 
-// import UniversityMailinbox from 'views/admin/Mail/Inbox.jsx';
-// import UniversityMailcompose from 'views/admin/Mail/Compose.jsx';
-// import UniversityMailview from 'views/admin/Mail/View.jsx';
-
-import UniversityReportsDepartment from "views/admin/Reports/ReportsDepartment.jsx";
-import UniversityReportsStudents from "views/admin/Reports/ReportsStudent.jsx";
-import UniversityReportsUniversity from "views/admin/Reports/ReportsUniversity.jsx";
 
 var dashRoutes = [
   //{ path: "#", name: "Main", type: "navgroup"},
@@ -69,21 +57,20 @@ var dashRoutes = [
   // { path: "/admin/edit-trainee", component: EditTrainee, type: "child" },
   { path: "/admin/trainee-profile/:id", component: TraineeProfile, type: "child" },
   {
-    path: "/admin/pts",
+    path: "#",
     name: "Personal trainer",
     icon: "user",
-    // type: "dropdown",
+    type: "dropdown",
     parentid: "professors",
-    component: Pt,
     child: [
       { path: "/admin/pts", name: "Personal trainer" },
-      // { path: "/admin/add-pt", name: "Add Personal trainer"},
+      { path: "/admin/add-pt", name: "Add Personal trainer"},
       // { path: "/admin/edit-pt/:id", name: "Edit Personal trainer" },
-      { path: "/admin/pt-profile/:id", name: "Personal trainer Profile" },
+      // { path: "/admin/pt-profile/:id", name: "Personal trainer Profile" },
     ],
   },
   { path: "/admin/pts", component: Pt, type: "child" },
-  // { path: "/admin/add-pt", component: AddPt, type: "child"},
+  { path: "/admin/add-pt", component: AddPt, type: "child"},
   { path: "/admin/edit-pt/:id", component: EditPt, type: "child" },
   { path: "/admin/pt-profile/:id", component: PtProfile, type: "child" },
 
@@ -102,34 +89,6 @@ var dashRoutes = [
   { path: "/admin/add-center", component: AddCenter, type: "child" },
   { path: "/admin/edit-center/:id", component: EditCenter, type: "child" },
   { path: "/admin/center-detail/:id", component: CenterDetail, type: "child" },
-
-  {
-    path: "#",
-    name: "Reports",
-    icon: "chart",
-    type: "dropdown",
-    parentid: "reports",
-    child: [
-      { path: "/admin/reports-department", name: "Department" },
-      { path: "/admin/reports-students", name: "Students" },
-      { path: "/admin/reports-university", name: "University" },
-    ],
-  },
-  {
-    path: "/admin/reports-department",
-    component: UniversityReportsDepartment,
-    type: "child",
-  },
-  {
-    path: "/admin/reports-students",
-    component: UniversityReportsStudents,
-    type: "child",
-  },
-  {
-    path: "/admin/reports-university",
-    component: UniversityReportsUniversity,
-    type: "child",
-  },
 
   {
     path: "#",
@@ -158,36 +117,6 @@ var dashRoutes = [
     badge: "",
     component: Account,
   },
-
-  {
-    path: "#",
-    name: "Departments",
-    icon: "organization",
-    type: "dropdown",
-    parentid: "departments",
-    child: [
-      { path: "/admin/department", name: "Departments" },
-      { path: "/admin/add-department", name: "Add Department" },
-      { path: "/admin/edit-department", name: "Edit Department" },
-    ],
-  },
-  { path: "/admin/department", component: Department, type: "child" },
-  { path: "/admin/add-department", component: AddDepartment, type: "child" },
-  { path: "/admin/edit-department", component: EditDepartment, type: "child" },
-
-  {
-    path: "#",
-    name: "Schedule",
-    icon: "event",
-    type: "dropdown",
-    parentid: "events",
-    child: [
-      { path: "/admin/events", name: "Schedules" },
-      { path: "/admin/addevent", name: "Add Schedules" },
-    ],
-  },
-  { path: "/admin/events", component: UniversityEvents, type: "child" },
-  { path: "/admin/addevent", component: AddEvent, type: "child" },
 
   { path: "/admin/dashboard", component: Admin, type: "child" },
 

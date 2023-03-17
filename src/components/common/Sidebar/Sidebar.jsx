@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
   }
   componentDidMount() {
     const accessToken = localStorage.getItem('accessToken');
-    const nameUser = jwt.decode(accessToken).email;
+    const nameUser = jwt.decode(accessToken).email.split("@")[0];
     if (this.props.admintype === "admin") {
       this.setState({
         profileposition: "Administration",

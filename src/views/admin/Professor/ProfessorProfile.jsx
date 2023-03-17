@@ -51,6 +51,13 @@ class PtProfile extends React.Component {
                           <h3 className="uprofile-owner">
                             <a href="#!">{this.state.pt.fullName}</a>
                           </h3>
+                          <button className="btn btn-danger btn-sm profile-btn"
+                          onClick={() => {
+                            window.location.href = "/admin/pts";
+                          }}  
+                          >
+                            Back
+                          </button>
                           <button className="btn btn-primary btn-sm profile-btn"
                           onClick={() => {
                             window.location.href = `/admin/edit-pt/${this.state.pt.id}`;
@@ -58,7 +65,7 @@ class PtProfile extends React.Component {
                           >
                             Edit Profile
                           </button>
-                          {/* <button className="btn btn-primary btn-sm profile-btn">Add as friend</button> */}
+
                           <div className="clearfix"></div>
                           <p className="uprofile-title">rate: {this.state.pt.rating}</p>
                           <div className="clearfix"></div>

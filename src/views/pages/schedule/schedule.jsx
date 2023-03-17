@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Modal, ModalHeader, Button } from "reactstrap";
-import BigCalendar from "react-big-calendar";
+import {
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
+import BigCalendar, { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./customCalendar.css";
@@ -9,7 +17,9 @@ import styles from "../../../layouts/index.module.css";
 import moment1 from "moment-timezone";
 import jwt from "jsonwebtoken";
 import ModalContent from "./modal";
+
 function Schedule() {
+  const localizer = momentLocalizer(moment); // Chọn chiến lược địa phương moment
   const [schedule, setSchedule] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,16 +49,21 @@ function Schedule() {
       <div>
         {isCompleted ? (
           <div>
-            <p>View your photos each slot</p>
-            <Button className={styles.btn__1}>
-            <a
-              className={styles.a_1}
-              style={{ textDecoration: "none" }}
-              href="/user/gallery"
-            >
-              View Photos
-            </a>
-          </Button>
+            <ModalBody>
+              <p className={styles.p_1}>View your photos each slot</p>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button className={styles.btn__1}>
+                <a
+                  className={styles.a_1}
+                  style={{ textDecoration: "none" }}
+                  href={`/user/gallery/${event.id}`}
+                >
+                  View Photos
+                </a>
+              </Button>
+            </ModalFooter>
           </div>
         ) : (
           <ModalContent
@@ -93,7 +108,7 @@ function Schedule() {
     <div className="content">
       <Modal isOpen={isModalOpen} toggle={toggleModal}>
         <ModalHeader className={styles.tittle_1} toggle={toggleModal}>
-          Your Schedule 
+          Your Schedule
         </ModalHeader>
         {modalContent}
       </Modal>
@@ -119,6 +134,7 @@ function Schedule() {
                   <div className="col-lg-12">
                     <div style={{ height: 500, width: 100 + "%" }}>
                       <BigCalendar
+                        localizer={localizer}
                         events={events}
                         views={["month"]}
                         defaultDate={new Date()}

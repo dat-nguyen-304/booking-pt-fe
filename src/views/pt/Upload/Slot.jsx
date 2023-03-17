@@ -5,8 +5,8 @@ import Datatable from "react-bs-datatable"; // Import this package
 import { Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const apiUrl = "https://gachateambe.herokuapp.com/api/sessions";
-const token = localStorage.getItem("accessToken");
+import jwt from "jsonwebtoken";
+
 const header = [
   {
     title: "ID",
@@ -72,9 +72,11 @@ class Sessions extends React.Component {
     };
   }
   componentDidMount() {
+    const token = localStorage.getItem("accessToken");
+    const ptID = jwt.decode(token).accountId;
     // Fetch data from the API endpoint
     axios
-      .get(apiUrl, {
+      .get(`https://gachateambe.herokuapp.com/api/sessions?PTId=${ptID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -89,6 +91,7 @@ class Sessions extends React.Component {
           notePt: slot.noteFromPT,
           noteTe: slot.noteFromTrainee ? slot.noteFromTrainee : "Nothing",
         }));
+        console.log(slot);
         this.setState({ data: slotData });
         return slotData;
       })
