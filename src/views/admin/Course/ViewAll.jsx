@@ -50,7 +50,6 @@ class Course extends React.Component {
   async componentDidMount() {
     const packages = await packagesStatic();
     this.setState({data: packages});
-    console.log(packages);
   }
   render() {
     return (
@@ -60,14 +59,13 @@ class Course extends React.Component {
             <Col xs={12} md={12}>
               <div className="page-title">
                 <div className="float-left">
-                  <h1 className="title">Library Assets</h1>
+                  <h1 className="title">Courses Assets</h1>
                 </div>
               </div>
-
               <div className="col-12">
                 <section className="box ">
                   <header className="panel_header">
-                    <h2 className="title float-left">All Library</h2>
+                    <h2 className="title float-left">All Courses</h2>
                   </header>
                   <div className="content-body">
                     <div className="row">

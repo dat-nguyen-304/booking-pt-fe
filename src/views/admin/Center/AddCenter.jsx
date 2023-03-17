@@ -19,7 +19,8 @@ function AddCenter() {
   const accessToken = localStorage.getItem("accessToken");
   const [showModal, setShowModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(centerName);
@@ -44,7 +45,8 @@ function AddCenter() {
         setShowModal(true);
       })
       .catch((err) => {
-        alert("fail");
+        setErrorMessage("Somthing went wrong, please try again");
+        setShowModal(true);
         console.log(err);
       });
   };
@@ -128,6 +130,7 @@ function AddCenter() {
         </ModalHeader>
         <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
         <ModalFooter>
+          <div>
           <Button
             color="primary"
             onClick={() => (window.location.href = "/admin/centers")}
@@ -140,6 +143,18 @@ function AddCenter() {
           >
             Continue Add 
           </Button>
+          </div>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+        <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
+        <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
         </ModalFooter>
       </Modal>
     </div>

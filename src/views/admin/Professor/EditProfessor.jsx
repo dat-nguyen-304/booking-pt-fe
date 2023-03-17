@@ -22,7 +22,8 @@ function EditPt(props) {
   const [description, setDescription] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -38,6 +39,8 @@ function EditPt(props) {
       setSuccessMessage("Update Personal Trainer successful");
       setShowModal(true);
     } catch (error) {
+      setErrorMessage("Somthing went wrong try again later")
+      setShowModal(true);
       console.log(error);
     }
   };
@@ -172,6 +175,18 @@ function EditPt(props) {
           >
             Close
           </Button>{" "}
+        </ModalFooter>
+      </Modal>
+
+      <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+        <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
+        <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
         </ModalFooter>
       </Modal>
     </div>

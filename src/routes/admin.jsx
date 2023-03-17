@@ -17,7 +17,6 @@ import CenterDetail from "views/admin/Center/CenterProfile.jsx";
 
 // import UniversityCentres from 'views/admin/Centres/UniversityCentres.jsx';
 
-import Course from "views/admin/Course/Course.jsx";
 import AddCourse from "views/admin/Course/AddCourse.jsx";
 import EditCourse from "views/admin/Course/EditCourse.jsx";
 import CourseView from "views/admin/Course/CourseView.jsx";
@@ -101,14 +100,13 @@ var dashRoutes = [
       { path: "/admin/add-course", name: "Add Course" },
       // { path: "/admin/edit-course/:id", name: "Edit Course" },
       // { path: "/admin/course-view/:id", name: "View Course" },
-      { path: "/admin/view-all", name: "View All Course" }
+      
     ],
   },
-  { path: "/admin/courses", component: Course, type: "child" },
   { path: "/admin/add-course", component: AddCourse, type: "child" },
   { path: "/admin/edit-course/:id", component: EditCourse, type: "child" },
   { path: "/admin/course-view/:id", component: CourseView, type: "child" },
-  { path: "/admin/view-all", component: ViewAll, type: "child" },
+  { path: "/admin/courses", component: ViewAll, type: "child" },
 
   {
     path: "/admin/account",

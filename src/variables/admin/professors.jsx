@@ -3,10 +3,14 @@
 // #############################
 import axios from "axios";
 const API_URL = "https://gachateambe.herokuapp.com/api/PTs";
-
+const token = localStorage.getItem("accessToken");
 const loadPTs = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(API_URL,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const PTData = response.data;
     const PTs = PTData.PTs.map((pt) => {
       return {
@@ -25,7 +29,11 @@ const loadPTs = async () => {
 };
 const getPtById = async (ptID) => {
   try {
-    const response = await axios.get(API_URL + "/" + ptID);
+    const response = await axios.get(API_URL + "/" + ptID, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const pt = response.data.PT;
     const center = response.data.PT.center;
     const PtInfo = {

@@ -4,10 +4,15 @@
 
 import axios from "axios";
 const API_URL = "https://gachateambe.herokuapp.com/api/trainees";
+const token = localStorage.getItem("accessToken");
 
 const getAllTrainee = async() => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(API_URL, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const trainees = response.data.trainees;
         const trainee = trainees.map((train) => ({
             id: train.traineeId,
@@ -22,7 +27,11 @@ const getAllTrainee = async() => {
 
 const getTraineeByID = async(id) => {
     try {
-        const response = await axios.get(`https://gachateambe.herokuapp.com/api/trainees/${id}`);
+        const response = await axios.get(`https://gachateambe.herokuapp.com/api/trainees/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const trainees = response.data.trainee;
         console.log(trainees);
         return trainees;
@@ -33,7 +42,11 @@ const getTraineeByID = async(id) => {
 
 const getPackagePurchased = async (id) => {
     try {
-        const response = await axios.get(`https://gachateambe.herokuapp.com/api/trainee-packages?traineeId=${id}`);
+        const response = await axios.get(`https://gachateambe.herokuapp.com/api/trainee-packages?traineeId=${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const total = response.data.totalItems;
         const totalItems = response.data.traineePackages;
         const packages = {

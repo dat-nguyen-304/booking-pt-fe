@@ -1,11 +1,12 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Table } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import {} from "components";
 import { getPackageById, getPackage } from "../../../variables/admin/courses";
-import ToggleCourse from "./Toogle";
 import moment from "moment";
 import ReactPaginate from "react-paginate";
+import axios from "axios";
+
 class CourseProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,7 @@ class CourseProfile extends React.Component {
       pack: [],
       total: "",
       packages: [],
+      packID: "",
       currentPage: 0, // Trang hiện tại
       perPage: 5, // Số phần tử trên mỗi trang
     };
@@ -31,8 +33,24 @@ class CourseProfile extends React.Component {
       pack: loadedPack,
       total: loadedData.total,
       packages: loadedData.traineePackages,
+      packID : packId,
     });
   }
+   handleDelete = async () => {
+    const { match } = this.props;
+    const packId = match.params.id;
+    if (window.confirm('Are you sure you want to delete?')) {
+      axios.delete(`https://gachateambe.herokuapp.com/api/packages/${packId}`)
+        .then(response => {
+          console.log(response.data);
+          // do something with the response
+        })
+        .catch(error => {
+          console.log(error);
+          // handle the error
+        });
+    }
+   }
   render() {
     const { packages, currentPage, perPage } = this.state;
     const offset = currentPage * perPage;
@@ -66,8 +84,17 @@ class CourseProfile extends React.Component {
                           <h3 className="uprofile-owner">
                             <a href="#!">{this.state.pack.packageName}</a>
                           </h3>
-                          <button className="btn btn-primary btn-sm profile-btn">
-                            Edit
+                          <button className="btn btn-danger btn-sm profile-btn"
+                           onClick={this.handleDelete}  
+                           >
+                            Delete Course 
+                          </button>
+                          <button className="btn btn-primary btn-sm profile-btn"
+                           onClick={() => {
+                            window.location.href = `/admin/edit-course/${this.state.packID}`;
+                          }}  
+                           >
+                            Edit Course
                           </button>
                           <div className="clearfix"></div>
                           <p className="uprofile-title">
@@ -90,49 +117,67 @@ class CourseProfile extends React.Component {
                   </div>
                 </section>
               </div>
-
-              <ToggleCourse title="1. Static">
-                  <ReactPaginate
-                    previousLabel={"Previous"}
-                    nextLabel={"Next"}
-                    breakLabel={"..."}
-                    pageCount={Math.ceil(packages.length / perPage)}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}
-                  />
-                  <table>
-                  <thead>
-                    <tr>
-                      <th>Traniee Name</th>
-                      <th>Pt Name</th>
-                      <th>Center</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th>Buy Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentPackages.map((packages, index) => (
-                      <tr key={index}>
-                        <td>{packages.trainee.fullName}</td>
-                        <td>{packages.mainPT.fullName}</td>
-                        <td>{packages.mainCenter.centerName}</td>
-                        <td>
-                          {moment(packages.startDate).format("DD/MM/YYYY")}
-                        </td>
-                        <td>{moment(packages.endDate).format("DD/MM/YYYY")}</td>
-                        <td>
-                          {moment(packages.registerDate).format("DD/MM/YYYY")}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  </table>
-              </ToggleCourse>
+              <div className="col-lg-12 col-xl-12 col-md-12 col-12">
+                <section className="box ">
+                  <header className="panel_header">
+                    <h2 className="title float-left">Static</h2>
+                  </header>
+                  <div className="content-body">
+                    <div className="row">
+                      <div className="col-12">
+                        <ReactPaginate
+                          previousLabel={"Previous"}
+                          nextLabel={"Next"}
+                          breakLabel={"..."}
+                          pageCount={Math.ceil(packages.length / perPage)}
+                          marginPagesDisplayed={2}
+                          pageRangeDisplayed={5}
+                          onPageChange={this.handlePageClick}
+                          containerClassName={"pagination"}
+                          subContainerClassName={"pages pagination"}
+                          activeClassName={"active"}
+                        />
+                        <Table hover responsive>
+                          <thead>
+                            <tr>
+                              <th>Traniee Name</th>
+                              <th>Pt Name</th>
+                              <th>Center</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Buy Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {currentPackages.map((packages, index) => (
+                              <tr key={index}>
+                                <td>{packages.trainee.fullName}</td>
+                                <td>{packages.mainPT.fullName}</td>
+                                <td>{packages.mainCenter.centerName}</td>
+                                <td>
+                                  {moment(packages.startDate).format(
+                                    "DD/MM/YYYY"
+                                  )}
+                                </td>
+                                <td>
+                                  {moment(packages.endDate).format(
+                                    "DD/MM/YYYY"
+                                  )}
+                                </td>
+                                <td>
+                                  {moment(packages.registerDate).format(
+                                    "DD/MM/YYYY"
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
             </Col>
           </Row>
         </div>

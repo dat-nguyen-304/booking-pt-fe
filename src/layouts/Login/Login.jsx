@@ -1,13 +1,11 @@
 import "./Login.css";
-import { Container, Row, Col, Input, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrow } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 function Login() {
   const [token, setToken] = useState("");
@@ -45,8 +43,7 @@ function Login() {
         setRedirect("/pt/scheduled");
       } else if (role === "user") {
         setRedirect("/user/home");
-      } 
-      else {
+      } else {
         setRedirect("/");
       }
     };
@@ -69,6 +66,7 @@ function Login() {
   }, [token]);
 
   const signInWithGoogle = () => {
+
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((userCred) => {
@@ -80,76 +78,62 @@ function Login() {
   if (redirect) {
     return <Redirect to={redirect} />;
   }
-  
+
   return (
-    <Container fluid>
-      <Row>
-        <Col sm="6">
-          <div className="d-flex flex-row ps-5 pt-3">
-            <FontAwesomeIcon
-              icon={faCrow}
-              className="me-3"
-              style={{ color: "#709085", fontSize: "3rem" }}
-            />
-            <span className="h1 fw-bold mb-0">PT-Booking</span>
+    <div>
+      <div className="limiter">
+        <div
+          className="container-login100"
+          style={{ backgroundImage: 'url("images/bg-01.jpg")' }}
+        >
+          <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+              <span className="login100-form-title p-b-49">Login</span>
+              <div
+                className="wrap-input100 m-b-23"
+              >
+                <span className="label-input100">Username</span>
+                <input
+                  className="input100"
+                  type="text"
+                  name="username"
+                  placeholder="Type your username"
+                />
+              </div>
+              <div
+                className="wrap-input100"
+              >
+                <span className="label-input100">Password</span>
+                <input
+                  className="input100"
+                  type="password"
+                  name="pass"
+                  placeholder="Type your password"
+                />
+              </div>
+              <div className="text-right p-t-8 p-b-31">
+
+              </div>
+              <div className="container-login100-form-btn">
+                <div className="wrap-login100-form-btn">
+                  <div className="login100-form-bgbtn" />
+                  <button className="login100-form-btn">Login</button>
+                </div>
+              </div>
+              <div className="txt1 text-center p-t-30 p-b-20">
+                <span>Or Sign In Using</span>
+              </div>
+              <div className="container-login100-form-btn">
+                <div className="wrap-login100-form-btn">
+                  <div className="login100-form-bgbtn" />
+                  <button className="login100-form-btn" onClick={signInWithGoogle}>
+                  <FontAwesomeIcon icon={faGoogle} className="mx-2" /> Login with Google</button>
+                </div>
+              </div>
           </div>
-
-          <div className="d-flex flex-column justify-content-center h-custom-2 w-75">
-            <h3
-              className="fw-normal mb-3 ps-5 pb-3"
-              style={{ letterSpacing: "1px", marginLeft: "50px" }}
-            >
-              Log in
-            </h3>
-
-            <Input
-              className="mb-4 mx-5 w-100"
-              type="email"
-              bsSize="lg"
-              placeholder="Email address"
-            />
-            <Input
-              className="mb-4 mx-5 w-100"
-              type="password"
-              bsSize="lg"
-              placeholder="Password"
-            />
-
-            <Button className="mb-4 px-5 mx-5 w-100" color="info" size="lg">
-              Login
-            </Button>
-            <Button
-              className="mb-4 px-5 mx-5 w-100"
-              size="lg"
-              style={{ backgroundColor: "#dd4b39" }}
-              onClick={signInWithGoogle}
-            >
-              <FontAwesomeIcon icon={faGoogle} className="mx-2" />
-              Sign in with google
-            </Button>
-            <div className="text-center">
-              <p className="small pb-lg-3">
-                <Link to="/reset">Forgot password?</Link>
-              </p>
-              <p className="ms-5">Don't have an account? Register here</p>
-            </div>
-          </div>
-        </Col>
-
-        <Col sm="6" className="d-none d-sm-block px-0">
-          <img
-            src="https://hips.hearstapps.com/hmg-prod/images/boxer-exercising-with-punch-bag-royalty-free-image-685043825-1537211838.jpg?resize=1200:*"
-            alt="Login"
-            className="w-100"
-            style={{
-              objectFit: "cover",
-              objectPosition: "left",
-              height: "600px",
-            }}
-          />
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+      
+    </div>
   );
 }
 

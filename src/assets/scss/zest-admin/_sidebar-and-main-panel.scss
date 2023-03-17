@@ -2727,18 +2727,18 @@
   right: 0px;
   z-index: 999999;
 
-  &:before{
-    background-color: $primary-color;
-    content: "xl";
-    color: #ffffff;
-    height: 30px;
-    width: 30px;
-    display: block;
-    text-align: center;
-    position: fixed;
-    right: 0px;
-    line-height: 30px;
-  }
+  // &:before{
+  //   background-color: $primary-color;
+  //   content: "xl";
+  //   color: #ffffff;
+  //   height: 30px;
+  //   width: 30px;
+  //   display: block;
+  //   text-align: center;
+  //   position: fixed;
+  //   right: 0px;
+  //   line-height: 30px;
+  // }
 
 }
 

@@ -122,7 +122,7 @@ const Booking = () => {
     const selectedSlot = event.target.value;
     setSelectedSlot(selectedSlot);
   }
-  
+
   // Handler function for start date selection
   function handleDateChange(event) {
     const selectedDate = event.target.value;
@@ -134,7 +134,6 @@ const Booking = () => {
     }
   }
 
-  
   function handlePaymentChange(event) {
     const selectedPay = event.target.value;
     setSelectedPay(selectedPay);
@@ -259,18 +258,27 @@ const Booking = () => {
           <Modal.Title>Register success</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className={style.p_1}>You have successfully registered, thank you for purchasing the training package</p>
+          <p className={style.p_1}>
+            You have successfully registered, thank you for purchasing the
+            training package
+          </p>
         </Modal.Body>
         <Modal.Footer>
-          <Btn className={style.btn} variant="secondary" onClick={() => (window.location.href = "/user/home")}>
-            Home
-          </Btn>
-          <Btn
-           className={style.btn}
-            onClick={() => (window.location.href = "/user/Schedule")}
-          >
-            View Schedule
-          </Btn>
+          <div>
+            <Btn
+              className={style.btn}
+              variant="secondary"
+              onClick={() => (window.location.href = "/user/home")}
+            >
+              Home
+            </Btn>
+            <Btn
+              className={style.btn}
+              onClick={() => (window.location.href = "/user/Schedule")}
+            >
+              View Schedule
+            </Btn>
+          </div>
         </Modal.Footer>
       </Modal>
     </>

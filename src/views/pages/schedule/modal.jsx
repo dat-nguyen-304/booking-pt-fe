@@ -16,7 +16,7 @@ import { getAllCenter } from "../../../components/user/data";
 import { loadPtByID, loadSlotByPT } from "../../../variables/admin/professors";
 import styles from "../../../layouts/index.module.css";
 import axios from "axios";
-import module from "./modal.module.css"
+import module from "./modal.module.css";
 function modalContent({ center, pt, slot, sessionID, isToday }) {
   // update
   const [centers, setCenters] = useState([]);
@@ -129,7 +129,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
                   id="center"
                   value={selectedCenter}
                   onChange={handleCenterChange}
-                  className = {module.radius_1}
+                  className={module.radius_1}
                   readOnly
                 >
                   {centers.map((center) => (
@@ -152,7 +152,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
                   value={selectedPT}
                   onChange={handlePTChange}
                   disabled={!selectedCenter}
-                  className = {module.radius_1}
+                  className={module.radius_1}
                   required
                 >
                   {pts.map((pt) => (
@@ -175,7 +175,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
                   value={selectedSlot}
                   onChange={handleSlotChange}
                   disabled={!selectedPT}
-                  className = {module.radius_1}
+                  className={module.radius_1}
                 >
                   <option value="">Select a slot</option>
                   {slots.map((slot) => (
@@ -194,7 +194,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
                 </Label>
                 <Input
                   type="input"
-                  className = {module.radius_1}
+                  className={module.radius_1}
                   onChange={(e) => setNoteFromStudent(e.target.value)}
                 />
               </FormGroup>
@@ -222,9 +222,11 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
         </ModalHeader>
         <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={() => window.location.reload()}>
-            Close
-          </Button>{" "}
+          <div>
+            <Button color="primary" onClick={() => window.location.reload()}>
+              Close
+            </Button>{" "}
+          </div>
         </ModalFooter>
       </Modal>
 
@@ -232,9 +234,11 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
         <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
         <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={() => setShowErrorModal(false)}>
-            Close
-          </Button>{" "}
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
         </ModalFooter>
       </Modal>
     </div>

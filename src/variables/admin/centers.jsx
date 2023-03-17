@@ -2,6 +2,7 @@
 // // // centers
 // #############################
 import axios from "axios";
+import moment from "moment";
 const API_URL = "https://gachateambe.herokuapp.com/api/centers";
 const token = localStorage.getItem("accessToken");
 const loadCenters = async () => {
@@ -16,7 +17,7 @@ const loadCenters = async () => {
       id: center.centerId,
       name: center.centerName,
       address: center.address,
-      created: center.createdAt,
+      created: moment(center.createdAt).format("DD-MM-YYYY"),
       img: center.imgLink,
       status: center.activate,
     }));
@@ -27,9 +28,9 @@ const loadCenters = async () => {
   }
 };
 
-const getCenterById  = async (centerId) => {
+const getCenterById = async (centerId) => {
   try {
-    const response = await axios.get(API_URL + '/' + centerId, {
+    const response = await axios.get(API_URL + "/" + centerId, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -39,7 +40,7 @@ const getCenterById  = async (centerId) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 
 export { loadCenters, getCenterById };

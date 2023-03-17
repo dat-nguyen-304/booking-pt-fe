@@ -194,9 +194,7 @@ class Header extends React.Component {
   render() {
     const { history } = this.props;
     function logout() {
-      console.log("logged out");
-      localStorage.removeItem("accessToken");
-      history.push("/login");
+      history.push("/logout");
     }
     return (
       // add or remove classes depending if we are on full-screen-maps page or not

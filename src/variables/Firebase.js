@@ -22,13 +22,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const logout = () => {
-  localStorage.removeItem("accessToken");
-  signOut(auth);
+
+const logOut = () => {
+  const auth = getAuth();
+  signOut(auth).then(() => {
+    localStorage.removeItem("accessToken")
+    // Đăng xuất thành công
+    
+    window.location.reload(); // Tải lại trang
+  }).catch((error) => {
+    // Xử lý lỗi đăng xuất
+    console.log(error);
+  });
 };
 
 export {
   auth,
   db,
-  logout,
+  logOut,
 }

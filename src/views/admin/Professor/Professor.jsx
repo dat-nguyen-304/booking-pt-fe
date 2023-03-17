@@ -74,14 +74,14 @@ class PersonalTrainer extends React.Component {
             <Col xs={12} md={12}>
               <div className="page-title">
                 <div className="float-left">
-                  <h1 className="title">Trainee Assets</h1>
+                  <h1 className="title">Personal Trainer Assets</h1>
                 </div>
               </div>
 
               <div className="col-12">
                 <section className="box ">
                   <header className="panel_header">
-                    <h2 className="title float-left">All Trainee</h2>
+                    <h2 className="title float-left">All Personal Trainer</h2>
                   </header>
                   <div className="content-body">
                     <div className="row">

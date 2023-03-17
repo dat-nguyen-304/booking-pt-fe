@@ -10,7 +10,7 @@ import {
   ModalFooter,
   Button,
 } from "reactstrap";
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 import { getAllCenter } from "../../../components/user/data";
 import axios from "axios";
 import styles from "../../../layouts/index.module.css";
@@ -25,6 +25,8 @@ function AddProfessor() {
   const [loadingCenters, setLoadingCenters] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   // get all center
   useEffect(() => {
     const getCenter = async () => {
@@ -40,40 +42,36 @@ function AddProfessor() {
   const handleCenterChange = (event) => {
     const selectedCenter = event.target.value;
     setSelectedCenter(selectedCenter);
-  }
+  };
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  const isValidEmail = (email) => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
-  };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData();
     data.append("email", email);
     data.append("centerId", selectedCenter);
-    data.append("fullName", fullName)
-    data.append("imgLink ", selectedFile);
-    data.append("description", description)
-    console.log(data);
-    console.log(selectedFile);
+    data.append("fullName", fullName);
+    data.append("imgLink", selectedFile);
+    data.append("description", description);
     axios
       .post("https://gachateambe.herokuapp.com/api/PTs", data, {
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        setSuccessMessage("Add Personal Trainer Successfully")
-        setShowModal(true)
+        setSuccessMessage("Add Personal Trainer Successfully");
+        setShowModal(true);
       })
       .catch((err) => {
+        setErrorMessage("Somthing went wrong try again later")
+        setShowModal(true)
         console.log(err);
       });
   };
@@ -108,12 +106,7 @@ function AddProfessor() {
                                 placeholder=""
                                 required
                                 onChange={(e) => {
-                                  const email = e.target.value;
-                                  if (isValidEmail(email)) {
-                                    setEmail(email);
-                                  } else {
-                                    alert("Invalid email")
-                                  }
+                                  setEmail(e.target.value);
                                 }}
                               />
                             </div>
@@ -167,7 +160,9 @@ function AddProfessor() {
                                 className="form-control"
                                 id="description"
                                 placeholder=""
-                                onChange={(e) => setDesscription(e.target.value)}
+                                onChange={(e) =>
+                                  setDesscription(e.target.value)
+                                }
                               />
                             </div>
                           </div>
@@ -198,18 +193,28 @@ function AddProfessor() {
         </ModalHeader>
         <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => (window.location.href = "/admin/pts")}
-          >
-            Back
-          </Button>
-          <Button
-            color="danger"
-            onClick={() => setShowModal(false)}
-          >
-            Continue Add 
-          </Button>{" "}
+          <div>
+            <Button
+              color="primary"
+              onClick={() => (window.location.href = "/admin/pts")}
+            >
+              Back
+            </Button>
+            <Button color="danger" onClick={() => setShowModal(false)}>
+              Continue Add
+            </Button>
+          </div>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+        <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
+        <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
         </ModalFooter>
       </Modal>
     </div>

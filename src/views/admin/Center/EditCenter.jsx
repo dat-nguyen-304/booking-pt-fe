@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Label, Input } from "reactstrap";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
+import styles from "../../../layouts/index.module.css";
 import axios from "axios";
 import { getCenterById } from "../../../variables/admin/centers";
 
 function EditCenter() {
-  const [centerName, setcenterName] = useState({});
+  const [centerName, setcenterName] = useState("");
   const [address, setAddress] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [oldData, setOldData] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   //center id
   const path = window.location.pathname;
   const centerId = path.split("/").pop();
@@ -15,7 +29,9 @@ function EditCenter() {
   useEffect(() => {
     const getCenter = async () => {
       const center = await getCenterById(centerId);
-      setOldData(center);
+      setAddress(center.address)
+      setcenterName(center.centerName)
+      setSelectedFile(center.imgLink)
     };
     getCenter();
   }, []);
@@ -24,29 +40,30 @@ function EditCenter() {
     console.log(centerName);
     console.log(address);
     const data = new FormData();
-    data.append("operation", "update");
+    data.append("operation", 'update');
     data.append("centerName", centerName);
     data.append("address", address);
     data.append("centerImg", selectedFile);
-    console.log(data);
-    console.log(selectedFile);
-    //https://gachateambe.herokuapp.com/api/centers/${centerId}
-    axios.patch(`https://gachateambe.herokuapp.com/api/centers/${centerId}`, {
-      data: data
-    }, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        // 'Content-Type': "multipart/form-data",
-        operation : "update"
-      }
-    })
+
+    axios
+      .patch(
+        `https://gachateambe.herokuapp.com/api/centers/${centerId}`, data,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        alert("Success");
+        setSuccessMessage("Edit Center Successfully");
+        setShowModal(true);
       })
       .catch((err) => {
-        alert("fail");
+        setErrorMessage("Somthing went wrong try again later")
+        setShowModal(true);
         console.log(err);
       });
   };
@@ -84,7 +101,7 @@ function EditCenter() {
                                 className="form-control"
                                 id="name"
                                 placeholder=""
-                                defaultValue={oldData.centerName}
+                                defaultValue={centerName}
                                 onChange={(e) => setcenterName(e.target.value)}
                               />
                             </div>
@@ -93,12 +110,17 @@ function EditCenter() {
                               <div className="profileimg-input">
                                 <img
                                   alt=""
-                                  src={oldData.imgLink}
+                                  src={selectedFile}
                                   className="img-fluid"
                                   style={{ width: "120px" }}
                                 />
                               </div>
-                              <Input type="file" name="file" id="centerImg"  onChange={handleFileSelect}/>
+                              <Input
+                                type="file"
+                                name="file"
+                                id="centerImg"
+                                onChange={handleFileSelect}
+                              />
                             </div>
                             <div className="form-group col-md-12">
                               <label htmlFor="address">Address</label>
@@ -106,14 +128,14 @@ function EditCenter() {
                                 type="text"
                                 className="form-control"
                                 id="address"
-                                placeholder={oldData.address}
-                                defaultValue={oldData.address}
+                                placeholder={address}
+                                defaultValue={address}
                                 onChange={(e) => setAddress(e.target.value)}
                               />
                             </div>
                           </div>
                           <button type="submit" className="btn btn-primary">
-                            Save
+                            Update Center
                           </button>
                         </form>
                       </div>
@@ -125,6 +147,39 @@ function EditCenter() {
           </Col>
         </Row>
       </div>
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalHeader toggle={() => setShowModal(false)}>
+          Notification
+        </ModalHeader>
+        <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button
+              color="primary"
+              className="mr-2"
+              onClick={() => (window.location.href = "/admin/centers")}
+            >
+              Back
+            </Button>
+
+            <Button className="mr-2" color="danger" onClick={() => setShowModal(false)}>
+              Continue Add
+            </Button>
+          </div>
+        </ModalFooter>
+      </Modal>
+
+      <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+        <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
+        <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }
