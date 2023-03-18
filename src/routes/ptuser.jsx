@@ -40,12 +40,12 @@ var dashRoutes = [
     //     { path: BASEDIR+"/university/events", component: UniversityEvents, type: "child"},
     //     { path: BASEDIR+"/university/addevent", component: AddEvent, type: "child"},
        { 
-        path: "#", name: "Students", icon: "people", type: "dropdown", parentid: "students",
+        path: "/pt/students", name: "Students", icon: "people",component: Student,
             child: [
                 { path: BASEDIR+"/pt/students", name: "Students"},
-                { path: BASEDIR+"/pt/add-student", name: "Add Student"},
-                { path: BASEDIR+"/pt/edit-student", name: "Edit Student"},
-                { path: BASEDIR+"/pt/student-profile", name: "Student Profile"},
+                // { path: BASEDIR+"/pt/add-student", name: "Add Student"},
+                // { path: BASEDIR+"/pt/edit-student", name: "Edit Student"},
+                // { path: BASEDIR+"/pt/student-profile", name: "Student Profile"},
             ]
     },
         { path: BASEDIR+"/pt/students", component: Student, type: "child"},
