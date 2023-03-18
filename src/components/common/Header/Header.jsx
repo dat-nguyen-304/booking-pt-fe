@@ -2,24 +2,15 @@ import React from "react";
 import {
   Collapse,
   Navbar,
-  NavbarBrand,
   Nav,
-  NavItem,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Container,
-  InputGroup,
-  InputGroupAddon,
-  Input,
 } from "reactstrap";
 import jwt from "jsonwebtoken";
-import { Messages, Notifications } from "components";
 import dashboardRoutes from "routes/admin.jsx";
-
-import { messages } from "variables/topbar.jsx";
-import { notifications } from "variables/topbar.jsx";
 import { withRouter } from "react-router-dom";
 var IMGDIR = process.env.REACT_APP_IMGDIR;
 
@@ -28,19 +19,11 @@ class Header extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      userddOpen: false,
-      searchOpen: false,
-      messagesddOpen: false,
-      notificationsddOpen: false,
-      color: "primary",
+      color: "white",
       profilename: "Eric Nelson",
-      profileimg: IMGDIR + "/images/profile/profile.jpg",
+      profileimg: "/images/profile/profile.jpg",
     };
     this.toggle = this.toggle.bind(this);
-    this.userddToggle = this.userddToggle.bind(this);
-    this.messagesddToggle = this.messagesddToggle.bind(this);
-    this.notificationsddToggle = this.notificationsddToggle.bind(this);
-    this.searchToggle = this.searchToggle.bind(this);
   }
   toggle() {
     if (this.state.isOpen) {
@@ -68,16 +51,6 @@ class Header extends React.Component {
     });
     //console.log(this.state.searchOpen);
     //this.refs.searchbarToggle.classList.toggle('opened');
-  }
-  messagesddToggle(e) {
-    this.setState({
-      messagesddOpen: !this.state.messagesddOpen,
-    });
-  }
-  notificationsddToggle(e) {
-    this.setState({
-      notificationsddOpen: !this.state.notificationsddOpen,
-    });
   }
   getBrand() {
     var name;
@@ -142,7 +115,7 @@ class Header extends React.Component {
   updateColor() {
     if (window.innerWidth < 993 && this.state.isOpen) {
       this.setState({
-        color: "primary",
+        color: "white",
       });
     } else {
       this.setState({
@@ -159,7 +132,7 @@ class Header extends React.Component {
       this.refs.sidebarToggle.classList.remove("toggled");
     }
     window.addEventListener("resize", this.updateColor.bind(this));
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
     const nameUser = jwt.decode(accessToken).email.split("@")[0];
     if (this.props.admintype === "admin") {
       this.setState({
@@ -218,51 +191,6 @@ class Header extends React.Component {
                 <i className="i-menu"></i>
               </button>
             </div>
-
-            <Dropdown
-              nav
-              isOpen={this.state.messagesddOpen}
-              toggle={(e) => this.messagesddToggle(e)}
-              className="navbardd"
-            >
-              <DropdownToggle caret nav>
-                <i className="i-envelope"></i>
-                <span className="badge badge-pill badge-primary">3</span>
-              </DropdownToggle>
-              <Messages messages={messages} />
-            </Dropdown>
-
-            <Dropdown
-              nav
-              isOpen={this.state.notificationsddOpen}
-              toggle={(e) => this.notificationsddToggle(e)}
-              className="navbardd"
-            >
-              <DropdownToggle caret nav>
-                <i className="i-bell"></i>
-                <span className="badge badge-pill badge-primary">7</span>
-              </DropdownToggle>
-              <Notifications notifications={notifications} />
-            </Dropdown>
-
-            <form className="topbar-search-form">
-              <InputGroup
-                className={
-                  "topbar-search " +
-                  (this.state.searchOpen === true ? "open" : "")
-                }
-              >
-                <InputGroupAddon
-                  addonType="append"
-                  onClick={() => this.searchToggle()}
-                >
-                  <i className="i-magnifier"></i>
-                </InputGroupAddon>
-                <Input placeholder="Search..." />
-              </InputGroup>
-            </form>
-
-            <NavbarBrand href="/">{this.getBrand()}</NavbarBrand>
           </div>
 
           <Collapse isOpen={this.state.isOpen} navbar className="navbar-right">
@@ -278,8 +206,7 @@ class Header extends React.Component {
                     src={this.state.profileimg}
                     alt="react-logo"
                     className="avatar-image"
-                  />{" "}
-                  <span>{this.state.profilename}</span>
+                  />
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem tag="a">
@@ -291,24 +218,16 @@ class Header extends React.Component {
                   <DropdownItem tag="a">
                     <i className="i-info" href="#!"></i> Help
                   </DropdownItem>
-                  <DropdownItem tag="a" className="" onClick={logout} style={{cursor:"pointer"}}>
+                  <DropdownItem
+                    tag="a"
+                    className=""
+                    onClick={logout}
+                    style={{ cursor: "pointer" }}
+                  >
                     <i className="i-lock"></i>Logout
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-              <NavItem>
-                <div className="navbar-toggle chat-toggle">
-                  <button
-                    type="button"
-                    ref="chatToggle"
-                    className="navbar-toggler"
-                    onClick={() => this.openChat()}
-                  >
-                    <i className="i-bubbles"></i>
-                    <span className="badge badge-pill badge-primary">9</span>
-                  </button>
-                </div>
-              </NavItem>
             </Nav>
             <div
               className="screensize"

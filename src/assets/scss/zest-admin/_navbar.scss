@@ -11,7 +11,7 @@
     -moz-box-shadow: 0 2px 4px rgba(33,33,33,.2);
     -o-box-shadow: 0 2px 4px rgba(33,33,33,.2);
     -ms-box-shadow: 0 2px 4px rgba(33,33,33,.2);
-
+    border-radius: 10px;
     a{
         vertical-align: middle;
 
@@ -571,7 +571,7 @@
 
 
 /*Transparent topbar style*/
-[data-topbar="transparent"]{
+[data-topbar= ".bg-white"]{
   .navbar{
     height: 70px;
 

@@ -8,10 +8,6 @@ import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 //import useravatar from "assets/img/profile.jpg";
-import logofull from "assets/img/logo-full.png";
-import logomini from "assets/img/logo-mini.png";
-import logofulldark from "assets/img/logo-full-dark.png";
-import logominidark from "assets/img/logo-mini-dark.png";
 import jwt from "jsonwebtoken";
 var ps;
 var currentmenu = "notset";
@@ -130,16 +126,7 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar menubar" data-color="black">
         <div className="logo">
-          <a href="/" className="logo-mini">
-            <div className="logo-img">
-              <img src={logomini} alt="react-logo" className="light-logo" />
-              <img src={logominidark} alt="react-logo" className="dark-logo" />
-            </div>
-          </a>
-          <a href="/" className="logo-full">
-            <img src={logofull} alt="react-logo" className="light-logo" />
-            <img src={logofulldark} alt="react-logo" className="dark-logo" />
-          </a>
+          
         </div>
 
         <div className="sidebar-wrapper" ref="sidebar">

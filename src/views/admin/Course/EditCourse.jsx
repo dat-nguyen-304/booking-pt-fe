@@ -108,6 +108,7 @@ function EditCourse(props) {
                                 id="inputname4"
                                 placeholder=""
                                 defaultValue={packages.packageName}
+                                onChange={(e) => setPackageName(e.target.value)}
                               />
                             </div>
 
@@ -119,6 +120,7 @@ function EditCourse(props) {
                                 id="price"
                                 placeholder=""
                                 defaultValue={packages.price}
+                                onChange={(e) => setPrice(e.target.value)}
                               />
                             </div>
 
@@ -130,6 +132,7 @@ function EditCourse(props) {
                                 id="day"
                                 placeholder=""
                                 defaultValue={packages.durationByDay}
+                                onChange={(e) => setDurationByDay(e.target.value)}
                               />
                             </div>
 
@@ -141,6 +144,7 @@ function EditCourse(props) {
                                 id="month"
                                 placeholder=""
                                 defaultValue={packages.durationByMonth}
+                                onChange={(e) => setDurationByMonth(e.target.value)}
                               />
                             </div>
                             <div className="form-group col-md-12">

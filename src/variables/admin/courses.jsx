@@ -82,6 +82,7 @@ const getPackageById = async (id) => {
       }
     );
     const packages = response.data.package;
+ 
     return packages;
   } catch (error) {
     console.error(error);
@@ -103,7 +104,7 @@ const getPackage = async (id) => {
       total,
       traineePackages,
     };
-    
+    console.log(packages);
     return packages;
   } catch (error) {
     console.error(error);
@@ -113,10 +114,8 @@ const getPackage = async (id) => {
 const packagesStatic = async () => {
   // Lấy thông tin tất cả các gói đang có
   const allPackages = await getAllPackage();
-  console.log(allPackages);
   // Lấy thông tin tất cả người dùng và gói tập đã mua
   const allTraineePacks = await getAllTraineePack();
-  
   // Khởi tạo mảng để chứa thông tin khóa học
   const courseCount = [];
 
@@ -129,17 +128,16 @@ const packagesStatic = async () => {
       numberOfTrainees: 0, // Số lượng người mua ban đầu = 0
       packCategory: packages.ptStatus,
     };
-
     // Duyệt qua mỗi gói trong allTraineePacks để đếm số lượng người mua
     allTraineePacks.forEach((traineePack) => {
       if (traineePack.currentTraineePackage.packageId === packages.id) {
         course.numberOfTrainees++; // Tăng số lượng người mua lên 1
       }
     });
-
+    
     courseCount.push(course); // Thêm thông tin khóa học vào mảng courseCount
   });
-  console.log(courseCount);
+  
   return courseCount; // In ra mảng thông tin khóa học
 };
 export {

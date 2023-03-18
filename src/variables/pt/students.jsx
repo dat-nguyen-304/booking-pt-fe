@@ -1,19 +1,36 @@
 // ##############################
 // // // students
 // #############################
-var IMGDIR = process.env.REACT_APP_IMGDIR;
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
-const students = [
-    {avatar: IMGDIR+"/images/pt/students/student-9.jpg", name: "Lily White", position: "Architect", age: "23"},
-    {avatar: IMGDIR+"/images/pt/students/student-7.jpg", name: "Leah Young", position: "Electrical Engg", age: "23"},
-    {avatar: IMGDIR+"/images/pt/students/student-10.jpg", name: "Irene Smith", position: "Medical", age: "21"},
-    {avatar: IMGDIR+"/images/pt/students/student-3.jpg", name: "Julia Vasar", position: "Management", age: "25"},
-    {avatar: IMGDIR+"/images/pt/students/student-13.jpg", name: "Evan Short", position: "Mechnical Engg", age: "24"},
-    {avatar: IMGDIR+"/images/pt/students/student-1.jpg", name: "Fiona Vance", position: "Computer Engg", age: "20"},
-    {avatar: IMGDIR+"/images/pt/students/student-2.jpg", name: "Grace Turner", position: "Civil Engg", age: "21"},
-    {avatar: IMGDIR+"/images/pt/students/student-6.jpg", name: "Colin Taylor", position: "Aeronautical", age: "25"},
-]; 
-
-export {
-    students, 
+const getTraineeByPtID = async () => {
+  const token = localStorage.getItem("accessToken");
+  const PtID = jwt.decode(token).accountId;
+  try {
+    const response = await axios.get(
+      `https://gachateambe.herokuapp.com/api/trainee-packages?mainPTId=${PtID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const trainees = response.data.traineePackages;
+    const ptStudent = trainees.map((pt)=> {
+      return {
+        id: pt.trainee.traineeId,
+        fullName: pt.trainee.fullName,
+        package: pt.package.packageId,
+        packageName: pt.package.packageName,
+        status: pt.status
+      }
+    })
+    console.log(trainees);
+    return ptStudent;
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+export { getTraineeByPtID };
