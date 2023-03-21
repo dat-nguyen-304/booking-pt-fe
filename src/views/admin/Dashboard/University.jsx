@@ -20,7 +20,7 @@ class University extends React.Component {
                           width="100%"
                           height="700"
                           src="https://lookerstudio.google.com/embed/reporting/d8b822e3-af3f-469d-8a8a-9309445c8051/page/tWDGB"
-                          frameborder="0"
+                          frameBorder="0"
                           // style="border:0"
                           title="Pt Booking Dashboard"
                         ></iframe>

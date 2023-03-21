@@ -76,12 +76,15 @@ const Plans = () => {
           <p className={styles.p_1}>Please go to your profile to view your purchased packages.</p> 
         </ModalBody>
         <ModalFooter>
-          <Button className={styles.btn__1} onClick={() => setModalIsOpen(false)}>
+          <div>
+          <Button style={{marginLeft:"2px"}} className={styles.btn__1} onClick={() => setModalIsOpen(false)}>
             Close
           </Button>
-          <Button className={styles.btn__2} onClick={() => window.location.href = "/user/profile"}>
+          <Button style={{marginLeft:"2px"}} className={styles.btn__2} onClick={() => window.location.href = "/user/profile"}>
             Your Profile
           </Button>
+          </div>
+          
         </ModalFooter>
       </Modal>
     </>
