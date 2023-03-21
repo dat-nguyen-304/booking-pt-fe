@@ -276,7 +276,14 @@ section {
     width: 76%;
   }
 }
-
+.trainer__img {
+  width: 150px;
+  height: 150px;
+}
+.center__img {
+  width: 175px;
+  height: 105px;
+}
 /******************** MEADIA QUERIES (small screens) ********************/
 @media screen and (max-width: 600px) {
   h1 {

@@ -32,7 +32,7 @@ const Program = () => {
             return (
               <Card className="center" key={id}>
                 <div className="center__img">
-                  <img src={img} alt={name} />
+                  <img className={style.center__img} src={img} alt={name} />
                 </div>
                 <h3 className={style.h3_3}>{name}</h3>
                 <p className={style.p_1}>{address}</p>

@@ -6,7 +6,7 @@ const Trainer = ({ id, image, name, center, rating, description }) => {
   return (
     <Card className="trainer">
       <div className="trainer__img">
-        <img src={image} alt={name} />
+        <img className={styles.trainer__img} src={image} alt={name} />
       </div>
       <h3 className={styles.h3_3}>{name}</h3>
       <p>Work: {center}</p>

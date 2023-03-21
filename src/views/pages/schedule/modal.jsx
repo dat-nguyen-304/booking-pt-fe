@@ -193,7 +193,7 @@ function modalContent({
                       value={selectedCenter}
                       onChange={handleCenterChange}
                       className={module.radius_1}
-                      readOnly
+                      disabled
                     >
                       {centers.map((center) => (
                         <option key={center.id} value={center.id}>
@@ -240,7 +240,7 @@ function modalContent({
                       disabled={!selectedPT}
                       className={module.radius_1}
                     >
-                      <option value={selectedSlot}>Select a slot</option>
+                      <option value="">Select a slot</option>
                       {slots.map((slot) => (
                         <option key={slot.slotId} value={slot.slotId}>
                           {slot.slotTime}
