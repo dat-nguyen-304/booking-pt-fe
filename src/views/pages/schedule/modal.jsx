@@ -17,7 +17,17 @@ import { loadPtByID, loadSlotByPT } from "../../../variables/admin/professors";
 import styles from "../../../layouts/index.module.css";
 import axios from "axios";
 import module from "./modal.module.css";
-function modalContent({ center, pt, slot, sessionID, isToday }) {
+function modalContent({
+  center,
+  pt,
+  slot,
+  sessionID,
+  isToday,
+  slotTime,
+  closeModal,
+  noteFromPT,
+  startDate,
+}) {
   // update
   const [centers, setCenters] = useState([]);
   const [selectedCenter, setSelectedCenter] = useState(center);
@@ -31,6 +41,18 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [noteFromStudentDisabled, setNoteFromStudentDisabled] = useState(false);
+  const maxSlotTime = new Date();
+  maxSlotTime.setDate(maxSlotTime.getDate() + 7);
+  useEffect(() => {
+    if (new Date(startDate) > maxSlotTime) {
+      console.log(new Date(startDate));
+      setNoteFromStudent(null);
+      setNoteFromStudentDisabled(true);
+    } else {
+      setNoteFromStudentDisabled(false);
+    }
+  }, [startDate])
   useEffect(() => {
     const getCenter = async () => {
       setLoadingCenters(true);
@@ -41,6 +63,10 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
       getCenter();
     }
   }, [loadingCenters]);
+
+  const handleCloseModal = () => {
+    closeModal();
+  };
 
   useEffect(() => {
     if (selectedCenter !== "") {
@@ -56,7 +82,6 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
 
   useEffect(() => {
     const getSlotByPtID = async () => {
-      console.log(selectedPT);
       const slots = await loadSlotByPT(selectedPT);
       setSlots(slots);
     };
@@ -91,7 +116,6 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
       slotId: parseInt(selectedSlot),
       noteFromTrainee: noteFromStudent,
     };
-    console.log(data);
     axios
       .patch(
         `https://gachateambe.herokuapp.com/api/sessions/${sessionID}`,
@@ -116,105 +140,141 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
   }
   return (
     <div>
-      <Form method="post" onSubmit={handleSubmit}>
-        <ModalBody>
-          <Row>
-            <Col md={12}>
-              <FormGroup>
-                <Label className={styles.p_1} htmlFor="center">
-                  Center:
-                </Label>
-                <Input
-                  type="select"
-                  id="center"
-                  value={selectedCenter}
-                  onChange={handleCenterChange}
-                  className={module.radius_1}
-                  readOnly
+      {isToday ? (
+        <>
+          <Form method="post" onSubmit={handleSubmit}>
+            <ModalBody>
+              <Col md={12}>
+                <p className={styles.p_1}>Note from PT:</p>
+                <p className={styles.p_note}> {noteFromPT}</p>
+              </Col>
+              <Col md={12}>
+                <FormGroup>
+                  <Label className={styles.p_1} htmlFor="noteToPt">
+                    Note to PT:
+                  </Label>
+                  <Input
+                    type="input"
+                    className={module.radius_1}
+                    onChange={(e) => setNoteFromStudent(e.target.value)}
+                  />
+                </FormGroup>
+              </Col>
+            </ModalBody>
+            <ModalFooter>
+              <div>
+                <Button
+                  className={styles.btn__close}
+                  style={{ marginRight: "5px" }}
+                  onClick={handleCloseModal}
                 >
-                  {centers.map((center) => (
-                    <option key={center.id} value={center.id}>
-                      {center.name}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
+                  Close
+                </Button>
+                <Button type="submit" className={styles.btn__1}>
+                  Note to PT
+                </Button>
+              </div>
+            </ModalFooter>
+          </Form>
+        </>
+      ) : (
+        <>
+          <Form method="post" onSubmit={handleSubmit}>
+            <ModalBody>
+              <Row>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label className={styles.p_1} htmlFor="center">
+                      Center:
+                    </Label>
+                    <Input
+                      type="select"
+                      id="center"
+                      value={selectedCenter}
+                      onChange={handleCenterChange}
+                      className={module.radius_1}
+                      readOnly
+                    >
+                      {centers.map((center) => (
+                        <option key={center.id} value={center.id}>
+                          {center.name}
+                        </option>
+                      ))}
+                    </Input>
+                  </FormGroup>
+                </Col>
 
-            <Col md={12}>
-              <FormGroup>
-                <Label className={styles.p_1} htmlFor="pt">
-                  PT:
-                </Label>
-                <Input
-                  type="select"
-                  id="pt"
-                  value={selectedPT}
-                  onChange={handlePTChange}
-                  disabled={!selectedCenter}
-                  className={module.radius_1}
-                  required
-                >
-                  {pts.map((pt) => (
-                    <option key={pt.id} value={pt.id}>
-                      {pt.name}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label className={styles.p_1} htmlFor="pt">
+                      PT:
+                    </Label>
+                    <Input
+                      type="select"
+                      id="pt"
+                      value={selectedPT}
+                      onChange={handlePTChange}
+                      disabled={!selectedCenter}
+                      className={module.radius_1}
+                      required
+                    >
+                      {pts.map((pt) => (
+                        <option key={pt.id} value={pt.id}>
+                          {pt.name}
+                        </option>
+                      ))}
+                    </Input>
+                  </FormGroup>
+                </Col>
 
-            <Col md={12}>
-              <FormGroup>
-                <Label className={styles.p_1} htmlFor="slot">
-                  Slot:
-                </Label>
-                <Input
-                  type="select"
-                  id="slot"
-                  value={selectedSlot}
-                  onChange={handleSlotChange}
-                  disabled={!selectedPT}
-                  className={module.radius_1}
-                >
-                  <option value="">Select a slot</option>
-                  {slots.map((slot) => (
-                    <option key={slot.slotId} value={slot.slotId}>
-                      {slot.slotTime}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
-            </Col>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label className={styles.p_1} htmlFor="slot">
+                      Slot: {slotTime}
+                    </Label>
+                    <Input
+                      type="select"
+                      id="slot"
+                      value={selectedSlot}
+                      onChange={handleSlotChange}
+                      disabled={!selectedPT}
+                      className={module.radius_1}
+                    >
+                      <option value={selectedSlot}>Select a slot</option>
+                      {slots.map((slot) => (
+                        <option key={slot.slotId} value={slot.slotId}>
+                          {slot.slotTime}
+                        </option>
+                      ))}
+                    </Input>
+                  </FormGroup>
+                </Col>
 
-            <Col md={12}>
-              <FormGroup>
-                <Label className={styles.p_1} htmlFor="noteToPt">
-                  Note to PT:
-                </Label>
-                <Input
-                  type="input"
-                  className={module.radius_1}
-                  onChange={(e) => setNoteFromStudent(e.target.value)}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </ModalBody>
-        <ModalFooter>
-          <div>
-            {isToday ? (
-              <Button className={styles.btn__1} disabled>
-                Can't Change Schedule Today
-              </Button>
-            ) : (
-              <Button type="submit" className={styles.btn__1}>
-                Change Schedule
-              </Button>
-            )}
-          </div>
-        </ModalFooter>
-      </Form>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label className={styles.p_1} htmlFor="noteToPt">
+                      Note to PT:
+                    </Label>
+                    <Input
+                      type="input"
+                      className={module.radius_1}
+                      onChange={(e) => setNoteFromStudent(e.target.value)}
+                      disabled={noteFromStudentDisabled}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            </ModalBody>
+            <ModalFooter>
+              <div>
+                <Button type="submit" className={styles.btn__1}>
+                  Change Schedule
+                </Button>
+              </div>
+            </ModalFooter>
+          </Form>
+        </>
+      )}
 
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalHeader toggle={() => setShowModal(false)}>
@@ -223,7 +283,7 @@ function modalContent({ center, pt, slot, sessionID, isToday }) {
         <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
         <ModalFooter>
           <div>
-            <Button color="primary" onClick={() => window.location.reload()}>
+            <Button color="primary" onClick={handleCloseModal}>
               Close
             </Button>{" "}
           </div>

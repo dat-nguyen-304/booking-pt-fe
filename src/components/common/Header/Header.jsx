@@ -19,7 +19,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      color: "white",
+      color: "primary",
       profilename: "Eric Nelson",
       profileimg: "/images/profile/profile.jpg",
     };
@@ -115,7 +115,7 @@ class Header extends React.Component {
   updateColor() {
     if (window.innerWidth < 993 && this.state.isOpen) {
       this.setState({
-        color: "white",
+        color: "primary",
       });
     } else {
       this.setState({

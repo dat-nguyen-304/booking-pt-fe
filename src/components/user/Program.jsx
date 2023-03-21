@@ -24,7 +24,7 @@ const Program = () => {
 
   return (
     <section className="programs">
-      <div className="container programs container">
+      <div className="container programs">
         <SectionHead icon={<FaCrown />} title="Centers" />
 
         <div className="program__wrapper">
@@ -35,10 +35,7 @@ const Program = () => {
                   <img src={img} alt={name} />
                 </div>
                 <h3 className={style.h3_3}>{name}</h3>
-                <p>{address}</p>
-                <button className={style.btn}>
-                  View Center
-                </button>
+                <p className={style.p_1}>{address}</p>
               </Card>
             );
           })}

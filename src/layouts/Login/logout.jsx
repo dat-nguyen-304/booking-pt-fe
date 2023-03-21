@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import "./Logout.css"; // Import file CSS cho trang Log Out
+import styles from "./Logout.module.css"
 
 function LogOut() {
   const [showMessage, setShowMessage] = useState(true);
@@ -18,13 +18,13 @@ function LogOut() {
 
   return (
     <div
-      className="logout-container"
+      className={styles.logout_container}
       style={{ backgroundImage: 'url("images/bg-01.jpg")' }}
     >
       {showMessage && (
-        <div className="logout-message-container">
-          <h2 className="logout-message" onAnimationEnd={handleAnimationEnd}>
-            <FontAwesomeIcon icon={faSpinner} className="logout-icon" spin />{" "}
+        <div className= {styles.logout_message_container}>
+          <h2 className={styles.logout_message} onAnimationEnd={handleAnimationEnd}>
+            <FontAwesomeIcon icon={faSpinner} className={styles.logout_icon} spin />{" "}
             {""}
             Thank you for supporting us
           </h2>

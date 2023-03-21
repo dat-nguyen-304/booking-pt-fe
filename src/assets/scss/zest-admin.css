@@ -763,11 +763,11 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   position: absolute; }
 
 /*Transparent topbar style*/
-[data-topbar=".bg-white"] .navbar {
+[data-topbar="transparent"] .navbar {
   height: 70px; }
-  [data-topbar=".bg-white"] .navbar.navbar-absolute {
+  [data-topbar="transparent"] .navbar.navbar-absolute {
     position: absolute; }
-  [data-topbar=".bg-white"] .navbar .navbar-wrapper, [data-topbar=".bg-white"] .navbar .container-fluid, [data-topbar=".bg-white"] .navbar .navbar-right {
+  [data-topbar="transparent"] .navbar .navbar-wrapper, [data-topbar="transparent"] .navbar .container-fluid, [data-topbar="transparent"] .navbar .navbar-right {
     height: 70px; }
 
 .navbar-toggle i {
@@ -4434,14 +4434,10 @@ ul, ol {
   margin: 0 15px 15px 0; }
 
 /*7*/
-/*---------------------------------------------
-      UI Calendar
-----------------------------------------------*/
 body .rbc-event {
   background-color: #26a69a;
   border-radius: 0px;
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  padding: 5px 8px; }
+  font-family: Roboto, Arial, Helvetica, sans-serif; }
 
 body .rbc-event.rbc-selected {
   background-color: #ff8a65; }
@@ -4473,7 +4469,8 @@ body .rbc-calendar .rbc-toolbar .rbc-btn-group button {
   font-weight: 300;
   text-shadow: none;
   font-size: 14px;
-  line-height: 1.618; }
+  line-height: 1.618;
+  border-radius: 10px; }
 
 body .rbc-calendar .rbc-toolbar .rbc-btn-group button.rbc-active, body .rbc-calendar .rbc-toolbar .rbc-btn-group button:hover, body .rbc-calendar .rbc-toolbar .rbc-btn-group button:focus, body .rbc-calendar .rbc-toolbar .rbc-btn-group button:active {
   color: #ffffff;

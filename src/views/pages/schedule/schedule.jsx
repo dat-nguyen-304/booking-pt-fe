@@ -19,32 +19,35 @@ import jwt from "jsonwebtoken";
 import ModalContent from "./modal";
 
 function Schedule() {
-  const localizer = momentLocalizer(moment); // Chọn chiến lược địa phương moment
+  const localizer = momentLocalizer(moment);
   const [schedule, setSchedule] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   // load lịch học
   useEffect(() => {
-    async function loadSchedule() {
+     const loadSchedule = async () => {
       const accessToken = localStorage.getItem("accessToken");
       const userId = jwt.decode(accessToken).accountId;
+      console.log(getPackageById(userId, accessToken));
       const loadedSchedule = await getPackageById(userId, accessToken);
       setSchedule(loadedSchedule);
+      
     }
     loadSchedule();
-  }, []);
-
+  }, [isModalOpen]);
+  console.log(schedule);
   const handleShowCompleted = () => {
     setShowCompleted(!showCompleted);
   };
-
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const toggleModal = (event) => {
     const eventDate = moment(event.start, "YYYY-MM-DD HH:mm");
     const isCompleted = eventDate.isSameOrBefore(moment());
     const today = moment();
     const isToday = eventDate.isSame(today, "day");
-    console.log(isCompleted);
     const modalContent = (
       <div>
         {isCompleted ? (
@@ -73,6 +76,9 @@ function Schedule() {
             sessionID={event.id}
             isToday={isToday}
             slotTime={event.slot}
+            closeModal={closeModal}
+            noteFromPT = {event.notePT}
+            startDate = {event.start}
           />
         )}
       </div>
@@ -101,13 +107,14 @@ function Schedule() {
       center: schedule.center,
       slotID: schedule.slot,
       slot: schedule.slotName,
+      notePT: schedule.noteFromPt,
     };
   });
 
   return (
     <div className="content">
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
-        <ModalHeader className={styles.tittle_1} toggle={toggleModal}>
+      <Modal isOpen={isModalOpen} toggle={closeModal}>
+        <ModalHeader className={styles.tittle_1} toggle={closeModal}>
           Your Schedule
         </ModalHeader>
         {modalContent}
@@ -148,7 +155,12 @@ function Schedule() {
                         components={{
                           event: (props) => (
                             <div>
-                              <div className="event-title">{props.title}</div>
+                              <div className="event-title">
+                                {props.title}{" "}
+                                {props.event.notePT && (
+                                  <span className="note-indicator">*</span>
+                                )}
+                              </div>
                               <div className="event-time">
                                 <div>
                                   {moment(props.event.start)

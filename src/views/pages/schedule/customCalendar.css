@@ -10,7 +10,20 @@
   font-weight: 900;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.event-note {
+  margin-top: 10px;
+  color: black;
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 5px;
+  justify-content: center;
+}
 
+.note-indicator {
+  margin-left: 2px;
+  color: red;
+  font-weight: 900;
+}
 .event-time {
   font-size: 13px;
   color: black;
@@ -67,6 +80,7 @@ body .rbc-calendar .rbc-toolbar .rbc-btn-group button {
   font-weight: 800;
   color: black;
   font-size: smaller;
+  display: none;
 }
 
 .rbc-day-slot .rbc-events-container .rbc-event {

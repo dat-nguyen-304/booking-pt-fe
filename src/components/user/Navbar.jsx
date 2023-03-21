@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 // NavLink comes with an isactive prop which we can use to detect which page we on
 // so we can have a special style for that link
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Logo from "./images/logo.png";
 import { links } from "./data";
 import { GoThreeBars } from "react-icons/go";
@@ -11,21 +10,34 @@ import "./navbar.css";
 import styles from "../../layouts/index.module.css";
 const Navbar = () => {
   const [isNavShowing, setIsNavShowing] = useState(false);
-
+  const [navbarVisible, setNavbarVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const handleNavToggle = () => {
     return setIsNavShowing((prevVAlue) => {
       return !prevVAlue;
     });
   };
   const handleLogOut = () => {
-    localStorage.removeItem("accessToken");
-    window.location.href = "/login";
+    window.location.href = "/logout";
   }
   function getNavLinkClassName(path) {
     return window.location.pathname === path ? "active-nav_1" : "";
   }
+  useEffect(() => {
+    function handleScroll() {
+      const currentScrollPos = window.pageYOffset;
+      const visible = prevScrollPos > currentScrollPos;
+      setNavbarVisible(visible);
+      setPrevScrollPos(currentScrollPos);
+    }
+
+    let prevScrollPos = window.pageYOffset;
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
+
   return (
-    <nav className="nav_1">
+    <nav className= {navbarVisible ? 'nav_1' : 'navbar navbar-hide'}>
       <div className="container nav__container">
         <img className="logo_1" src={Logo} alt="Nav-logo" />
 

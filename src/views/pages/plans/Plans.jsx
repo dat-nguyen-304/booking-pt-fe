@@ -54,10 +54,10 @@ const Plans = () => {
                 <Card key={id} className="plan">
                   <h3 className={styles.h1__1}>{name}</h3>
                   <h3 className={styles.h3__3}>Suitable: {object}</h3>
-                  <h4 className={styles.h4_4}>
+                  <h4 className={styles.price_1}>
                     {` ${price}`}/{durationByMonth} month
                   </h4>
-                  <p>{ptStatus}</p>
+                  <p className={styles.category__1}>{ptStatus}</p>
                   <button
                     className={styles.btn}
                     onClick={() => handleOnClick(id)}

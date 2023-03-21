@@ -4,7 +4,7 @@ import HeaderImage from "../../../components/user/images/header_bg_3.jpg";
 import Header from "../../../components/user/Header";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 
 function Gallery(props) {
   const [imageList, setImageList] = useState([]);
@@ -29,15 +29,15 @@ function Gallery(props) {
       });
   }, []);
 
-  function handleDownload(imgLink) {
-    axios({
-      url: imgLink,
-      method: "GET",
-      responseType: "blob",
-    }).then((response) => {
-      saveAs(response.data, "image.jpg");
-    });
-  }
+  // function handleDownload(imgLink) {
+  //   axios({
+  //     url: imgLink,
+  //     method: "GET",
+  //     responseType: "blob",
+  //   }).then((response) => {
+  //     saveAs(response.data, "image.jpg");
+  //   });
+  // }
   return (
     <>
       <Header title="Your Gallery" image={HeaderImage}>
@@ -51,7 +51,7 @@ function Gallery(props) {
                 <img
                   src={image.imgLink}
                   alt={`GalleryImage ${index + 1}`}
-                  onClick={() => handleDownload(image.imgLink)}
+                  // onClick={() => handleDownload(image.imgLink)}
                 />
               </article>
             );

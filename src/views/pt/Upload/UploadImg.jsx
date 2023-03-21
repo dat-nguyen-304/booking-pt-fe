@@ -1,11 +1,24 @@
 import React, { useState } from "react";
-import { Row, Col, Label, Input } from "reactstrap";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
 import axios from "axios";
-
+import styles from "../../../layouts/index.module.css";
 const UploadImage = (props) => {
   const sessionId = props.match.params.id
   const [file, setFile] = useState(null);
-
+  const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleFileChange = (event) => {
     setFile(event.target.files);
     console.log(event.target.files);
@@ -16,7 +29,10 @@ const UploadImage = (props) => {
 
     const formData = new FormData();
     formData.append("sessionId", sessionId);
-    formData.append("imgFile", file);
+    for( let i = 0; i < file.length; i++ ) {
+      formData.append("imgFile", file[i]);
+    }
+   
 
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -27,9 +43,13 @@ const UploadImage = (props) => {
         },
       })
       .then((response) => {
+        setSuccessMessage("Update trainee image successful");
+        setShowModal(true);
         console.log(response);
       })
       .catch((error) => {
+        setErrorMessage("Somthing went wrong, please try again");
+        setShowModal(true);
         console.log(error);
       });
   };
@@ -93,6 +113,33 @@ const UploadImage = (props) => {
           </Col>
         </Row>
       </div>
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalHeader toggle={() => setShowModal(false)}>
+          Notification
+        </ModalHeader>
+        <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+          <Button
+            color="primary"
+            onClick={() => (window.location.href = "/pt/scheduled")}
+          >
+            Back 
+          </Button>
+          </div>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+        <ModalHeader toggle={() => setShowErrorModal(false)}>Error</ModalHeader>
+        <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+        <ModalFooter>
+          <div>
+            <Button color="secondary" onClick={() => setShowErrorModal(false)}>
+              Close
+            </Button>{" "}
+          </div>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

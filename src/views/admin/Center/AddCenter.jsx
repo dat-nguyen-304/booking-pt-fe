@@ -29,8 +29,6 @@ function AddCenter() {
     data.append("centerName", centerName);
     data.append("address", address);
     data.append("centerImg", selectedFile);
-    console.log(data);
-    console.log(selectedFile);
     axios
       .post("https://gachateambe.herokuapp.com/api/centers", data, {
         headers: {
@@ -105,7 +103,6 @@ function AddCenter() {
                               type="text"
                               className="form-control"
                               id="inputAddress"
-                              placeholder="1234 Main St"
                               value={address}
                               onChange={(e) => setAddress(e.target.value)}
                             />

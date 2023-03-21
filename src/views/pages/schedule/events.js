@@ -16,6 +16,7 @@ const refreshAccessToken = async () => {
   }
 }
 const getPackageById = async (id, token) => {
+  
   try {
     const response = await axios.get(
       `https://gachateambe.herokuapp.com/api/sessions?traineeId=${id}`,
@@ -25,11 +26,12 @@ const getPackageById = async (id, token) => {
         },
       }
     );
+    console.log(response.data.sessions);
     const schedules = response.data.sessions;
     const timeTable = schedules.map((timeTable)=> {
-      const date = timeTable.date.slice(0, 10)
+      // const date = timeTable.date.slice(0, 10)
       const timeStart = timeTable.slot.slotTime.slice(0, 5);
-      const newTime = date + 'T' + timeStart + ':00.000';
+      const newTime = timeTable.date + 'T' + timeStart + ':00.000';
       return {
         sessionsId: timeTable.sessionId,
         date: newTime,
@@ -39,8 +41,10 @@ const getPackageById = async (id, token) => {
         center: timeTable.center.centerName,
         slot: timeTable.slot.slotId,
         slotName: timeTable.slot.slotTime,
+        noteFromPt: timeTable.noteFromPT,
       }
     })
+    console.log(timeTable);
     return timeTable;
   } catch (error) {
     if (error.response && error.response.status === 401) {

@@ -20,7 +20,7 @@ function User() {
   }, []);
 
   return (
-    <div>
+    <div className={style.body_1}>
       <Navbar />
       <Switch>
         <Route path="/user/home" component={Home} />

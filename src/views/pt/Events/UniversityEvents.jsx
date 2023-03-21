@@ -20,7 +20,7 @@ import styles from "../../../layouts/index.module.css";
 import moment1 from "moment-timezone";
 import jwt from "jsonwebtoken";
 import axios from "axios";
-
+import "../../pages/schedule/customCalendar.css";
 function Schedule() {
   const localizer = momentLocalizer(moment);
   const [schedule, setSchedule] = useState([]);
@@ -34,6 +34,10 @@ function Schedule() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedSessions, setSelectedSessions] = useState("");
+  const minTime = new Date();
+  minTime.setHours(7, 0, 0, 0); // 7 giờ sáng
+  const maxTime = new Date();
+  maxTime.setHours(22, 0, 0, 0); // 11 giờ đêm
   // load lịch học
   useEffect(() => {
     async function loadSchedule() {
@@ -44,7 +48,6 @@ function Schedule() {
     }
     loadSchedule();
   }, []);
-
   const handleShowCompleted = () => {
     setShowCompleted(!showCompleted);
   };
@@ -83,18 +86,25 @@ function Schedule() {
     setSelectedSessions(event.id);
     const modalContent = (
       <div>
-        <p className={styles.p_1}>Trainee Name: {event.trainee}</p>
-        <FormGroup>
-          <Label className={styles.p_1} htmlFor="noteToPt">
-            Note to Trainee:
-          </Label>
-          <Input
-            type="input"
-            id="noteToPt"
-            className={module.radius_1}
-            onChange={(e) => setNoteToTrainee(e.target.value)}
-          />
-        </FormGroup>
+        {isCompleted ? (
+          <p className={styles.p_1}>Upload Picture for trainee: {event.trainee}</p>
+        ) : (
+          <>
+            <p className={styles.p_1}>Note from Trainee:</p>
+            <p className={styles.p_note}> {event.noteTe}</p>
+            <FormGroup>
+              <Label className={styles.p_1} htmlFor="noteToPt">
+                Note to Trainee:
+              </Label>
+              <Input
+                type="input"
+                id="noteToPt"
+                className={module.radius_1}
+                onChange={(e) => setNoteToTrainee(e.target.value)}
+              />
+            </FormGroup>
+          </>
+        )}
       </div>
     );
     const modelFooter = (
@@ -110,9 +120,18 @@ function Schedule() {
             </a>
           </Button>
         ) : (
-          <Button type="submit" className={styles.btn__1}>
-            Note To Trainee
-          </Button>
+          <div>
+            <Button
+              className={styles.btn__close}
+              style={{ marginRight: "5px" }}
+              onClick={() => setIsModalOpen(false)}
+            >
+              Close
+            </Button>
+            <Button type="submit" className={styles.btn__1}>
+              Note To Trainee
+            </Button>
+          </div>
         )}
       </div>
     );
@@ -120,7 +139,6 @@ function Schedule() {
     setModalContent(modalContent);
     setModalFooter(modelFooter);
   };
-
   const filteredEvents = schedule.filter((schedule) => {
     const eventDate = moment(schedule.date, "YYYY-MM-DD HH:mm");
     const isCompleted = eventDate.isSameOrBefore(moment());
@@ -141,6 +159,7 @@ function Schedule() {
       slot: schedule.slotName,
       traineeId: schedule.traineeID,
       trainee: schedule.trainee,
+      noteTe: schedule.noteFromTrainee,
     };
   });
 
@@ -170,10 +189,34 @@ function Schedule() {
                       <BigCalendar
                         localizer={localizer}
                         events={events}
-                        step={60}
                         defaultView={"week"}
                         views={["week"]}
                         defaultDate={new Date()}
+                        min={minTime}
+                        max={maxTime}
+                        components={{
+                          event: (props) => (
+                            <div>
+                              <div className="event-note">
+                                {props.event.trainee}{" "}
+                                {props.event.noteTe && (
+                                  <span className="note-indicator">*</span>
+                                )}
+                              </div>
+                              <div className="event-time">
+                                <div>
+                                  {moment(props.event.start)
+                                    .tz(moment.tz.guess())
+                                    .format("HH:mm")}{" "}
+                                  -{" "}
+                                  {moment(props.event.end)
+                                    .tz(moment.tz.guess())
+                                    .format("HH:mm")}
+                                </div>
+                              </div>
+                            </div>
+                          ),
+                        }}
                         onSelectEvent={toggleModal}
                       />
                     </div>
@@ -201,7 +244,7 @@ function Schedule() {
         <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
         <ModalFooter>
           <div>
-            <Button color="primary" onClick={() => window.location.reload()}>
+            <Button color="primary" onClick={() => setShowModal(false)}>
               Close
             </Button>{" "}
           </div>

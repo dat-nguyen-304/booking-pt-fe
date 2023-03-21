@@ -57,7 +57,7 @@
 .h4_4,
 .h5_5 {
   line-height: 1.2;
-  color: var(--color-gray-100);
+  color: #ffb116;
 }
 .h1_1 {
   font-size: 3rem;
@@ -65,6 +65,7 @@
 .h1__1 {
   color: #ffb116;
   font-size: 2rem;
+  font-weight: bold;
 }
 
 .h2_2 {
@@ -76,6 +77,16 @@
 }
 .p_1 {
   font-size: medium;
+  font-weight: bold;
+}
+
+.p_note {
+  font-size: large;
+  font-weight: bolder;
+}
+.category__1 {
+  color: #ffb116 !important;
+  font-size: 1rem;
   font-weight: bold;
 }
 .li__1 a {
@@ -102,11 +113,15 @@
   margin: 0 auto;
   padding: 0.9rem 2rem;
   background: var(--color-primary);
-  border-radius: 1.5rem;
+  border-radius: 20px;
   transition: var(--transition);
   text-decoration: none !important;
+  font-weight: bold;
 }
-
+.btn__close {
+  color: var(--color-gray-100);
+  border-radius: 1.5rem;
+}
 .btn__1 {
   width: fit-content;
   background-color: rgb(227, 92, 92) !important;
@@ -120,6 +135,7 @@
 .btn:hover {
   background: var(--color-secondary);
   color: var(--color-gray-600);
+  
 }
 
 .btn.lg {
@@ -137,7 +153,7 @@
   background: var(--color-gray-100);
 }
 .footer_1 {
-  background-color: var(--color-primary); /*hsl(134deg 2% 6%)*/
+  background-color: hsl(134deg 2% 6%); 
 }
 /******************** SECTION REUSABLE STYLES ********************/
 section {
@@ -158,7 +174,7 @@ section {
 }
 
 .card_1 {
-  background: var(--color-gray-500);
+  background: var(--light);
   border: 2px solid transparent;
   text-align: center;
   padding: 3rem 2rem;
@@ -171,11 +187,14 @@ section {
   border-color: var(--color-gray-400);
   cursor: default;
 }
-
+.price_1 {
+  color: rgb(222, 84, 84);
+  font-weight: bold;
+}
 .card_1 span {
   width: 3rem;
   height: 3rem;
-  background: var(--color-primary);
+  background: var(--ligh);
   color: var(--color-gray-100);
   font-size: 1.5rem;
   padding: 0.8rem;

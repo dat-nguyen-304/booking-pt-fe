@@ -39,6 +39,7 @@ const getPackageByPTId = async (id, token) => {
         slotName: timeTable.slot.slotTime,
         traineeID: timeTable.trainee.traineeId,
         trainee: timeTable.trainee.fullName,
+        noteFromTrainee: timeTable.noteFromTrainee,
       }
     })
     return timeTable;
