@@ -16,8 +16,6 @@ const Plans = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
   const decode = jwt.decode(accessToken).accountId;
-  const refreshToken = localStorage.getItem('refreshToken');
-  console.log(refreshToken);
   useEffect(() => {
     const getData = async () => {
       const data = await getPackage();
@@ -35,7 +33,6 @@ const Plans = () => {
       setRedirect(true);
     }
   };
-  console.log(hasPurchased.length);
   return (
     <>
       {redirect && <Redirect to={`/user/booking/${selectedPackageId}`} />}
@@ -49,7 +46,8 @@ const Plans = () => {
       <section className="plans">
         <div className="container plans__container">
           {packData.map(
-            ({ id, name, price, durationByMonth, object, ptStatus }) => {
+            ({ id, name, price, durationByMonth, object, ptStatus, status }) => {
+              if(status === true) {
               return (
                 <Card key={id} className="plan">
                   <h3 className={styles.h1__1}>{name}</h3>
@@ -66,6 +64,8 @@ const Plans = () => {
                   </button>
                 </Card>
               );
+              }
+              return null
             }
           )}
         </div>

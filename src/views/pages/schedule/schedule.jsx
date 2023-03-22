@@ -29,14 +29,12 @@ function Schedule() {
      const loadSchedule = async () => {
       const accessToken = localStorage.getItem("accessToken");
       const userId = jwt.decode(accessToken).accountId;
-      console.log(getPackageById(userId, accessToken));
       const loadedSchedule = await getPackageById(userId, accessToken);
       setSchedule(loadedSchedule);
       
     }
     loadSchedule();
   }, [isModalOpen]);
-  console.log(schedule);
   const handleShowCompleted = () => {
     setShowCompleted(!showCompleted);
   };

@@ -18,15 +18,14 @@ const Values = () => {
 				<div className="values__right">
 					<SectionHead icon={<GiCutDiamond />} title="Values" />
 					<p>
-						anim et. Officia exercitation veniam consectetur ad labore pariatur
-						aonsectetur ad labore pariatur.
+					If you work hard but can't improve your fitness, you are definitely missing a guide
 					</p>
 					<div className="values__wrapper">
 						{values.map(({ id, icon, title, desc }) => {
 							return (
 								<Card className="values__value" key={id}>
 									<h4 className={style.h4_4}>{title}</h4>
-									<small>{desc}</small>
+									<small style={{fontWeight:"bold"}}>{desc}</small>
 								</Card>
 							);
 						})}

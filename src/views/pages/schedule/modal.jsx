@@ -46,7 +46,6 @@ function modalContent({
   maxSlotTime.setDate(maxSlotTime.getDate() + 7);
   useEffect(() => {
     if (new Date(startDate) > maxSlotTime) {
-      console.log(new Date(startDate));
       setNoteFromStudent(null);
       setNoteFromStudentDisabled(true);
     } else {
@@ -106,7 +105,13 @@ function modalContent({
   // Handler function for slot selection
   function handleSlotChange(event) {
     const selectedSlot = event.target.value;
-    setSelectedSlot(selectedSlot);
+    if(selectedSlot === "" ) {
+      setSelectedSlot(slot)
+    }
+    else {
+      setSelectedSlot(selectedSlot);
+    }
+   
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -241,7 +246,7 @@ function modalContent({
                       className={module.radius_1}
                     >
                       <option value="">Select a slot</option>
-                      {slots.map((slot) => (
+                      {slots.sort((a, b) => a.slotId - b.slotId).map((slot) => (
                         <option key={slot.slotId} value={slot.slotId}>
                           {slot.slotTime}
                         </option>

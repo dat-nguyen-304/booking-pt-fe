@@ -26,7 +26,6 @@ const getPackageById = async (id, token) => {
         },
       }
     );
-    console.log(response.data.sessions);
     const schedules = response.data.sessions;
     const timeTable = schedules.map((timeTable)=> {
       // const date = timeTable.date.slice(0, 10)
@@ -44,7 +43,6 @@ const getPackageById = async (id, token) => {
         noteFromPt: timeTable.noteFromPT,
       }
     })
-    console.log(timeTable);
     return timeTable;
   } catch (error) {
     if (error.response && error.response.status === 401) {

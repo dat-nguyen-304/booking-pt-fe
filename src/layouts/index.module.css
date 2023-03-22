@@ -167,12 +167,15 @@ section {
 
 .span_1 {
   background: var(--color-gray-500);
-  padding: 0.3rem 0.8rem 0;
+  padding: 0.2rem 0.8rem 0.4rem;
   border-radius: 1rem;
   color: var(--color-secondary);
   font-size: 1.5rem;
+  
 }
-
+.span svg {
+  vertical-align: none;
+}
 .card_1 {
   background: var(--light);
   border: 2px solid transparent;

@@ -4,7 +4,6 @@ import MainHeader from "../../../components/user/MainHeader";
 import Program from "../../../components/user/Program";
 import Values from "../../../components/user/Values";
 import FAQs from "../../../components/user/FAQs";
-import Testimonial from "../../../components/user/Testimonial";
 // import Footer from "../../components/Footer";
 
 const Home = () => {
@@ -14,7 +13,6 @@ const Home = () => {
 			<Program />
 			<Values />
 			<FAQs />
-			<Testimonial />
 			{/* <Footer /> comment this out so footer wount be double */}
 		</>
 	);

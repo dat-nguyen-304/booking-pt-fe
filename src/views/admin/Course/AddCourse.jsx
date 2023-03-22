@@ -4,7 +4,6 @@ import axios from "axios";
 const AddCourse = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const packageName = event.target.elements.inputname4.value;
     const durationByDay = event.target.elements.day.value;
     const durationByMonth = event.target.elements.month.value;
@@ -19,7 +18,6 @@ const AddCourse = () => {
       category,
       object,
     };
-    console.log(data);
     axios
       .post("https://gachateambe.herokuapp.com/api/packages", data, {
       })
@@ -139,8 +137,16 @@ const AddCourse = () => {
                                 </Input>
                             </div>
                           </div>
-                          <button type="submit" className="btn btn-primary">
-                            Add
+                          <button
+                            className="btn btn-danger mr-2"
+                            onClick={() => {
+                              window.location.href = "/admin/courses";
+                            }}
+                          >
+                            Back
+                          </button>
+                          <button type="submit" className="btn btn-primary mr-2">
+                            Add Course
                           </button>
                         </form>
                       </div>
