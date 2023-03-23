@@ -97,11 +97,12 @@ const UploadImage = (props) => {
                                 id="file"
                                 multiple
                                 onChange={handleFileChange}
+                                required
                               />
                             </div>
                           </div>
                           <button type="submit" className="btn btn-primary">
-                            Save
+                            Upload
                           </button>
                         </form>
                       </div>

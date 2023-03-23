@@ -75,6 +75,14 @@ function AddProfessor() {
         console.log(err);
       });
   };
+  const resetForm = () => {
+    setEmail("");
+    setFullName("");
+    setSelectedCenter("");
+    setSelectedFile(null);
+    setDesscription("");
+    setShowModal(false);
+  }
   return (
     <div>
       <div className="content">
@@ -104,6 +112,7 @@ function AddProfessor() {
                                 className="form-control"
                                 id="email"
                                 placeholder=""
+                                value={email}
                                 required
                                 onChange={(e) => {
                                   setEmail(e.target.value);
@@ -118,6 +127,7 @@ function AddProfessor() {
                                 className="form-control"
                                 id="fullName"
                                 placeholder=""
+                                value={fullName}
                                 required
                                 onChange={(e) => setFullName(e.target.value)}
                               />
@@ -148,6 +158,7 @@ function AddProfessor() {
                                 className="form-control"
                                 id="ptImage"
                                 placeholder=""
+                                value={selectedFile}
                                 onChange={handleFileSelect}
                                 required
                               />
@@ -159,6 +170,7 @@ function AddProfessor() {
                                 type="text"
                                 className="form-control"
                                 id="description"
+                                value={description}
                                 placeholder=""
                                 onChange={(e) =>
                                   setDesscription(e.target.value)
@@ -200,7 +212,7 @@ function AddProfessor() {
             >
               Back
             </Button>
-            <Button color="danger" onClick={() => setShowModal(false)}>
+            <Button color="danger" onClick={resetForm}>
               Continue Add
             </Button>
           </div>

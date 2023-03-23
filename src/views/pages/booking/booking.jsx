@@ -21,6 +21,9 @@ const Booking = () => {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [loadingCenters, setLoadingCenters] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().substr(0, 10);
   // useEffect hook to load centers on component mount
   //id course
 
@@ -84,7 +87,7 @@ const Booking = () => {
       paymentId: parseInt(paymentId),
       startDate: date,
     };
-    console.log(data);
+    console.log(data.startDate);
     axios
       .post("https://gachateambe.herokuapp.com/api/trainee-packages", data, {
         headers: {
@@ -141,13 +144,11 @@ const Booking = () => {
   return (
     <>
       <Header title="Buy a Course" image={HeaderImage}>
-        Transform your fitness journey with our diverse range of training
-        programs, tailored to your individual needs and goals. Whether you're
-        looking to build strength, improve endurance, or enhance your overall
-        wellness, our expert trainers are here to guide and motivate you every
-        step of the way.
+        Our center is not open on Saturday and Sunday so your calendar will
+        automatically shift to Thursday if you choose Saturday or Sunday. We are
+        so sorry for this inconvenience
       </Header>
-      <section>
+      <div style={{ marginTop: "50px" }}>
         <Form className="container" onSubmit={handleSubmit}>
           <Row>
             <Col md={12}>
@@ -217,12 +218,13 @@ const Booking = () => {
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label htmlFor="date">Start date:</Label>
+                <Label>Start date:</Label>
                 <Input
                   type="date"
                   id="date"
                   value={startDate}
                   onChange={handleDateChange}
+                  min={minDate}
                   required
                 />
               </FormGroup>
@@ -252,7 +254,7 @@ const Booking = () => {
             Register now
           </Button>
         </Form>
-      </section>
+      </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Register success</Modal.Title>

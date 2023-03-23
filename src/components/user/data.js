@@ -194,7 +194,6 @@ export const checkTrainers = async (id) => {
       remainDay: trainer.remainDay,
       slot: trainer.mainSlot.slotTime,
     }));
-    console.log(trainee);
     return trainee;
   } catch (error) {
     console.error(error);

@@ -24,7 +24,6 @@ import "../../pages/schedule/customCalendar.css";
 function Schedule() {
   const localizer = momentLocalizer(moment);
   const [schedule, setSchedule] = useState([]);
-  const [showCompleted, setShowCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [modalFooter, setModalFooter] = useState(null);
@@ -34,6 +33,27 @@ function Schedule() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedSessions, setSelectedSessions] = useState("");
+  const [showCompleted, setShowCompleted] = useState(false); // giá trị mặc định ban đầu
+  const [showAll, setShowAll] = useState(false);
+  const [showIncomplete, setShowIncomplete] = useState(true);
+
+  const handleShowAll = () => {
+    setShowCompleted(false);
+    setShowAll(true);
+    setShowIncomplete(false);
+  };
+
+  const handleShowCompleted = () => {
+    setShowCompleted(true);
+    setShowAll(false);
+    setShowIncomplete(false);
+  };
+
+  const handleShowIncomplete = () => {
+    setShowCompleted(false);
+    setShowAll(false);
+    setShowIncomplete(true);
+  };
   const minTime = new Date();
   minTime.setHours(7, 0, 0, 0); // 7 giờ sáng
   const maxTime = new Date();
@@ -48,9 +68,6 @@ function Schedule() {
     }
     loadSchedule();
   }, []);
-  const handleShowCompleted = () => {
-    setShowCompleted(!showCompleted);
-  };
   function handleSubmit(event) {
     event.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
@@ -87,7 +104,9 @@ function Schedule() {
     const modalContent = (
       <div>
         {isCompleted ? (
-          <p className={styles.p_1}>Upload Picture for trainee: {event.trainee}</p>
+          <p className={styles.p_1}>
+            Upload Picture for trainee: {event.trainee}
+          </p>
         ) : (
           <>
             <p className={styles.p_1}>Note from Trainee:</p>
@@ -142,10 +161,17 @@ function Schedule() {
   const filteredEvents = schedule.filter((schedule) => {
     const eventDate = moment(schedule.date, "YYYY-MM-DD HH:mm");
     const isCompleted = eventDate.isSameOrBefore(moment());
-    return showCompleted ? isCompleted : !isCompleted;
+    if (showAll) return true;
+    if (showCompleted && isCompleted) return true;
+    if (showIncomplete && !isCompleted) return true;
+    return false;
   });
 
   const events = filteredEvents.map((schedule) => {
+    const isCompleted = moment(
+      schedule.date,
+      "YYYY-MM-DD HH:mm"
+    ).isSameOrBefore(moment());
     return {
       id: schedule.sessionsId,
       title: schedule.pt,
@@ -160,6 +186,7 @@ function Schedule() {
       traineeId: schedule.traineeID,
       trainee: schedule.trainee,
       noteTe: schedule.noteFromTrainee,
+      completed: isCompleted,
     };
   });
 
@@ -180,9 +207,27 @@ function Schedule() {
               </header>
 
               <div className="content-body">
-                <Button className={styles.btn} onClick={handleShowCompleted}>
-                  {showCompleted ? "Not Started" : "Started"}
-                </Button>
+                <div
+                  className="rbc-btn-group"
+                  role="group"
+                  aria-label="Basic example"
+                >
+                  <Button className={styles.btn_1} onClick={handleShowAll}>
+                    All slot
+                  </Button>
+                  <Button
+                    className={styles.btn_1}
+                    onClick={handleShowCompleted}
+                  >
+                    Have Teached
+                  </Button>
+                  <Button
+                    className={styles.btn_1}
+                    onClick={handleShowIncomplete}
+                  >
+                    Not Teach
+                  </Button>
+                </div>
                 <div className="row">
                   <div className="col-lg-12">
                     <div style={{ height: 500, width: 100 + "%" }}>
@@ -194,6 +239,13 @@ function Schedule() {
                         defaultDate={new Date()}
                         min={minTime}
                         max={maxTime}
+                        eventPropGetter={(event) => ({
+                          className: "event-with-time",
+                          style: {
+                            backgroundColor: [event.completed ? "#90f590" : "rgb(218, 218, 80)"],
+                            color: "#fff",
+                          },
+                        })}
                         components={{
                           event: (props) => (
                             <div>

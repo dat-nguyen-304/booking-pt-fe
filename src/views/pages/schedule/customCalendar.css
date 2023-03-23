@@ -40,7 +40,7 @@
   font-weight: bold;
 }
 .rbc-event {
-  background-color: rgb(218, 218, 80) !important;
+  /* background-color: rgb(218, 218, 80) !important; */
   padding: 0 !important ;
 }
 body .rbc-calendar .rbc-toolbar .rbc-toolbar-label {

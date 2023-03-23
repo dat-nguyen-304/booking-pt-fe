@@ -1,15 +1,30 @@
-import React from "react";
-import { Row, Col, Label, Input } from "reactstrap";
+import React, { useState } from "react";
+import {
+  Row,
+  Col,
+  Label,
+  Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "reactstrap";
+import styles from "../../../layouts/index.module.css";
 import axios from "axios";
-const AddCourse = () => {
+function AddCourse() {
+  const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [packageName, setPackageName] = useState("");
+  const [durationByDay, setDurationByDay] = useState("");
+  const [durationByMonth, setDurationByMonth] = useState("");
+  const [category, setCategory] = useState("");
+  const [object, setObject] = useState("");
+  const [price, setPrice] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    const packageName = event.target.elements.inputname4.value;
-    const durationByDay = event.target.elements.day.value;
-    const durationByMonth = event.target.elements.month.value;
-    const category = event.target.elements.category.value;
-    const object = event.target.elements.object.value;
-    const price = event.target.elements.price.value;
     const data = {
       packageName,
       price,
@@ -18,18 +33,45 @@ const AddCourse = () => {
       category,
       object,
     };
+    console.log(data);
     axios
-      .post("https://gachateambe.herokuapp.com/api/packages", data, {
-      })
+      .post("https://gachateambe.herokuapp.com/api/packages", data, {})
       .then((response) => {
         console.log(response);
-        window.location.href = "/admin/courses";
+        setSuccessMessage("Add Personal Trainer Successfully");
+        setShowModal(true);
       })
       .catch((error) => {
         console.log(error);
-        alert("Error");
+        setErrorMessage("Somthing went wrong try again later");
+        setShowModal(true);
       });
   };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "packageName") {
+      setPackageName(value);
+    } else if (name === "day") {
+      setDurationByDay(value);
+    } else if (name === "month") {
+      setDurationByMonth(value);
+    } else if (name === "category") {
+      setCategory(value);
+    } else if (name === "object") {
+      setObject(value);
+    } else if (name === "price") {
+      setPrice(value);
+    }
+  };
+  const resetForm = () => {
+    setShowModal(false);
+    setPackageName("");
+    setDurationByDay("");
+    setDurationByMonth("");
+    setCategory("");
+    setPrice("");
+    setObject("");
+  }
   return (
     <div>
       <div className="content">
@@ -53,12 +95,14 @@ const AddCourse = () => {
                         <form method="post" onSubmit={handleSubmit}>
                           <div className="form-row">
                             <div className="form-group col-md-12">
-                              <label htmlFor="inputname4">Course Name</label>
+                              <label htmlFor="packageName">Course Name</label>
                               <input
                                 type="text"
                                 className="form-control"
-                                id="inputname4"
-                                placeholder=""
+                                name="packageName"
+                                id="packageName"
+                                value={packageName}
+                                onChange={handleInputChange}
                                 required
                               />
                             </div>
@@ -68,7 +112,10 @@ const AddCourse = () => {
                                 type="number"
                                 className="form-control"
                                 id="price"
+                                name="price"
                                 placeholder=""
+                                value={price}
+                                onChange={handleInputChange}
                                 required
                               />
                             </div>
@@ -78,9 +125,12 @@ const AddCourse = () => {
                                 type="number"
                                 className="form-control"
                                 id="day"
+                                name="day"
+                                value={durationByDay}
                                 placeholder=""
                                 min="1"
                                 max="31"
+                                onChange={handleInputChange}
                               />
                             </div>
                             <div className="form-group col-md-12">
@@ -89,9 +139,12 @@ const AddCourse = () => {
                                 type="munber"
                                 className="form-control"
                                 id="month"
+                                name="month"
                                 placeholder=""
+                                value={durationByMonth}
                                 min="1"
                                 max="12"
+                                onChange={handleInputChange}
                               />
                             </div>
 
@@ -101,6 +154,8 @@ const AddCourse = () => {
                                 type="select"
                                 name="category"
                                 id="category"
+                                value={category}
+                                onChange={handleInputChange}
                                 required
                               >
                                 <option>Select</option>
@@ -114,27 +169,26 @@ const AddCourse = () => {
                             </div>
 
                             <div className="form-group col-md-12">
-                              <Label htmlFor="object">
-                                Suitable for:
-                              </Label>
+                              <Label htmlFor="object">Suitable for:</Label>
                               <Input
-                                type="text"
+                                type="select"
                                 className="form-control"
                                 id="object"
+                                name="object"
                                 placeholder=""
+                                value={object}
+                                onChange={handleInputChange}
                                 required
                               >
-                                 <option>Select</option>
-                                <option value="newbie">
-                                  For newbie
-                                </option>
+                                <option>Select</option>
+                                <option value="newbie">Newbie</option>
                                 <option value="intermediate">
-                                  For intermediate
+                                  Intermediate
                                 </option>
                                 <option value="professional">
-                                  for professional
+                                  Professional
                                 </option>
-                                </Input>
+                              </Input>
                             </div>
                           </div>
                           <button
@@ -145,7 +199,10 @@ const AddCourse = () => {
                           >
                             Back
                           </button>
-                          <button type="submit" className="btn btn-primary mr-2">
+                          <button
+                            type="submit"
+                            className="btn btn-primary mr-2"
+                          >
                             Add Course
                           </button>
                         </form>
@@ -157,9 +214,49 @@ const AddCourse = () => {
             </div>
           </Col>
         </Row>
+        <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+          <ModalHeader toggle={() => setShowModal(false)}>
+            Notification
+          </ModalHeader>
+          <ModalBody className={styles.p_1}>{successMessage}</ModalBody>
+          <ModalFooter>
+            <div>
+              <Button
+                color="primary"
+                onClick={() => (window.location.href = "/admin/courses")}
+                className="mr-2"
+              >
+                Back
+              </Button>
+              <Button
+                className="mr-2"
+                color="danger"
+                onClick={resetForm}
+              >
+                Continue Add
+              </Button>
+            </div>
+          </ModalFooter>
+        </Modal>
+        <Modal isOpen={showErrorModal} toggle={() => setShowErrorModal(false)}>
+          <ModalHeader toggle={() => setShowErrorModal(false)}>
+            Error
+          </ModalHeader>
+          <ModalBody className={styles.p_1}>{errorMessage}</ModalBody>
+          <ModalFooter>
+            <div>
+              <Button
+                color="secondary"
+                onClick={() => setShowErrorModal(false)}
+              >
+                Close
+              </Button>{" "}
+            </div>
+          </ModalFooter>
+        </Modal>
       </div>
     </div>
   );
-};
+}
 
 export default AddCourse;

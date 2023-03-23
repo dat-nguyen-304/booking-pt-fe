@@ -32,14 +32,14 @@ function AddCenter() {
     axios
       .post("https://gachateambe.herokuapp.com/api/centers", data, {
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
         console.log(res.statusText);
         console.log(res.data);
-        setSuccessMessage("Update Personal Trainer successful");
+        setSuccessMessage("Add new center successful");
         setShowModal(true);
       })
       .catch((err) => {
@@ -53,6 +53,12 @@ function AddCenter() {
     setSelectedFile(event.target.files[0]);
     console.log(event.target.files[0]);
   };
+  const resetForm = () => {
+    setShowModal(false);
+    setCenterName("");
+    setSelectedFile(null);
+    setAddress("")
+  }
   return (
     <div>
       <div className="content">
@@ -93,6 +99,7 @@ function AddCenter() {
                                 type="file"
                                 name="imageLink"
                                 id="exampleFile"
+                                value={selectedFile}
                                 onChange={handleFileSelect}
                               />
                             </div>
@@ -131,12 +138,14 @@ function AddCenter() {
           <Button
             color="primary"
             onClick={() => (window.location.href = "/admin/centers")}
+            className="mr-2"
           >
             Back 
           </Button>
           <Button
             color="danger"
-            onClick={() => setShowModal(false)}
+            onClick={resetForm}
+            className="mr-2"
           >
             Continue Add 
           </Button>

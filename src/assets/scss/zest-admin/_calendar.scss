@@ -1,7 +1,7 @@
 
 body {
     .rbc-event {
-        background-color: $primary-color;
+        background-color: rgb(218, 218, 80);
         border-radius: 0px;
         font-family: $sans-serif-family;
     }
@@ -38,7 +38,6 @@ body {
             text-shadow: none;
             font-size: 14px;
             line-height: 1.618;
-            border-radius: 10px;
         }
         .rbc-btn-group button.rbc-active, .rbc-btn-group button:hover, .rbc-btn-group button:focus, .rbc-btn-group button:active{
             color: #ffffff;

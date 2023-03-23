@@ -118,6 +118,11 @@
   text-decoration: none !important;
   font-weight: bold;
 }
+.btn_1 {
+  background-color: azure !important;
+  color: black !important;
+  font-weight: bold;
+}
 .btn__close {
   color: var(--color-gray-100);
   border-radius: 1.5rem;
@@ -135,7 +140,6 @@
 .btn:hover {
   background: var(--color-secondary);
   color: var(--color-gray-600);
-  
 }
 
 .btn.lg {
@@ -151,6 +155,9 @@
 
 .btn.sm:hover {
   background: var(--color-gray-100);
+}
+.btn_1:focus {
+  background-color: #ffb116 !important;
 }
 .footer_1 {
   background-color: hsl(134deg 2% 6%); 
