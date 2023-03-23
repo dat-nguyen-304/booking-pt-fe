@@ -23,7 +23,17 @@ const Booking = () => {
   const [showModal, setShowModal] = useState(false);
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  const minDate = tomorrow.toISOString().substr(0, 10);
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Ho_Chi_Minh",
+  };
+  const minDate = tomorrow
+    .toLocaleDateString("vi-VN", options)
+    .split("/")
+    .reverse()
+    .join("-");
   // useEffect hook to load centers on component mount
   //id course
 

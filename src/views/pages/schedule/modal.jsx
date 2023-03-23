@@ -51,7 +51,7 @@ function modalContent({
     } else {
       setNoteFromStudentDisabled(false);
     }
-  }, [startDate])
+  }, [startDate]);
   useEffect(() => {
     const getCenter = async () => {
       setLoadingCenters(true);
@@ -105,13 +105,11 @@ function modalContent({
   // Handler function for slot selection
   function handleSlotChange(event) {
     const selectedSlot = event.target.value;
-    if(selectedSlot === "" ) {
-      setSelectedSlot(slot)
-    }
-    else {
+    if (selectedSlot === "") {
+      setSelectedSlot(slot);
+    } else {
       setSelectedSlot(selectedSlot);
     }
-   
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -151,7 +149,12 @@ function modalContent({
             <ModalBody>
               <Col md={12}>
                 <p className={styles.p_1}>Note from PT:</p>
-                <p className={styles.p_note}> {noteFromPT}</p>
+                {noteFromPT ? (
+                  <p className={styles.p_note}>{noteFromPT}</p>
+                ) : (
+                  <p className={styles.p_note}>
+                  There are no comments from PT</p>
+                )}
               </Col>
               <Col md={12}>
                 <FormGroup>
@@ -246,11 +249,13 @@ function modalContent({
                       className={module.radius_1}
                     >
                       <option value="">Select a slot</option>
-                      {slots.sort((a, b) => a.slotId - b.slotId).map((slot) => (
-                        <option key={slot.slotId} value={slot.slotId}>
-                          {slot.slotTime}
-                        </option>
-                      ))}
+                      {slots
+                        .sort((a, b) => a.slotId - b.slotId)
+                        .map((slot) => (
+                          <option key={slot.slotId} value={slot.slotId}>
+                            {slot.slotTime}
+                          </option>
+                        ))}
                     </Input>
                   </FormGroup>
                 </Col>
