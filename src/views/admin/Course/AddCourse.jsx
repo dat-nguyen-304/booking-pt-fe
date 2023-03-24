@@ -20,11 +20,11 @@ function AddCourse() {
   const [packageName, setPackageName] = useState("");
   const [durationByDay, setDurationByDay] = useState("");
   const [durationByMonth, setDurationByMonth] = useState("");
-  const [category, setCategory] = useState("");
   const [object, setObject] = useState("");
   const [price, setPrice] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
+    const category = "havept";
     const data = {
       packageName,
       price,
@@ -55,8 +55,6 @@ function AddCourse() {
       setDurationByDay(value);
     } else if (name === "month") {
       setDurationByMonth(value);
-    } else if (name === "category") {
-      setCategory(value);
     } else if (name === "object") {
       setObject(value);
     } else if (name === "price") {
@@ -68,10 +66,9 @@ function AddCourse() {
     setPackageName("");
     setDurationByDay("");
     setDurationByMonth("");
-    setCategory("");
     setPrice("");
     setObject("");
-  }
+  };
   return (
     <div>
       <div className="content">
@@ -149,26 +146,6 @@ function AddCourse() {
                             </div>
 
                             <div className="form-group col-md-12">
-                              <Label htmlFor="category">Category</Label>
-                              <Input
-                                type="select"
-                                name="category"
-                                id="category"
-                                value={category}
-                                onChange={handleInputChange}
-                                required
-                              >
-                                <option>Select</option>
-                                <option value="havept">
-                                  Have Personal Trainer
-                                </option>
-                                <option value="nopt">
-                                  Don't have personal trainer
-                                </option>
-                              </Input>
-                            </div>
-
-                            <div className="form-group col-md-12">
                               <Label htmlFor="object">Suitable for:</Label>
                               <Input
                                 type="select"
@@ -228,11 +205,7 @@ function AddCourse() {
               >
                 Back
               </Button>
-              <Button
-                className="mr-2"
-                color="danger"
-                onClick={resetForm}
-              >
+              <Button className="mr-2" color="danger" onClick={resetForm}>
                 Continue Add
               </Button>
             </div>
